@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 10 Statistical power in R | Statistical Thinking for the 21st Century</title>
+  <meta name="description" content="A book about statistics." />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 10 Statistical power in R | Statistical Thinking for the 21st Century" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A book about statistics." />
+  <meta name="github-repo" content="poldrack/psych10-book" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 10 Statistical power in R | Statistical Thinking for the 21st Century" />
+  
+  <meta name="twitter:description" content="A book about statistics." />
+  
+
+<meta name="author" content="Copyright 2019 Russell A. Poldrack" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="ci-effect-size-power.html"/>
+<link rel="next" href="bayesian-statistics-in-r.html"/>
+<script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
+<link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129414074-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-129414074-1');
+</script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#why-does-this-book-exist"><i class="fa fa-check"></i><b>0.1</b> Why does this book exist?</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#why-r"><i class="fa fa-check"></i><b>0.2</b> Why R?</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#the-golden-age-of-data"><i class="fa fa-check"></i><b>0.3</b> The golden age of data</a></li>
+<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#an-open-source-book"><i class="fa fa-check"></i><b>0.4</b> An open source book</a></li>
+<li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.5</b> Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>1</b> Introduction to R</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#why-programming-is-hard-to-learn"><i class="fa fa-check"></i><b>1.1</b> Why programming is hard to learn</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#use-the-web"><i class="fa fa-check"></i><b>1.1.1</b> Use the web</a></li>
+<li class="chapter" data-level="1.1.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#rubber-duck-debugging"><i class="fa fa-check"></i><b>1.1.2</b> Rubber duck debugging</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#using-rstudio"><i class="fa fa-check"></i><b>1.2</b> Using RStudio</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-started-with-r"><i class="fa fa-check"></i><b>1.3</b> Getting started with R</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#variables"><i class="fa fa-check"></i><b>1.4</b> Variables</a></li>
+<li class="chapter" data-level="1.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#functions"><i class="fa fa-check"></i><b>1.5</b> Functions</a></li>
+<li class="chapter" data-level="1.6" data-path="introduction-to-r.html"><a href="introduction-to-r.html#vectors"><i class="fa fa-check"></i><b>1.6</b> Vectors</a></li>
+<li class="chapter" data-level="1.7" data-path="introduction-to-r.html"><a href="introduction-to-r.html#math-with-vectors"><i class="fa fa-check"></i><b>1.7</b> Math with vectors</a></li>
+<li class="chapter" data-level="1.8" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-frames"><i class="fa fa-check"></i><b>1.8</b> Data Frames</a></li>
+<li class="chapter" data-level="1.9" data-path="introduction-to-r.html"><a href="introduction-to-r.html#using-r-libraries"><i class="fa fa-check"></i><b>1.9</b> Using R libraries</a></li>
+<li class="chapter" data-level="1.10" data-path="introduction-to-r.html"><a href="introduction-to-r.html#working-with-data-files"><i class="fa fa-check"></i><b>1.10</b> Working with data files</a></li>
+<li class="chapter" data-level="1.11" data-path="introduction-to-r.html"><a href="introduction-to-r.html#learning-objectives"><i class="fa fa-check"></i><b>1.11</b> Learning objectives</a></li>
+<li class="chapter" data-level="1.12" data-path="introduction-to-r.html"><a href="introduction-to-r.html#suggested-readings-and-videos"><i class="fa fa-check"></i><b>1.12</b> Suggested readings and videos</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html"><i class="fa fa-check"></i><b>2</b> Summarizing data with R (with Lucy King)</a><ul>
+<li class="chapter" data-level="2.1" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html#introduction-to-the-tidyverse"><i class="fa fa-check"></i><b>2.1</b> Introduction to the Tidyverse</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html#making-a-data-frame-using-tibble"><i class="fa fa-check"></i><b>2.1.1</b> Making a data frame using tibble()</a></li>
+<li class="chapter" data-level="2.1.2" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html#selecting-an-element"><i class="fa fa-check"></i><b>2.1.2</b> Selecting an element</a></li>
+<li class="chapter" data-level="2.1.3" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html#adding-a-row-or-column"><i class="fa fa-check"></i><b>2.1.3</b> Adding a row or column</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html#creating-or-modifying-variables-using-mutate"><i class="fa fa-check"></i><b>2.2</b> Creating or modifying variables using <code>mutate()</code></a><ul>
+<li class="chapter" data-level="2.2.1" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html#remove-a-column-using-the-select-function"><i class="fa fa-check"></i><b>2.2.1</b> Remove a column using the select() function</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html#tidyverse-in-action"><i class="fa fa-check"></i><b>2.3</b> Tidyverse in action</a></li>
+<li class="chapter" data-level="2.4" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html#looking-at-individual-variables-using-pull-and-head"><i class="fa fa-check"></i><b>2.4</b> Looking at individual variables using pull() and head()</a></li>
+<li class="chapter" data-level="2.5" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html#computing-a-frequency-distribution-section-reffrequency-distributions"><i class="fa fa-check"></i><b>2.5</b> Computing a frequency distribution (Section @ref(frequency-distributions))</a></li>
+<li class="chapter" data-level="2.6" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html#computing-a-cumulative-distribution-section-refcumulative-distributions"><i class="fa fa-check"></i><b>2.6</b> Computing a cumulative distribution (Section @ref(cumulative-distributions))</a></li>
+<li class="chapter" data-level="2.7" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html#data-cleaning-and-tidying-with-r"><i class="fa fa-check"></i><b>2.7</b> Data cleaning and tidying with R</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html#statistics-attitude-data-from-course-survey"><i class="fa fa-check"></i><b>2.7.1</b> Statistics attitude data from course survey</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html"><i class="fa fa-check"></i><b>3</b> Data visualization with R (with Anna Khazenzon)</a><ul>
+<li class="chapter" data-level="3.1" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#the-grammar-of-graphics"><i class="fa fa-check"></i><b>3.1</b> The grammar of graphics</a></li>
+<li class="chapter" data-level="3.2" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#getting-started"><i class="fa fa-check"></i><b>3.2</b> Getting started</a></li>
+<li class="chapter" data-level="3.3" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#lets-think-through-a-visualization"><i class="fa fa-check"></i><b>3.3</b> Let’s think through a visualization</a></li>
+<li class="chapter" data-level="3.4" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#plotting-the-distribution-of-a-single-variable"><i class="fa fa-check"></i><b>3.4</b> Plotting the distribution of a single variable</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#histogram"><i class="fa fa-check"></i><b>3.4.1</b> Histogram</a></li>
+<li class="chapter" data-level="3.4.2" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#density-plot"><i class="fa fa-check"></i><b>3.4.2</b> Density plot</a></li>
+<li class="chapter" data-level="3.4.3" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#bar-vs.line-plots"><i class="fa fa-check"></i><b>3.4.3</b> Bar vs. line plots</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#plots-with-two-variables"><i class="fa fa-check"></i><b>3.5</b> Plots with two variables</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#adding-on-variables"><i class="fa fa-check"></i><b>3.5.1</b> Adding on variables</a></li>
+<li class="chapter" data-level="3.5.2" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#plotting-dispersion"><i class="fa fa-check"></i><b>3.5.2</b> Plotting dispersion</a></li>
+<li class="chapter" data-level="3.5.3" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#scatter-plot"><i class="fa fa-check"></i><b>3.5.3</b> Scatter plot</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#creating-a-more-complex-plot"><i class="fa fa-check"></i><b>3.6</b> Creating a more complex plot</a></li>
+<li class="chapter" data-level="3.7" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#additional-reading-and-resources"><i class="fa fa-check"></i><b>3.7</b> Additional reading and resources</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="fitting-simple-models-with-r.html"><a href="fitting-simple-models-with-r.html"><i class="fa fa-check"></i><b>4</b> Fitting simple models with R</a><ul>
+<li class="chapter" data-level="4.1" data-path="fitting-simple-models-with-r.html"><a href="fitting-simple-models-with-r.html#mean"><i class="fa fa-check"></i><b>4.1</b> Mean</a></li>
+<li class="chapter" data-level="4.2" data-path="fitting-simple-models-with-r.html"><a href="fitting-simple-models-with-r.html#median"><i class="fa fa-check"></i><b>4.2</b> Median</a></li>
+<li class="chapter" data-level="4.3" data-path="fitting-simple-models-with-r.html"><a href="fitting-simple-models-with-r.html#mode"><i class="fa fa-check"></i><b>4.3</b> Mode</a></li>
+<li class="chapter" data-level="4.4" data-path="fitting-simple-models-with-r.html"><a href="fitting-simple-models-with-r.html#variability"><i class="fa fa-check"></i><b>4.4</b> Variability</a></li>
+<li class="chapter" data-level="4.5" data-path="fitting-simple-models-with-r.html"><a href="fitting-simple-models-with-r.html#z-scores"><i class="fa fa-check"></i><b>4.5</b> Z-scores</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="probability-in-r-with-lucy-king.html"><a href="probability-in-r-with-lucy-king.html"><i class="fa fa-check"></i><b>5</b> Probability in R (with Lucy King)</a><ul>
+<li class="chapter" data-level="5.1" data-path="probability-in-r-with-lucy-king.html"><a href="probability-in-r-with-lucy-king.html#basic-probability-calculations"><i class="fa fa-check"></i><b>5.1</b> Basic probability calculations</a></li>
+<li class="chapter" data-level="5.2" data-path="probability-in-r-with-lucy-king.html"><a href="probability-in-r-with-lucy-king.html#empirical-frequency-section-refempirical-frequency"><i class="fa fa-check"></i><b>5.2</b> Empirical frequency (Section @ref(empirical-frequency))</a></li>
+<li class="chapter" data-level="5.3" data-path="probability-in-r-with-lucy-king.html"><a href="probability-in-r-with-lucy-king.html#conditional-probability-section-refconditional-probability"><i class="fa fa-check"></i><b>5.3</b> Conditional probability (Section @ref(conditional-probability))</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="sampling-in-r.html"><a href="sampling-in-r.html"><i class="fa fa-check"></i><b>6</b> Sampling in R</a><ul>
+<li class="chapter" data-level="6.1" data-path="sampling-in-r.html"><a href="sampling-in-r.html#sampling-error-section-refsamplingerror"><i class="fa fa-check"></i><b>6.1</b> Sampling error (Section @ref(samplingerror))</a></li>
+<li class="chapter" data-level="6.2" data-path="sampling-in-r.html"><a href="sampling-in-r.html#central-limit-theorem"><i class="fa fa-check"></i><b>6.2</b> Central limit theorem</a></li>
+<li class="chapter" data-level="6.3" data-path="sampling-in-r.html"><a href="sampling-in-r.html#confidence-intervals-section-refconfidence-intervals"><i class="fa fa-check"></i><b>6.3</b> Confidence intervals (Section @ref(confidence-intervals))</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="resampling-and-simulation-in-r.html"><a href="resampling-and-simulation-in-r.html"><i class="fa fa-check"></i><b>7</b> Resampling and simulation in R</a><ul>
+<li class="chapter" data-level="7.1" data-path="resampling-and-simulation-in-r.html"><a href="resampling-and-simulation-in-r.html#generating-random-samples-section-refgenerating-random-numbers"><i class="fa fa-check"></i><b>7.1</b> Generating random samples (Section @ref(generating-random-numbers))</a></li>
+<li class="chapter" data-level="7.2" data-path="resampling-and-simulation-in-r.html"><a href="resampling-and-simulation-in-r.html#simulating-the-maximum-finishing-time"><i class="fa fa-check"></i><b>7.2</b> Simulating the maximum finishing time</a></li>
+<li class="chapter" data-level="7.3" data-path="resampling-and-simulation-in-r.html"><a href="resampling-and-simulation-in-r.html#the-bootstrap"><i class="fa fa-check"></i><b>7.3</b> The bootstrap</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="hypothesis-testing-in-r.html"><a href="hypothesis-testing-in-r.html"><i class="fa fa-check"></i><b>8</b> Hypothesis testing in R</a><ul>
+<li class="chapter" data-level="8.1" data-path="hypothesis-testing-in-r.html"><a href="hypothesis-testing-in-r.html#simple-example-coin-flipping-section-refrandomization-very-simple"><i class="fa fa-check"></i><b>8.1</b> Simple example: Coin-flipping (Section @ref(randomization-very-simple))</a></li>
+<li class="chapter" data-level="8.2" data-path="hypothesis-testing-in-r.html"><a href="hypothesis-testing-in-r.html#simulating-p-values"><i class="fa fa-check"></i><b>8.2</b> Simulating p-values</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html"><i class="fa fa-check"></i><b>9</b> Quantifying effects and designing studies</a><ul>
+<li class="chapter" data-level="9.1" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#confidence-intervals"><i class="fa fa-check"></i><b>9.1</b> Confidence intervals</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#confidence-intervals-using-the-normal-distribution"><i class="fa fa-check"></i><b>9.1.1</b> Confidence intervals using the normal distribution</a></li>
+<li class="chapter" data-level="9.1.2" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#confidence-intervals-using-the-t-distribution"><i class="fa fa-check"></i><b>9.1.2</b> Confidence intervals using the t distribution</a></li>
+<li class="chapter" data-level="9.1.3" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#confidence-intervals-and-sample-size"><i class="fa fa-check"></i><b>9.1.3</b> Confidence intervals and sample size</a></li>
+<li class="chapter" data-level="9.1.4" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#computing-confidence-intervals-using-the-bootstrap"><i class="fa fa-check"></i><b>9.1.4</b> Computing confidence intervals using the bootstrap</a></li>
+<li class="chapter" data-level="9.1.5" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#relation-of-confidence-intervals-to-hypothesis-tests"><i class="fa fa-check"></i><b>9.1.5</b> Relation of confidence intervals to hypothesis tests</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#effect-sizes"><i class="fa fa-check"></i><b>9.2</b> Effect sizes</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#cohens-d"><i class="fa fa-check"></i><b>9.2.1</b> Cohen’s D</a></li>
+<li class="chapter" data-level="9.2.2" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#pearsons-r"><i class="fa fa-check"></i><b>9.2.2</b> Pearson’s r</a></li>
+<li class="chapter" data-level="9.2.3" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#odds-ratio"><i class="fa fa-check"></i><b>9.2.3</b> Odds ratio</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#statistical-power"><i class="fa fa-check"></i><b>9.3</b> Statistical power</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#power-analysis"><i class="fa fa-check"></i><b>9.3.1</b> Power analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#learning-objectives-1"><i class="fa fa-check"></i><b>9.4</b> Learning objectives</a></li>
+<li class="chapter" data-level="9.5" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#suggested-readings"><i class="fa fa-check"></i><b>9.5</b> Suggested readings</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="statistical-power-in-r.html"><a href="statistical-power-in-r.html"><i class="fa fa-check"></i><b>10</b> Statistical power in R</a><ul>
+<li class="chapter" data-level="10.1" data-path="statistical-power-in-r.html"><a href="statistical-power-in-r.html#power-analysis-1"><i class="fa fa-check"></i><b>10.1</b> Power analysis</a></li>
+<li class="chapter" data-level="10.2" data-path="statistical-power-in-r.html"><a href="statistical-power-in-r.html#power-curves"><i class="fa fa-check"></i><b>10.2</b> Power curves</a></li>
+<li class="chapter" data-level="10.3" data-path="statistical-power-in-r.html"><a href="statistical-power-in-r.html#simulating-statistical-power"><i class="fa fa-check"></i><b>10.3</b> Simulating statistical power</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="bayesian-statistics-in-r.html"><a href="bayesian-statistics-in-r.html"><i class="fa fa-check"></i><b>11</b> Bayesian statistics in R</a><ul>
+<li class="chapter" data-level="11.1" data-path="bayesian-statistics-in-r.html"><a href="bayesian-statistics-in-r.html#a-simple-example-section-refdoing-bayesian-estimation"><i class="fa fa-check"></i><b>11.1</b> A simple example (Section @ref(doing-bayesian-estimation))</a></li>
+<li class="chapter" data-level="11.2" data-path="bayesian-statistics-in-r.html"><a href="bayesian-statistics-in-r.html#estimating-posterior-distributions-section-refestimating-posterior-distributions"><i class="fa fa-check"></i><b>11.2</b> Estimating posterior distributions (Section @ref(estimating-posterior-distributions))</a></li>
+<li class="chapter" data-level="11.3" data-path="bayesian-statistics-in-r.html"><a href="bayesian-statistics-in-r.html#bayes-factors-section-refbayes-factors"><i class="fa fa-check"></i><b>11.3</b> Bayes factors (Section @ref(Bayes-factors))</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="modeling-categorical-relationships-in-r.html"><a href="modeling-categorical-relationships-in-r.html"><i class="fa fa-check"></i><b>12</b> Modeling categorical relationships in R</a><ul>
+<li class="chapter" data-level="12.1" data-path="modeling-categorical-relationships-in-r.html"><a href="modeling-categorical-relationships-in-r.html#the-pearson-chi-squared-test-section-refchi-squared-test"><i class="fa fa-check"></i><b>12.1</b> The Pearson Chi-squared test (Section @ref(chi-squared-test))</a></li>
+<li class="chapter" data-level="12.2" data-path="modeling-categorical-relationships-in-r.html"><a href="modeling-categorical-relationships-in-r.html#two-way-tests-section-reftwo-way-test"><i class="fa fa-check"></i><b>12.2</b> Two-way tests (Section @ref(two-way-test})</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="modeling-continuous-relationships-in-r.html"><a href="modeling-continuous-relationships-in-r.html"><i class="fa fa-check"></i><b>13</b> Modeling continuous relationships in R</a><ul>
+<li class="chapter" data-level="13.1" data-path="modeling-continuous-relationships-in-r.html"><a href="modeling-continuous-relationships-in-r.html#computing-covariance-and-correlation-section-refcovariance-and-correlation"><i class="fa fa-check"></i><b>13.1</b> Computing covariance and correlation (Section @ref(covariance-and-correlation))</a></li>
+<li class="chapter" data-level="13.2" data-path="modeling-continuous-relationships-in-r.html"><a href="modeling-continuous-relationships-in-r.html#hate-crime-example"><i class="fa fa-check"></i><b>13.2</b> Hate crime example</a></li>
+<li class="chapter" data-level="13.3" data-path="modeling-continuous-relationships-in-r.html"><a href="modeling-continuous-relationships-in-r.html#robust-correlations-section-refrobust-correlations"><i class="fa fa-check"></i><b>13.3</b> Robust correlations (Section @ref(robust-correlations))</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="the-general-linear-model-in-r.html"><a href="the-general-linear-model-in-r.html"><i class="fa fa-check"></i><b>14</b> The General Linear Model in R</a><ul>
+<li class="chapter" data-level="14.1" data-path="the-general-linear-model-in-r.html"><a href="the-general-linear-model-in-r.html#linear-regression-section-reflinear-regression"><i class="fa fa-check"></i><b>14.1</b> Linear regression (Section @ref(linear-regression))</a></li>
+<li class="chapter" data-level="14.2" data-path="the-general-linear-model-in-r.html"><a href="the-general-linear-model-in-r.html#model-criticism-and-diagnostics-section-refmodel-criticism"><i class="fa fa-check"></i><b>14.2</b> Model criticism and diagnostics (Section @ref(model-criticism))</a></li>
+<li class="chapter" data-level="14.3" data-path="the-general-linear-model-in-r.html"><a href="the-general-linear-model-in-r.html#examples-of-problematic-model-fit"><i class="fa fa-check"></i><b>14.3</b> Examples of problematic model fit</a></li>
+<li class="chapter" data-level="14.4" data-path="the-general-linear-model-in-r.html"><a href="the-general-linear-model-in-r.html#extending-regression-to-binary-outcomes."><i class="fa fa-check"></i><b>14.4</b> Extending regression to binary outcomes.</a></li>
+<li class="chapter" data-level="14.5" data-path="the-general-linear-model-in-r.html"><a href="the-general-linear-model-in-r.html#cross-validation-section-refcross-validation"><i class="fa fa-check"></i><b>14.5</b> Cross-validation (Section @ref(cross-validation))</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="comparing-means-in-r.html"><a href="comparing-means-in-r.html"><i class="fa fa-check"></i><b>15</b> Comparing means in R</a><ul>
+<li class="chapter" data-level="15.1" data-path="comparing-means-in-r.html"><a href="comparing-means-in-r.html#testing-the-value-of-a-single-mean-section-refsingle-mean"><i class="fa fa-check"></i><b>15.1</b> Testing the value of a single mean (Section @ref(single-mean))</a></li>
+<li class="chapter" data-level="15.2" data-path="comparing-means-in-r.html"><a href="comparing-means-in-r.html#comparing-two-means-section-refcomparing-two-means"><i class="fa fa-check"></i><b>15.2</b> Comparing two means (Section @ref(comparing-two-means))</a></li>
+<li class="chapter" data-level="15.3" data-path="comparing-means-in-r.html"><a href="comparing-means-in-r.html#the-t-test-as-a-linear-model-section-refttest-linear-model"><i class="fa fa-check"></i><b>15.3</b> The t-test as a linear model (Section @ref(ttest-linear-model))</a></li>
+<li class="chapter" data-level="15.4" data-path="comparing-means-in-r.html"><a href="comparing-means-in-r.html#comparing-paired-observations-section-refpaired-ttests"><i class="fa fa-check"></i><b>15.4</b> Comparing paired observations (Section @ref(paired-ttests))</a></li>
+<li class="chapter" data-level="15.5" data-path="comparing-means-in-r.html"><a href="comparing-means-in-r.html#analysis-of-variance-section-refanova"><i class="fa fa-check"></i><b>15.5</b> Analysis of variance (Section @ref(ANOVA))</a><ul>
+<li class="chapter" data-level="15.5.1" data-path="comparing-means-in-r.html"><a href="comparing-means-in-r.html#repeated-measures-analysis-of-variance"><i class="fa fa-check"></i><b>15.5.1</b> Repeated measures analysis of variance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="practical-statistical-modeling-in-r.html"><a href="practical-statistical-modeling-in-r.html"><i class="fa fa-check"></i><b>16</b> Practical statistical modeling in R</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Statistical Thinking for the 21st Century</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="statistical-power-in-r" class="section level1">
+<h1><span class="header-section-number">Chapter 10</span> Statistical power in R</h1>
+<p>In this chapter we focus specifically on statistical power.</p>
+<div id="power-analysis-1" class="section level2">
+<h2><span class="header-section-number">10.1</span> Power analysis</h2>
+<p>We can compute a power analysis using functions from the <code>pwr</code> package. Let’s focus on the power for a t-test in order to determine a difference in the mean between two groups. Let’s say that we think than an effect size of Cohen’s d=0.5 is realistic for the study in question (based on previous research) and would be of scientific interest. We wish to have 80% power to find the effect if it exists. We can compute the sample size needed for adequate power using the <code>pwr.t.test()</code> function:</p>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb224-1" data-line-number="1"><span class="kw">pwr.t.test</span>(<span class="dt">d=</span><span class="fl">0.5</span>, <span class="dt">power=</span>.<span class="dv">8</span>)</a></code></pre></div>
+<pre><code>## 
+##      Two-sample t test power calculation 
+## 
+##               n = 63.76561
+##               d = 0.5
+##       sig.level = 0.05
+##           power = 0.8
+##     alternative = two.sided
+## 
+## NOTE: n is number in *each* group</code></pre>
+<p>Thus, about 64 participants would be needed in each group in order to test the hypothesis with adequate power.</p>
+</div>
+<div id="power-curves" class="section level2">
+<h2><span class="header-section-number">10.2</span> Power curves</h2>
+<p>We can also create plots that can show us how the power to find an effect varies as a function of effect size and sample size. We willl use the <code>crossing()</code> function from the <code>tidyr</code> package to help with this. This function takes in two vectors, and returns a tibble that contains all possible combinations of those values.</p>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb226-1" data-line-number="1">effect_sizes &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.8</span>) </a>
+<a class="sourceLine" id="cb226-2" data-line-number="2">sample_sizes =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">10</span>, <span class="dv">500</span>, <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb226-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb226-4" data-line-number="4"><span class="co">#</span></a>
+<a class="sourceLine" id="cb226-5" data-line-number="5">input_df &lt;-<span class="st"> </span><span class="kw">crossing</span>(effect_sizes,sample_sizes)</a>
+<a class="sourceLine" id="cb226-6" data-line-number="6"><span class="kw">glimpse</span>(input_df)</a></code></pre></div>
+<pre><code>## Observations: 150
+## Variables: 2
+## $ effect_sizes &lt;dbl&gt; 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0…
+## $ sample_sizes &lt;dbl&gt; 10, 20, 30, 40, 50, 60, 70, 80, 90, …</code></pre>
+<p>Using this, we can then perform a power analysis for each combination of effect size and sample size to create our power curves. In this case, let’s say that we wish to perform a two-sample t-test.</p>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb228-1" data-line-number="1"><span class="co"># create a function get the power value and</span></a>
+<a class="sourceLine" id="cb228-2" data-line-number="2"><span class="co"># return as a tibble</span></a>
+<a class="sourceLine" id="cb228-3" data-line-number="3">get_power &lt;-<span class="st"> </span><span class="cf">function</span>(df){</a>
+<a class="sourceLine" id="cb228-4" data-line-number="4">  power_result &lt;-<span class="st"> </span><span class="kw">pwr.t.test</span>(<span class="dt">n=</span>df<span class="op">$</span>sample_sizes, </a>
+<a class="sourceLine" id="cb228-5" data-line-number="5">                             <span class="dt">d=</span>df<span class="op">$</span>effect_sizes,</a>
+<a class="sourceLine" id="cb228-6" data-line-number="6">                             <span class="dt">type=</span><span class="st">&#39;two.sample&#39;</span>)</a>
+<a class="sourceLine" id="cb228-7" data-line-number="7">  df<span class="op">$</span>power=power_result<span class="op">$</span>power</a>
+<a class="sourceLine" id="cb228-8" data-line-number="8">  <span class="kw">return</span>(df)</a>
+<a class="sourceLine" id="cb228-9" data-line-number="9">}</a>
+<a class="sourceLine" id="cb228-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb228-11" data-line-number="11"><span class="co"># run get_power for each combination of effect size </span></a>
+<a class="sourceLine" id="cb228-12" data-line-number="12"><span class="co"># and sample size</span></a>
+<a class="sourceLine" id="cb228-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb228-14" data-line-number="14">power_curves &lt;-<span class="st"> </span>input_df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb228-15" data-line-number="15"><span class="st">  </span><span class="kw">do</span>(<span class="kw">get_power</span>(.)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb228-16" data-line-number="16"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">effect_sizes =</span> <span class="kw">as.factor</span>(effect_sizes)) </a></code></pre></div>
+<p>Now we can plot the power curves, using a separate line for each effect size.</p>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb229-1" data-line-number="1"><span class="kw">ggplot</span>(power_curves, </a>
+<a class="sourceLine" id="cb229-2" data-line-number="2">       <span class="kw">aes</span>(<span class="dt">x=</span>sample_sizes,</a>
+<a class="sourceLine" id="cb229-3" data-line-number="3">           <span class="dt">y=</span>power, </a>
+<a class="sourceLine" id="cb229-4" data-line-number="4">           <span class="dt">linetype=</span>effect_sizes)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb229-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb229-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="fl">0.8</span>, </a>
+<a class="sourceLine" id="cb229-7" data-line-number="7">             <span class="dt">linetype=</span><span class="st">&#39;dotdash&#39;</span>)</a></code></pre></div>
+<p><img src="StatsThinking21_files/figure-html/unnamed-chunk-135-1.png" width="50%" /></p>
+</div>
+<div id="simulating-statistical-power" class="section level2">
+<h2><span class="header-section-number">10.3</span> Simulating statistical power</h2>
+<p>Let’s simulate this to see whether the power analysis actually gives the right answer.
+We will sample data for two groups, with a difference of 0.5 standard deviations between their underlying distributions, and we will look at how often we reject the null hypothesis.</p>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb230-1" data-line-number="1">nRuns &lt;-<span class="st"> </span><span class="dv">5000</span></a>
+<a class="sourceLine" id="cb230-2" data-line-number="2">effectSize &lt;-<span class="st"> </span><span class="fl">0.5</span></a>
+<a class="sourceLine" id="cb230-3" data-line-number="3"><span class="co"># perform power analysis to get sample size</span></a>
+<a class="sourceLine" id="cb230-4" data-line-number="4">pwr.result &lt;-<span class="st"> </span><span class="kw">pwr.t.test</span>(<span class="dt">d=</span>effectSize, <span class="dt">power=</span>.<span class="dv">8</span>)</a>
+<a class="sourceLine" id="cb230-5" data-line-number="5"><span class="co"># round up from estimated sample size</span></a>
+<a class="sourceLine" id="cb230-6" data-line-number="6">sampleSize &lt;-<span class="st"> </span><span class="kw">ceiling</span>(pwr.result<span class="op">$</span>n)</a>
+<a class="sourceLine" id="cb230-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb230-8" data-line-number="8"><span class="co"># create a function that will generate samples and test for</span></a>
+<a class="sourceLine" id="cb230-9" data-line-number="9"><span class="co"># a difference between groups using a two-sample t-test</span></a>
+<a class="sourceLine" id="cb230-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb230-11" data-line-number="11">get_t_result &lt;-<span class="st"> </span><span class="cf">function</span>(sampleSize, effectSize){</a>
+<a class="sourceLine" id="cb230-12" data-line-number="12">  <span class="co"># take sample for the first group from N(0, 1)</span></a>
+<a class="sourceLine" id="cb230-13" data-line-number="13">  group1 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(sampleSize)</a>
+<a class="sourceLine" id="cb230-14" data-line-number="14">  group2 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(sampleSize, <span class="dt">mean=</span>effectSize)</a>
+<a class="sourceLine" id="cb230-15" data-line-number="15">  ttest.result &lt;-<span class="st"> </span><span class="kw">t.test</span>(group1, group2)</a>
+<a class="sourceLine" id="cb230-16" data-line-number="16">  <span class="kw">return</span>(<span class="kw">tibble</span>(<span class="dt">pvalue=</span>ttest.result<span class="op">$</span>p.value))</a>
+<a class="sourceLine" id="cb230-17" data-line-number="17">}</a>
+<a class="sourceLine" id="cb230-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb230-19" data-line-number="19">index_df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">id=</span><span class="kw">seq</span>(nRuns)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb230-20" data-line-number="20"><span class="st">  </span><span class="kw">group_by</span>(id)</a>
+<a class="sourceLine" id="cb230-21" data-line-number="21"></a>
+<a class="sourceLine" id="cb230-22" data-line-number="22">power_sim_results &lt;-<span class="st"> </span>index_df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb230-23" data-line-number="23"><span class="st">  </span><span class="kw">do</span>(<span class="kw">get_t_result</span>(sampleSize, effectSize))</a>
+<a class="sourceLine" id="cb230-24" data-line-number="24"></a>
+<a class="sourceLine" id="cb230-25" data-line-number="25">p_reject &lt;-</a>
+<a class="sourceLine" id="cb230-26" data-line-number="26"><span class="st">  </span>power_sim_results <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb230-27" data-line-number="27"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb230-28" data-line-number="28"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">pvalue =</span> <span class="kw">mean</span>(pvalue<span class="op">&lt;</span>.<span class="dv">05</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb230-29" data-line-number="29"><span class="st">  </span><span class="kw">pull</span>()</a>
+<a class="sourceLine" id="cb230-30" data-line-number="30"></a>
+<a class="sourceLine" id="cb230-31" data-line-number="31">p_reject</a></code></pre></div>
+<pre><code>## [1] 0.7998</code></pre>
+<p>This should return a number very close to 0.8.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="ci-effect-size-power.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="bayesian-statistics-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/lunr.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/poldrack/psych10-book/edit/master/10b-StatisticalPowerInR.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["StatsThinking21.pdf", "StatsThinking21.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

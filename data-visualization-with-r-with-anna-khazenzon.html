@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Data visualization with R (with Anna Khazenzon) | Statistical Thinking for the 21st Century</title>
+  <meta name="description" content="A book about statistics." />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Data visualization with R (with Anna Khazenzon) | Statistical Thinking for the 21st Century" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A book about statistics." />
+  <meta name="github-repo" content="poldrack/psych10-book" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Data visualization with R (with Anna Khazenzon) | Statistical Thinking for the 21st Century" />
+  
+  <meta name="twitter:description" content="A book about statistics." />
+  
+
+<meta name="author" content="Copyright 2019 Russell A. Poldrack" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="summarizing-data-with-r-with-lucy-king.html"/>
+<link rel="next" href="fitting-simple-models-with-r.html"/>
+<script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
+<link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129414074-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-129414074-1');
+</script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#why-does-this-book-exist"><i class="fa fa-check"></i><b>0.1</b> Why does this book exist?</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#why-r"><i class="fa fa-check"></i><b>0.2</b> Why R?</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#the-golden-age-of-data"><i class="fa fa-check"></i><b>0.3</b> The golden age of data</a></li>
+<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#an-open-source-book"><i class="fa fa-check"></i><b>0.4</b> An open source book</a></li>
+<li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.5</b> Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>1</b> Introduction to R</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#why-programming-is-hard-to-learn"><i class="fa fa-check"></i><b>1.1</b> Why programming is hard to learn</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#use-the-web"><i class="fa fa-check"></i><b>1.1.1</b> Use the web</a></li>
+<li class="chapter" data-level="1.1.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#rubber-duck-debugging"><i class="fa fa-check"></i><b>1.1.2</b> Rubber duck debugging</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#using-rstudio"><i class="fa fa-check"></i><b>1.2</b> Using RStudio</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-started-with-r"><i class="fa fa-check"></i><b>1.3</b> Getting started with R</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#variables"><i class="fa fa-check"></i><b>1.4</b> Variables</a></li>
+<li class="chapter" data-level="1.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#functions"><i class="fa fa-check"></i><b>1.5</b> Functions</a></li>
+<li class="chapter" data-level="1.6" data-path="introduction-to-r.html"><a href="introduction-to-r.html#vectors"><i class="fa fa-check"></i><b>1.6</b> Vectors</a></li>
+<li class="chapter" data-level="1.7" data-path="introduction-to-r.html"><a href="introduction-to-r.html#math-with-vectors"><i class="fa fa-check"></i><b>1.7</b> Math with vectors</a></li>
+<li class="chapter" data-level="1.8" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-frames"><i class="fa fa-check"></i><b>1.8</b> Data Frames</a></li>
+<li class="chapter" data-level="1.9" data-path="introduction-to-r.html"><a href="introduction-to-r.html#using-r-libraries"><i class="fa fa-check"></i><b>1.9</b> Using R libraries</a></li>
+<li class="chapter" data-level="1.10" data-path="introduction-to-r.html"><a href="introduction-to-r.html#working-with-data-files"><i class="fa fa-check"></i><b>1.10</b> Working with data files</a></li>
+<li class="chapter" data-level="1.11" data-path="introduction-to-r.html"><a href="introduction-to-r.html#learning-objectives"><i class="fa fa-check"></i><b>1.11</b> Learning objectives</a></li>
+<li class="chapter" data-level="1.12" data-path="introduction-to-r.html"><a href="introduction-to-r.html#suggested-readings-and-videos"><i class="fa fa-check"></i><b>1.12</b> Suggested readings and videos</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html"><i class="fa fa-check"></i><b>2</b> Summarizing data with R (with Lucy King)</a><ul>
+<li class="chapter" data-level="2.1" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html#introduction-to-the-tidyverse"><i class="fa fa-check"></i><b>2.1</b> Introduction to the Tidyverse</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html#making-a-data-frame-using-tibble"><i class="fa fa-check"></i><b>2.1.1</b> Making a data frame using tibble()</a></li>
+<li class="chapter" data-level="2.1.2" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html#selecting-an-element"><i class="fa fa-check"></i><b>2.1.2</b> Selecting an element</a></li>
+<li class="chapter" data-level="2.1.3" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html#adding-a-row-or-column"><i class="fa fa-check"></i><b>2.1.3</b> Adding a row or column</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html#creating-or-modifying-variables-using-mutate"><i class="fa fa-check"></i><b>2.2</b> Creating or modifying variables using <code>mutate()</code></a><ul>
+<li class="chapter" data-level="2.2.1" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html#remove-a-column-using-the-select-function"><i class="fa fa-check"></i><b>2.2.1</b> Remove a column using the select() function</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html#tidyverse-in-action"><i class="fa fa-check"></i><b>2.3</b> Tidyverse in action</a></li>
+<li class="chapter" data-level="2.4" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html#looking-at-individual-variables-using-pull-and-head"><i class="fa fa-check"></i><b>2.4</b> Looking at individual variables using pull() and head()</a></li>
+<li class="chapter" data-level="2.5" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html#computing-a-frequency-distribution-section-reffrequency-distributions"><i class="fa fa-check"></i><b>2.5</b> Computing a frequency distribution (Section @ref(frequency-distributions))</a></li>
+<li class="chapter" data-level="2.6" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html#computing-a-cumulative-distribution-section-refcumulative-distributions"><i class="fa fa-check"></i><b>2.6</b> Computing a cumulative distribution (Section @ref(cumulative-distributions))</a></li>
+<li class="chapter" data-level="2.7" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html#data-cleaning-and-tidying-with-r"><i class="fa fa-check"></i><b>2.7</b> Data cleaning and tidying with R</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html#statistics-attitude-data-from-course-survey"><i class="fa fa-check"></i><b>2.7.1</b> Statistics attitude data from course survey</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html"><i class="fa fa-check"></i><b>3</b> Data visualization with R (with Anna Khazenzon)</a><ul>
+<li class="chapter" data-level="3.1" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#the-grammar-of-graphics"><i class="fa fa-check"></i><b>3.1</b> The grammar of graphics</a></li>
+<li class="chapter" data-level="3.2" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#getting-started"><i class="fa fa-check"></i><b>3.2</b> Getting started</a></li>
+<li class="chapter" data-level="3.3" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#lets-think-through-a-visualization"><i class="fa fa-check"></i><b>3.3</b> Let’s think through a visualization</a></li>
+<li class="chapter" data-level="3.4" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#plotting-the-distribution-of-a-single-variable"><i class="fa fa-check"></i><b>3.4</b> Plotting the distribution of a single variable</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#histogram"><i class="fa fa-check"></i><b>3.4.1</b> Histogram</a></li>
+<li class="chapter" data-level="3.4.2" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#density-plot"><i class="fa fa-check"></i><b>3.4.2</b> Density plot</a></li>
+<li class="chapter" data-level="3.4.3" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#bar-vs.line-plots"><i class="fa fa-check"></i><b>3.4.3</b> Bar vs. line plots</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#plots-with-two-variables"><i class="fa fa-check"></i><b>3.5</b> Plots with two variables</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#adding-on-variables"><i class="fa fa-check"></i><b>3.5.1</b> Adding on variables</a></li>
+<li class="chapter" data-level="3.5.2" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#plotting-dispersion"><i class="fa fa-check"></i><b>3.5.2</b> Plotting dispersion</a></li>
+<li class="chapter" data-level="3.5.3" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#scatter-plot"><i class="fa fa-check"></i><b>3.5.3</b> Scatter plot</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#creating-a-more-complex-plot"><i class="fa fa-check"></i><b>3.6</b> Creating a more complex plot</a></li>
+<li class="chapter" data-level="3.7" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#additional-reading-and-resources"><i class="fa fa-check"></i><b>3.7</b> Additional reading and resources</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="fitting-simple-models-with-r.html"><a href="fitting-simple-models-with-r.html"><i class="fa fa-check"></i><b>4</b> Fitting simple models with R</a><ul>
+<li class="chapter" data-level="4.1" data-path="fitting-simple-models-with-r.html"><a href="fitting-simple-models-with-r.html#mean"><i class="fa fa-check"></i><b>4.1</b> Mean</a></li>
+<li class="chapter" data-level="4.2" data-path="fitting-simple-models-with-r.html"><a href="fitting-simple-models-with-r.html#median"><i class="fa fa-check"></i><b>4.2</b> Median</a></li>
+<li class="chapter" data-level="4.3" data-path="fitting-simple-models-with-r.html"><a href="fitting-simple-models-with-r.html#mode"><i class="fa fa-check"></i><b>4.3</b> Mode</a></li>
+<li class="chapter" data-level="4.4" data-path="fitting-simple-models-with-r.html"><a href="fitting-simple-models-with-r.html#variability"><i class="fa fa-check"></i><b>4.4</b> Variability</a></li>
+<li class="chapter" data-level="4.5" data-path="fitting-simple-models-with-r.html"><a href="fitting-simple-models-with-r.html#z-scores"><i class="fa fa-check"></i><b>4.5</b> Z-scores</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="probability-in-r-with-lucy-king.html"><a href="probability-in-r-with-lucy-king.html"><i class="fa fa-check"></i><b>5</b> Probability in R (with Lucy King)</a><ul>
+<li class="chapter" data-level="5.1" data-path="probability-in-r-with-lucy-king.html"><a href="probability-in-r-with-lucy-king.html#basic-probability-calculations"><i class="fa fa-check"></i><b>5.1</b> Basic probability calculations</a></li>
+<li class="chapter" data-level="5.2" data-path="probability-in-r-with-lucy-king.html"><a href="probability-in-r-with-lucy-king.html#empirical-frequency-section-refempirical-frequency"><i class="fa fa-check"></i><b>5.2</b> Empirical frequency (Section @ref(empirical-frequency))</a></li>
+<li class="chapter" data-level="5.3" data-path="probability-in-r-with-lucy-king.html"><a href="probability-in-r-with-lucy-king.html#conditional-probability-section-refconditional-probability"><i class="fa fa-check"></i><b>5.3</b> Conditional probability (Section @ref(conditional-probability))</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="sampling-in-r.html"><a href="sampling-in-r.html"><i class="fa fa-check"></i><b>6</b> Sampling in R</a><ul>
+<li class="chapter" data-level="6.1" data-path="sampling-in-r.html"><a href="sampling-in-r.html#sampling-error-section-refsamplingerror"><i class="fa fa-check"></i><b>6.1</b> Sampling error (Section @ref(samplingerror))</a></li>
+<li class="chapter" data-level="6.2" data-path="sampling-in-r.html"><a href="sampling-in-r.html#central-limit-theorem"><i class="fa fa-check"></i><b>6.2</b> Central limit theorem</a></li>
+<li class="chapter" data-level="6.3" data-path="sampling-in-r.html"><a href="sampling-in-r.html#confidence-intervals-section-refconfidence-intervals"><i class="fa fa-check"></i><b>6.3</b> Confidence intervals (Section @ref(confidence-intervals))</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="resampling-and-simulation-in-r.html"><a href="resampling-and-simulation-in-r.html"><i class="fa fa-check"></i><b>7</b> Resampling and simulation in R</a><ul>
+<li class="chapter" data-level="7.1" data-path="resampling-and-simulation-in-r.html"><a href="resampling-and-simulation-in-r.html#generating-random-samples-section-refgenerating-random-numbers"><i class="fa fa-check"></i><b>7.1</b> Generating random samples (Section @ref(generating-random-numbers))</a></li>
+<li class="chapter" data-level="7.2" data-path="resampling-and-simulation-in-r.html"><a href="resampling-and-simulation-in-r.html#simulating-the-maximum-finishing-time"><i class="fa fa-check"></i><b>7.2</b> Simulating the maximum finishing time</a></li>
+<li class="chapter" data-level="7.3" data-path="resampling-and-simulation-in-r.html"><a href="resampling-and-simulation-in-r.html#the-bootstrap"><i class="fa fa-check"></i><b>7.3</b> The bootstrap</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="hypothesis-testing-in-r.html"><a href="hypothesis-testing-in-r.html"><i class="fa fa-check"></i><b>8</b> Hypothesis testing in R</a><ul>
+<li class="chapter" data-level="8.1" data-path="hypothesis-testing-in-r.html"><a href="hypothesis-testing-in-r.html#simple-example-coin-flipping-section-refrandomization-very-simple"><i class="fa fa-check"></i><b>8.1</b> Simple example: Coin-flipping (Section @ref(randomization-very-simple))</a></li>
+<li class="chapter" data-level="8.2" data-path="hypothesis-testing-in-r.html"><a href="hypothesis-testing-in-r.html#simulating-p-values"><i class="fa fa-check"></i><b>8.2</b> Simulating p-values</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html"><i class="fa fa-check"></i><b>9</b> Quantifying effects and designing studies</a><ul>
+<li class="chapter" data-level="9.1" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#confidence-intervals"><i class="fa fa-check"></i><b>9.1</b> Confidence intervals</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#confidence-intervals-using-the-normal-distribution"><i class="fa fa-check"></i><b>9.1.1</b> Confidence intervals using the normal distribution</a></li>
+<li class="chapter" data-level="9.1.2" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#confidence-intervals-using-the-t-distribution"><i class="fa fa-check"></i><b>9.1.2</b> Confidence intervals using the t distribution</a></li>
+<li class="chapter" data-level="9.1.3" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#confidence-intervals-and-sample-size"><i class="fa fa-check"></i><b>9.1.3</b> Confidence intervals and sample size</a></li>
+<li class="chapter" data-level="9.1.4" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#computing-confidence-intervals-using-the-bootstrap"><i class="fa fa-check"></i><b>9.1.4</b> Computing confidence intervals using the bootstrap</a></li>
+<li class="chapter" data-level="9.1.5" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#relation-of-confidence-intervals-to-hypothesis-tests"><i class="fa fa-check"></i><b>9.1.5</b> Relation of confidence intervals to hypothesis tests</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#effect-sizes"><i class="fa fa-check"></i><b>9.2</b> Effect sizes</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#cohens-d"><i class="fa fa-check"></i><b>9.2.1</b> Cohen’s D</a></li>
+<li class="chapter" data-level="9.2.2" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#pearsons-r"><i class="fa fa-check"></i><b>9.2.2</b> Pearson’s r</a></li>
+<li class="chapter" data-level="9.2.3" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#odds-ratio"><i class="fa fa-check"></i><b>9.2.3</b> Odds ratio</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#statistical-power"><i class="fa fa-check"></i><b>9.3</b> Statistical power</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#power-analysis"><i class="fa fa-check"></i><b>9.3.1</b> Power analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#learning-objectives-1"><i class="fa fa-check"></i><b>9.4</b> Learning objectives</a></li>
+<li class="chapter" data-level="9.5" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#suggested-readings"><i class="fa fa-check"></i><b>9.5</b> Suggested readings</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="statistical-power-in-r.html"><a href="statistical-power-in-r.html"><i class="fa fa-check"></i><b>10</b> Statistical power in R</a><ul>
+<li class="chapter" data-level="10.1" data-path="statistical-power-in-r.html"><a href="statistical-power-in-r.html#power-analysis-1"><i class="fa fa-check"></i><b>10.1</b> Power analysis</a></li>
+<li class="chapter" data-level="10.2" data-path="statistical-power-in-r.html"><a href="statistical-power-in-r.html#power-curves"><i class="fa fa-check"></i><b>10.2</b> Power curves</a></li>
+<li class="chapter" data-level="10.3" data-path="statistical-power-in-r.html"><a href="statistical-power-in-r.html#simulating-statistical-power"><i class="fa fa-check"></i><b>10.3</b> Simulating statistical power</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="bayesian-statistics-in-r.html"><a href="bayesian-statistics-in-r.html"><i class="fa fa-check"></i><b>11</b> Bayesian statistics in R</a><ul>
+<li class="chapter" data-level="11.1" data-path="bayesian-statistics-in-r.html"><a href="bayesian-statistics-in-r.html#a-simple-example-section-refdoing-bayesian-estimation"><i class="fa fa-check"></i><b>11.1</b> A simple example (Section @ref(doing-bayesian-estimation))</a></li>
+<li class="chapter" data-level="11.2" data-path="bayesian-statistics-in-r.html"><a href="bayesian-statistics-in-r.html#estimating-posterior-distributions-section-refestimating-posterior-distributions"><i class="fa fa-check"></i><b>11.2</b> Estimating posterior distributions (Section @ref(estimating-posterior-distributions))</a></li>
+<li class="chapter" data-level="11.3" data-path="bayesian-statistics-in-r.html"><a href="bayesian-statistics-in-r.html#bayes-factors-section-refbayes-factors"><i class="fa fa-check"></i><b>11.3</b> Bayes factors (Section @ref(Bayes-factors))</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="modeling-categorical-relationships-in-r.html"><a href="modeling-categorical-relationships-in-r.html"><i class="fa fa-check"></i><b>12</b> Modeling categorical relationships in R</a><ul>
+<li class="chapter" data-level="12.1" data-path="modeling-categorical-relationships-in-r.html"><a href="modeling-categorical-relationships-in-r.html#the-pearson-chi-squared-test-section-refchi-squared-test"><i class="fa fa-check"></i><b>12.1</b> The Pearson Chi-squared test (Section @ref(chi-squared-test))</a></li>
+<li class="chapter" data-level="12.2" data-path="modeling-categorical-relationships-in-r.html"><a href="modeling-categorical-relationships-in-r.html#two-way-tests-section-reftwo-way-test"><i class="fa fa-check"></i><b>12.2</b> Two-way tests (Section @ref(two-way-test})</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="modeling-continuous-relationships-in-r.html"><a href="modeling-continuous-relationships-in-r.html"><i class="fa fa-check"></i><b>13</b> Modeling continuous relationships in R</a><ul>
+<li class="chapter" data-level="13.1" data-path="modeling-continuous-relationships-in-r.html"><a href="modeling-continuous-relationships-in-r.html#computing-covariance-and-correlation-section-refcovariance-and-correlation"><i class="fa fa-check"></i><b>13.1</b> Computing covariance and correlation (Section @ref(covariance-and-correlation))</a></li>
+<li class="chapter" data-level="13.2" data-path="modeling-continuous-relationships-in-r.html"><a href="modeling-continuous-relationships-in-r.html#hate-crime-example"><i class="fa fa-check"></i><b>13.2</b> Hate crime example</a></li>
+<li class="chapter" data-level="13.3" data-path="modeling-continuous-relationships-in-r.html"><a href="modeling-continuous-relationships-in-r.html#robust-correlations-section-refrobust-correlations"><i class="fa fa-check"></i><b>13.3</b> Robust correlations (Section @ref(robust-correlations))</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="the-general-linear-model-in-r.html"><a href="the-general-linear-model-in-r.html"><i class="fa fa-check"></i><b>14</b> The General Linear Model in R</a><ul>
+<li class="chapter" data-level="14.1" data-path="the-general-linear-model-in-r.html"><a href="the-general-linear-model-in-r.html#linear-regression-section-reflinear-regression"><i class="fa fa-check"></i><b>14.1</b> Linear regression (Section @ref(linear-regression))</a></li>
+<li class="chapter" data-level="14.2" data-path="the-general-linear-model-in-r.html"><a href="the-general-linear-model-in-r.html#model-criticism-and-diagnostics-section-refmodel-criticism"><i class="fa fa-check"></i><b>14.2</b> Model criticism and diagnostics (Section @ref(model-criticism))</a></li>
+<li class="chapter" data-level="14.3" data-path="the-general-linear-model-in-r.html"><a href="the-general-linear-model-in-r.html#examples-of-problematic-model-fit"><i class="fa fa-check"></i><b>14.3</b> Examples of problematic model fit</a></li>
+<li class="chapter" data-level="14.4" data-path="the-general-linear-model-in-r.html"><a href="the-general-linear-model-in-r.html#extending-regression-to-binary-outcomes."><i class="fa fa-check"></i><b>14.4</b> Extending regression to binary outcomes.</a></li>
+<li class="chapter" data-level="14.5" data-path="the-general-linear-model-in-r.html"><a href="the-general-linear-model-in-r.html#cross-validation-section-refcross-validation"><i class="fa fa-check"></i><b>14.5</b> Cross-validation (Section @ref(cross-validation))</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="comparing-means-in-r.html"><a href="comparing-means-in-r.html"><i class="fa fa-check"></i><b>15</b> Comparing means in R</a><ul>
+<li class="chapter" data-level="15.1" data-path="comparing-means-in-r.html"><a href="comparing-means-in-r.html#testing-the-value-of-a-single-mean-section-refsingle-mean"><i class="fa fa-check"></i><b>15.1</b> Testing the value of a single mean (Section @ref(single-mean))</a></li>
+<li class="chapter" data-level="15.2" data-path="comparing-means-in-r.html"><a href="comparing-means-in-r.html#comparing-two-means-section-refcomparing-two-means"><i class="fa fa-check"></i><b>15.2</b> Comparing two means (Section @ref(comparing-two-means))</a></li>
+<li class="chapter" data-level="15.3" data-path="comparing-means-in-r.html"><a href="comparing-means-in-r.html#the-t-test-as-a-linear-model-section-refttest-linear-model"><i class="fa fa-check"></i><b>15.3</b> The t-test as a linear model (Section @ref(ttest-linear-model))</a></li>
+<li class="chapter" data-level="15.4" data-path="comparing-means-in-r.html"><a href="comparing-means-in-r.html#comparing-paired-observations-section-refpaired-ttests"><i class="fa fa-check"></i><b>15.4</b> Comparing paired observations (Section @ref(paired-ttests))</a></li>
+<li class="chapter" data-level="15.5" data-path="comparing-means-in-r.html"><a href="comparing-means-in-r.html#analysis-of-variance-section-refanova"><i class="fa fa-check"></i><b>15.5</b> Analysis of variance (Section @ref(ANOVA))</a><ul>
+<li class="chapter" data-level="15.5.1" data-path="comparing-means-in-r.html"><a href="comparing-means-in-r.html#repeated-measures-analysis-of-variance"><i class="fa fa-check"></i><b>15.5.1</b> Repeated measures analysis of variance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="practical-statistical-modeling-in-r.html"><a href="practical-statistical-modeling-in-r.html"><i class="fa fa-check"></i><b>16</b> Practical statistical modeling in R</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Statistical Thinking for the 21st Century</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-visualization-with-r-with-anna-khazenzon" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> Data visualization with R (with Anna Khazenzon)</h1>
+<p>There are many different tools for plotting data in R, but we will focus on the <code>ggplot()</code> function provided by a package called <code>ggplot2</code>. ggplot is very powerful, but using it requires getting one’s head around how it works.</p>
+<div id="the-grammar-of-graphics" class="section level2">
+<h2><span class="header-section-number">3.1</span> The grammar of graphics</h2>
+<p>or, the “gg” in ggplot</p>
+<p>Each language has a grammar consisting of types of words and the rules with which to string them together into sentences. If a sentence is grammatically correct, we’re able to parse it, even though that doesn’t ensure that it’s interesting, beautiful, or even meaningful.</p>
+<p>Similarly, plots can be divided up into their core components, which come together via a set of rules.</p>
+<p>Some of the major components are :</p>
+<ul>
+<li>data</li>
+<li>aesthetics</li>
+<li>geometries</li>
+<li>themes</li>
+</ul>
+<p>The data are the actual variables we’re plotting, which we pass to ggplot through the data argument. As you’ve learned, ggplot takes a <strong>dataframe</strong> in which each column is a variable.</p>
+<p>Now we need to tell ggplot <em>how</em> to plot those variables, by mapping each variable to an <em>axis</em> of the plot. You’ve seen that when we plot histograms, our variable goes on the x axis. Hence, we set <code>x=&lt;variable&gt;</code> in a call to <code>aes()</code> within <code>ggplot()</code>. This sets <strong>aesthetics</strong>, which are mappings of data to certain scales, like axes or things like color or shape. The plot still had two axes – x and y – but we didn’t need to <em>specify</em> what went on the y axis because ggplot knew by <em>default</em> that it should make a count variable.</p>
+<p>How was ggplot able to figure that out? Because of <strong>geometries</strong>, which are <em>shapes</em> we use to represent our data. You’ve seen <code>geom_histogram</code>, which basically gives our graph a bar plot shape, except that it also sets the default y axis variable to be <code>count</code>. Other shapes include points and lines, among many others.</p>
+<p>We’ll go over other aspects of the grammar of graphics (such as facets, statistics, and coordinates) as they come up. Let’s start visualizing some data by first choosing a <strong>theme</strong>, which describes all of the non-data ink in our plot, like grid lines and text.</p>
+</div>
+<div id="getting-started" class="section level2">
+<h2><span class="header-section-number">3.2</span> Getting started</h2>
+<p>Load ggplot and choose a theme you like (see <a href="https://bookdown.org/asmundhreinn/r4ds-master/graphics-for-communication.html#themes">here</a> for examples).</p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb122-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb122-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb122-3" data-line-number="3"><span class="kw">theme_set</span>(<span class="kw">theme_bw</span>()) <span class="co"># I like this fairly minimal one</span></a></code></pre></div>
+</div>
+<div id="lets-think-through-a-visualization" class="section level2">
+<h2><span class="header-section-number">3.3</span> Let’s think through a visualization</h2>
+<p>Principles we want to keep in mind:</p>
+<ul>
+<li>Show the data without distortion</li>
+<li>Use color, shape, and location to encourage comparisons</li>
+<li>Minimize visual clutter (maximize your information to ink ratio)</li>
+</ul>
+<p>The two questions you want to ask yourself before getting started are:</p>
+<ul>
+<li>What type of variable(s) am I plotting?</li>
+<li>What comparison do I want to make salient for the viewer (possibly myself)?</li>
+</ul>
+<p>Figuring out <em>how</em> to highlight a comparison and include relevant variables usually benefits from sketching the plot out first.</p>
+</div>
+<div id="plotting-the-distribution-of-a-single-variable" class="section level2">
+<h2><span class="header-section-number">3.4</span> Plotting the distribution of a single variable</h2>
+<p>How do you choose which <strong>geometry</strong> to use? ggplot allows you to choose from a number of geometries. This choice will determine what sort of plot you create. We will use the built-in mpg dataset, which contains fuel efficiency data for a number of different cars.</p>
+<div id="histogram" class="section level3">
+<h3><span class="header-section-number">3.4.1</span> Histogram</h3>
+<p>The histogram shows the overall distribution of the data. Here we use the nclass.FD function to compute the optimal bin size.</p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb123-1" data-line-number="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(hwy)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb123-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="kw">nclass.FD</span>(mpg<span class="op">$</span>hwy)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb123-3" data-line-number="3"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&#39;Highway mileage&#39;</span>) </a></code></pre></div>
+<p><img src="StatsThinking21_files/figure-html/unnamed-chunk-50-1.png" width="50%" /></p>
+<p>Instead of creating discrete bins, we can look at relative density continuously.</p>
+</div>
+<div id="density-plot" class="section level3">
+<h3><span class="header-section-number">3.4.2</span> Density plot</h3>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb124-1" data-line-number="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(hwy)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb124-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_density</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb124-3" data-line-number="3"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&#39;Highway mileage&#39;</span>) </a></code></pre></div>
+<p><img src="StatsThinking21_files/figure-html/unnamed-chunk-51-1.png" width="50%" /></p>
+<p>A note on defaults: The default statistic (or “stat”) underlying <code>geom_density</code> is called “density” – not surprising. The default stat for <code>geom_histogram</code> is “count”. What do you think would happen if you overrode the default and set <code>stat=&quot;count&quot;</code>?</p>
+<pre rfig.width="4," fig.height="4," out.width="50%"><code>ggplot(mpg, aes(hwy)) +
+  geom_density(stat = &quot;count&quot;)</code></pre>
+<p>What we discover is that the <em>geometric</em> difference between <code>geom_histogram</code> and <code>geom_density</code> can actually be generalized. <code>geom_histogram</code> is a shortcut for working with <code>geom_bar</code>, and <code>geom_density</code> is a shortcut for working with <code>geom_line</code>.</p>
+</div>
+<div id="bar-vs.line-plots" class="section level3">
+<h3><span class="header-section-number">3.4.3</span> Bar vs. line plots</h3>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb126-1" data-line-number="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(hwy)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb126-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;count&quot;</span>)</a></code></pre></div>
+<p><img src="StatsThinking21_files/figure-html/unnamed-chunk-52-1.png" width="50%" /></p>
+<p>Note that the geometry tells ggplot what kind of plot to use, and the statistic (<em>stat</em>) tells it what kind of summary to present.</p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" data-line-number="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(hwy)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb127-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">stat =</span> <span class="st">&quot;density&quot;</span>)</a></code></pre></div>
+<p><img src="StatsThinking21_files/figure-html/unnamed-chunk-53-1.png" width="50%" /></p>
+</div>
+</div>
+<div id="plots-with-two-variables" class="section level2">
+<h2><span class="header-section-number">3.5</span> Plots with two variables</h2>
+<p>Let’s check out mileage by car manufacturer. We’ll plot one <em>continuous</em> variable by one <em>nominal</em> one.</p>
+<p>First, let’s make a bar plot by choosing the stat “summary” and picking the “mean” function to summarize the data.</p>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb128-1" data-line-number="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(manufacturer, hwy)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb128-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;summary&quot;</span>, <span class="dt">fun.y =</span> <span class="st">&quot;mean&quot;</span>)  <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb128-3" data-line-number="3"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;Highway mileage&#39;</span>)</a></code></pre></div>
+<p><img src="StatsThinking21_files/figure-html/unnamed-chunk-54-1.png" width="80%" /></p>
+<p>One problem with this plot is that it’s hard to read some of the labels because they overlap. How could we fix that? Hint: search the web for “ggplot rotate x axis labels” and add the appropriate command.</p>
+<p><em>TBD: fix</em></p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" data-line-number="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(manufacturer, hwy)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb129-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;summary&quot;</span>, <span class="dt">fun.y =</span> <span class="st">&quot;mean&quot;</span>)  <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb129-3" data-line-number="3"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;Highway mileage&#39;</span>)</a></code></pre></div>
+<p><img src="StatsThinking21_files/figure-html/unnamed-chunk-55-1.png" width="80%" /></p>
+<div id="adding-on-variables" class="section level3">
+<h3><span class="header-section-number">3.5.1</span> Adding on variables</h3>
+<p>What if we wanted to add another variable into the mix? Maybe the <em>year</em> of the car is also important to consider. We have a few options here. First, you could map the variable to another <strong>aesthetic</strong>.</p>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" data-line-number="1"><span class="co"># first, year needs to be converted to a factor</span></a>
+<a class="sourceLine" id="cb130-2" data-line-number="2">mpg<span class="op">$</span>year &lt;-<span class="st"> </span><span class="kw">factor</span>(mpg<span class="op">$</span>year) </a>
+<a class="sourceLine" id="cb130-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb130-4" data-line-number="4"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(manufacturer, hwy, <span class="dt">fill =</span> year)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb130-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;summary&quot;</span>, <span class="dt">fun.y =</span> <span class="st">&quot;mean&quot;</span>)</a></code></pre></div>
+<p><img src="StatsThinking21_files/figure-html/unnamed-chunk-56-1.png" width="80%" /></p>
+<p>By default, the bars are <em>stacked</em> on top of one another. If you want to separate them, you can change the <code>position</code> argument form its default to “dodge”.</p>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" data-line-number="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(manufacturer, hwy, <span class="dt">fill=</span>year)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb131-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;summary&quot;</span>, </a>
+<a class="sourceLine" id="cb131-3" data-line-number="3">           <span class="dt">fun.y =</span> <span class="st">&quot;mean&quot;</span>, </a>
+<a class="sourceLine" id="cb131-4" data-line-number="4">           <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</a></code></pre></div>
+<p><img src="StatsThinking21_files/figure-html/unnamed-chunk-57-1.png" width="80%" /></p>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" data-line-number="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(year, hwy, </a>
+<a class="sourceLine" id="cb132-2" data-line-number="2">                <span class="dt">group=</span>manufacturer,</a>
+<a class="sourceLine" id="cb132-3" data-line-number="3">                <span class="dt">color=</span>manufacturer)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb132-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">stat =</span> <span class="st">&quot;summary&quot;</span>, <span class="dt">fun.y =</span> <span class="st">&quot;mean&quot;</span>)</a></code></pre></div>
+<p><img src="StatsThinking21_files/figure-html/unnamed-chunk-58-1.png" width="50%" /></p>
+<p>For a less visually cluttered plot, let’s try <strong>facetting</strong>. This creates <em>subplots</em> for each value of the <code>year</code> variable.</p>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb133-1" data-line-number="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(manufacturer, hwy)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb133-2" data-line-number="2"><span class="st">  </span><span class="co"># split up the bar plot into two by year</span></a>
+<a class="sourceLine" id="cb133-3" data-line-number="3"><span class="st">  </span><span class="kw">facet_grid</span>(year <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb133-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;summary&quot;</span>, </a>
+<a class="sourceLine" id="cb133-5" data-line-number="5">           <span class="dt">fun.y =</span> <span class="st">&quot;mean&quot;</span>)</a></code></pre></div>
+<p><img src="StatsThinking21_files/figure-html/unnamed-chunk-59-1.png" width="80%" /></p>
+</div>
+<div id="plotting-dispersion" class="section level3">
+<h3><span class="header-section-number">3.5.2</span> Plotting dispersion</h3>
+<p>Instead of looking at just the means, we can get a sense of the entire distribution of mileage values for each manufacturer.</p>
+<div id="box-plot" class="section level4">
+<h4><span class="header-section-number">3.5.2.1</span> Box plot</h4>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb134-1" data-line-number="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(manufacturer, hwy)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb134-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_boxplot</span>()</a></code></pre></div>
+<p><img src="StatsThinking21_files/figure-html/unnamed-chunk-60-1.png" width="80%" /></p>
+<p>A <strong>box plot</strong> (or box and whiskers plot) uses quartiles to give us a sense of spread. The thickest line, somewhere inside the box, represents the <em>median</em>. The upper and lower bounds of the box (the <em>hinges</em>) are the first and third quartiles (can you use them to approximate the interquartile range?). The lines extending from the hinges are the remaining data points, excluding <strong>outliers</strong>, which are plotted as individual points.</p>
+</div>
+<div id="error-bars" class="section level4">
+<h4><span class="header-section-number">3.5.2.2</span> Error bars</h4>
+<p>Now, let’s do something a bit more complex, but much more useful – let’s create our own summary of the data, so we can choose which summary statistic to plot and also compute a measure of dispersion of our choosing.</p>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb135-1" data-line-number="1"><span class="co"># summarise data</span></a>
+<a class="sourceLine" id="cb135-2" data-line-number="2">mpg_summary &lt;-<span class="st"> </span>mpg <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb135-3" data-line-number="3"><span class="st">  </span><span class="kw">group_by</span>(manufacturer) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb135-4" data-line-number="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>(), </a>
+<a class="sourceLine" id="cb135-5" data-line-number="5">            <span class="dt">mean_hwy =</span> <span class="kw">mean</span>(hwy), </a>
+<a class="sourceLine" id="cb135-6" data-line-number="6">            <span class="dt">sd_hwy =</span> <span class="kw">sd</span>(hwy))</a>
+<a class="sourceLine" id="cb135-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb135-8" data-line-number="8"><span class="co"># compute confidence intervals for the error bars</span></a>
+<a class="sourceLine" id="cb135-9" data-line-number="9"><span class="co"># (we&#39;ll talk about this later in the course!)</span></a>
+<a class="sourceLine" id="cb135-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb135-11" data-line-number="11">limits &lt;-<span class="st"> </span><span class="kw">aes</span>(</a>
+<a class="sourceLine" id="cb135-12" data-line-number="12">  <span class="co"># compute the lower limit of the error bar</span></a>
+<a class="sourceLine" id="cb135-13" data-line-number="13">  <span class="dt">ymin =</span> mean_hwy <span class="op">-</span><span class="st"> </span><span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>sd_hwy <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(n), </a>
+<a class="sourceLine" id="cb135-14" data-line-number="14">  <span class="co"># compute the upper limit</span></a>
+<a class="sourceLine" id="cb135-15" data-line-number="15">  <span class="dt">ymax =</span> mean_hwy <span class="op">+</span><span class="st"> </span><span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>sd_hwy <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(n))</a>
+<a class="sourceLine" id="cb135-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb135-17" data-line-number="17"><span class="co"># now we&#39;re giving ggplot the mean for each group, </span></a>
+<a class="sourceLine" id="cb135-18" data-line-number="18"><span class="co"># instead of the datapoints themselves</span></a>
+<a class="sourceLine" id="cb135-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb135-20" data-line-number="20"><span class="kw">ggplot</span>(mpg_summary, <span class="kw">aes</span>(manufacturer, mean_hwy)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb135-21" data-line-number="21"><span class="st">  </span><span class="co"># we set stat = &quot;identity&quot; on the summary data </span></a>
+<a class="sourceLine" id="cb135-22" data-line-number="22"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb135-23" data-line-number="23"><span class="st">  </span><span class="co"># we create error bars using the limits we computed above</span></a>
+<a class="sourceLine" id="cb135-24" data-line-number="24"><span class="st">  </span><span class="kw">geom_errorbar</span>(limits, <span class="dt">width=</span><span class="fl">0.5</span>) </a></code></pre></div>
+<p><img src="StatsThinking21_files/figure-html/unnamed-chunk-61-1.png" width="80%" /></p>
+<p>Error bars don’t always mean the same thing – it’s important to determine whether you’re looking at e.g. standard error or confidence intervals (which we’ll talk more about later in the course).</p>
+<div id="minimizing-non-data-ink" class="section level5">
+<h5><span class="header-section-number">3.5.2.2.1</span> Minimizing non-data ink</h5>
+<p>The plot we just created is nice and all, but it’s tough to look at. The bar plots add a lot of ink that doesn’t help us compare engine sizes across manufacturers. Similarly, the width of the error bars doesn’t add any information. Let’s tweak which <em>geometry</em> we use, and tweak the appearance of the error bars.</p>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb136-1" data-line-number="1"><span class="kw">ggplot</span>(mpg_summary, <span class="kw">aes</span>(manufacturer, mean_hwy)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb136-2" data-line-number="2"><span class="st">  </span><span class="co"># switch to point instead of bar to minimize ink used</span></a>
+<a class="sourceLine" id="cb136-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb136-4" data-line-number="4"><span class="st">  </span><span class="co"># remove the horizontal parts of the error bars</span></a>
+<a class="sourceLine" id="cb136-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_errorbar</span>(limits, <span class="dt">width =</span> <span class="dv">0</span>) </a></code></pre></div>
+<p><img src="StatsThinking21_files/figure-html/unnamed-chunk-62-1.png" width="80%" /></p>
+<p>Looks a lot cleaner, but our points are all over the place. Let’s make a final tweak to make <em>learning something</em> from this plot a bit easier.</p>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb137-1" data-line-number="1">mpg_summary_ordered &lt;-<span class="st"> </span>mpg_summary <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb137-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(</a>
+<a class="sourceLine" id="cb137-3" data-line-number="3">    <span class="co"># we sort manufacturers by mean engine size</span></a>
+<a class="sourceLine" id="cb137-4" data-line-number="4">    <span class="dt">manufacturer =</span> <span class="kw">reorder</span>(manufacturer, <span class="op">-</span>mean_hwy)</a>
+<a class="sourceLine" id="cb137-5" data-line-number="5">  )</a>
+<a class="sourceLine" id="cb137-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb137-7" data-line-number="7"><span class="kw">ggplot</span>(mpg_summary_ordered, <span class="kw">aes</span>(manufacturer, mean_hwy)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb137-8" data-line-number="8"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb137-9" data-line-number="9"><span class="st">  </span><span class="kw">geom_errorbar</span>(limits, <span class="dt">width =</span> <span class="dv">0</span>) </a></code></pre></div>
+<p><img src="StatsThinking21_files/figure-html/unnamed-chunk-63-1.png" width="80%" /></p>
+</div>
+</div>
+</div>
+<div id="scatter-plot" class="section level3">
+<h3><span class="header-section-number">3.5.3</span> Scatter plot</h3>
+<p>When we have multiple <em>continuous</em> variables, we can use points to plot each variable on an axis. This is known as a <strong>scatter plot</strong>. You’ve seen this example in your reading.</p>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb138-1" data-line-number="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb138-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
+<p><img src="StatsThinking21_files/figure-html/unnamed-chunk-64-1.png" width="50%" /></p>
+<div id="layers-of-data" class="section level4">
+<h4><span class="header-section-number">3.5.3.1</span> Layers of data</h4>
+<p>We can add layers of data onto this graph, like a <em>line of best fit</em>. We use a geometry known as a <strong>smooth</strong> to accomplish this.</p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" data-line-number="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb139-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb139-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">color =</span> <span class="st">&quot;black&quot;</span>)</a></code></pre></div>
+<p><img src="StatsThinking21_files/figure-html/unnamed-chunk-65-1.png" width="50%" /></p>
+<p>We can add on points and a smooth line for another set of data as well (efficiency in the city instead of on the highway).</p>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb140-1" data-line-number="1"><span class="kw">ggplot</span>(mpg) <span class="op">+</span></a>
+<a class="sourceLine" id="cb140-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(displ, hwy), <span class="dt">color =</span> <span class="st">&quot;grey&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb140-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="kw">aes</span>(displ, hwy), <span class="dt">color =</span> <span class="st">&quot;grey&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb140-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(displ, cty), <span class="dt">color =</span> <span class="st">&quot;limegreen&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb140-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="kw">aes</span>(displ, cty), <span class="dt">color =</span> <span class="st">&quot;limegreen&quot;</span>)</a></code></pre></div>
+<p><img src="StatsThinking21_files/figure-html/unnamed-chunk-66-1.png" width="50%" /></p>
+</div>
+</div>
+</div>
+<div id="creating-a-more-complex-plot" class="section level2">
+<h2><span class="header-section-number">3.6</span> Creating a more complex plot</h2>
+<p>In this section we will recreate Figure <a href="#fig:challengerTemps"><strong>??</strong></a> from Chapter @ref{data-visualization}. Here is the code to generate the figure; we will go through each of its sections below.</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb141-1" data-line-number="1">oringDf &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;data/orings.csv&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>,</a>
+<a class="sourceLine" id="cb141-2" data-line-number="2">                      <span class="dt">header =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb141-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb141-4" data-line-number="4">oringDf <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb141-5" data-line-number="5"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Temperature, <span class="dt">y =</span> DamageIndex)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb141-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb141-7" data-line-number="7"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;loess&quot;</span>,</a>
+<a class="sourceLine" id="cb141-8" data-line-number="8">              <span class="dt">se =</span> <span class="ot">FALSE</span>, <span class="dt">span =</span> <span class="dv">1</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb141-9" data-line-number="9"><span class="st">  </span><span class="kw">ylim</span>(<span class="dv">0</span>, <span class="dv">12</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb141-10" data-line-number="10"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="fl">27.5</span>, <span class="dt">size =</span><span class="dv">8</span>, </a>
+<a class="sourceLine" id="cb141-11" data-line-number="11">             <span class="dt">alpha =</span> <span class="fl">0.3</span>, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb141-12" data-line-number="12"><span class="st">  </span><span class="kw">labs</span>(</a>
+<a class="sourceLine" id="cb141-13" data-line-number="13">    <span class="dt">y =</span> <span class="st">&quot;Damage Index&quot;</span>,</a>
+<a class="sourceLine" id="cb141-14" data-line-number="14">    <span class="dt">x =</span> <span class="st">&quot;Temperature at time of launch&quot;</span></a>
+<a class="sourceLine" id="cb141-15" data-line-number="15">  ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb141-16" data-line-number="16"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq.int</span>(<span class="dv">25</span>, <span class="dv">85</span>, <span class="dv">5</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb141-17" data-line-number="17"><span class="st">  </span><span class="kw">annotate</span>(</a>
+<a class="sourceLine" id="cb141-18" data-line-number="18">    <span class="st">&quot;text&quot;</span>,</a>
+<a class="sourceLine" id="cb141-19" data-line-number="19">    <span class="dt">angle=</span><span class="dv">90</span>,</a>
+<a class="sourceLine" id="cb141-20" data-line-number="20">    <span class="dt">x =</span> <span class="fl">27.5</span>,</a>
+<a class="sourceLine" id="cb141-21" data-line-number="21">    <span class="dt">y =</span> <span class="dv">6</span>,</a>
+<a class="sourceLine" id="cb141-22" data-line-number="22">    <span class="dt">label =</span> <span class="st">&quot;Forecasted temperature on Jan 28&quot;</span>,</a>
+<a class="sourceLine" id="cb141-23" data-line-number="23">    <span class="dt">size =</span> <span class="dv">5</span></a>
+<a class="sourceLine" id="cb141-24" data-line-number="24">  )</a></code></pre></div>
+<p><img src="StatsThinking21_files/figure-html/unnamed-chunk-67-1.png" width="768" height="50%" /></p>
+</div>
+<div id="additional-reading-and-resources" class="section level2">
+<h2><span class="header-section-number">3.7</span> Additional reading and resources</h2>
+<ul>
+<li><p><a href="http://ggplot2.tidyverse.org/reference/ggtheme.html">ggplot theme reference</a></p></li>
+<li><p><a href="http://www.ggplot2-exts.org/ggtech.html">knockoff tech themes</a></p></li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="summarizing-data-with-r-with-lucy-king.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="fitting-simple-models-with-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/lunr.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/poldrack/psych10-book/edit/master/04b-VisualizingDataWithR.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["StatsThinking21.pdf", "StatsThinking21.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
