@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Statistical power in R | Statistical Thinking for the 21st Century</title>
+  <title>Chapter 4 Fitting simple models using R | Statistical Thinking for the 21st Century</title>
   <meta name="description" content="A book about statistics." />
   <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Statistical power in R | Statistical Thinking for the 21st Century" />
+  <meta property="og:title" content="Chapter 4 Fitting simple models using R | Statistical Thinking for the 21st Century" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="poldrack/psych10-book" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Statistical power in R | Statistical Thinking for the 21st Century" />
+  <meta name="twitter:title" content="Chapter 4 Fitting simple models using R | Statistical Thinking for the 21st Century" />
   
   <meta name="twitter:description" content="A book about statistics." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="hypothesis-testing-in-r.html"/>
-<link rel="next" href="bayesian-statistics-in-r.html"/>
+<link rel="prev" href="data-visualization-using-r-with-anna-khazenzon.html"/>
+<link rel="next" href="probability-in-r-with-lucy-king.html"/>
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -281,123 +281,147 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="statistical-power-in-r" class="section level1">
-<h1><span class="header-section-number">Chapter 9</span> Statistical power in R</h1>
-<p>In this chapter we focus on effect size and statistical power.</p>
-<div id="computing-confidence-intervals" class="section level2">
-<h2><span class="header-section-number">9.1</span> Computing confidence intervals</h2>
-<div id="theoretical" class="section level3">
-<h3><span class="header-section-number">9.1.1</span> Theoretical</h3>
+<div id="fitting-simple-models-using-r" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Fitting simple models using R</h1>
+<p>In this chapter we will focus on how to compute the measures of central tendency and variability that were covered in the previous chapter. Most of these can be computed using a built-in R function, but we will show how to do them manually in order to give some intuition about how they work.</p>
+<div id="mean" class="section level2">
+<h2><span class="header-section-number">4.1</span> Mean</h2>
+<p>The mean is defined as the sum of values divided by the number of values being summed:</p>
+<p><span class="math display">\[
+\bar{X} = \frac{\sum_{i=1}^{n}x_i}{n}
+\]</span></p>
+<p>Let’s say that we want to obtain the mean height for adults in the NHANES database (contained in the data <code>Height</code>). We would sum the individual heights (using the <code>sum()</code> function) and then divide by the number of values:</p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" data-line-number="1"><span class="kw">sum</span>(NHANES<span class="op">$</span>Height) <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(NHANES<span class="op">$</span>Height)</a></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<p>This returns the value NA, because there are missing values for some rows, and the <code>sum()</code> function doesn’t automatically handle those. To address this, we could filter the data frame using <code>drop_na()</code> to drop rows with NA values for this variable:</p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb144-1" data-line-number="1">height_noNA &lt;-<span class="st"> </span>NHANES <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb144-2" data-line-number="2"><span class="st">  </span><span class="kw">drop_na</span>(Height) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb144-3" data-line-number="3"><span class="st">  </span><span class="kw">pull</span>(Height)</a>
+<a class="sourceLine" id="cb144-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb144-5" data-line-number="5"><span class="kw">sum</span>(height_noNA) <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(height_noNA)</a></code></pre></div>
+<pre><code>## [1] 160.3516</code></pre>
+<p>There is, of course, a built-in function in R called <code>mean()</code> that will compute the mean. Like the <code>sum()</code> function, <code>mean()</code> will return NA if there are any NA values in the data:</p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb146-1" data-line-number="1"><span class="kw">mean</span>(NHANES<span class="op">$</span>Height)</a></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<p>The <code>mean()</code> function includes an optional argument called <code>na.rm</code> that will remove NA values if it is set to TRUE:</p>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" data-line-number="1"><span class="kw">mean</span>(NHANES<span class="op">$</span>Height, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>## [1] 160.3516</code></pre>
 </div>
-<div id="bootstrap" class="section level3">
-<h3><span class="header-section-number">9.1.2</span> Bootstrap</h3>
+<div id="median" class="section level2">
+<h2><span class="header-section-number">4.2</span> Median</h2>
+<p>The median is the middle value after sorting the entire set of values. Let’s use the cleand-up <code>height_noNA</code> variable created above to determine this for the NHANES height data. First we sort the data in order of their values:</p>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb150-1" data-line-number="1">height_sorted &lt;-<span class="st"> </span><span class="kw">sort</span>(height_noNA)</a></code></pre></div>
+<p>Next we find the median value. If there is an odd number of values in the list, then this is just the value in the middle, whereas if the number of values is even then we take the average of the two middle values. We can determine whether the number of items is even by dividing the length by two and seeing if there is a remainder; we do this using the <code>%%</code> operator, which is known as the <em>modulus</em> and returns the remainder:</p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb151-1" data-line-number="1"><span class="dv">5</span> <span class="op">%%</span><span class="st"> </span><span class="dv">2</span></a></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<p>Here we will test whether the remainder is equal to one; if it is, then we will take the middle value, otherwise we will take the average of the two middle values. We can do this using an if/else structure, which executes different processes depending on which of the arguments are true:</p>
+<pre><code>if (logical value) {
+  functions to perform if logical value is true
+} else {
+  functions to perform if logical value is false
+
+}</code></pre>
+<p>Let’s do this with our data. To find the middle value when the number of items is odd, we will divide the length and then round up, using the <code>ceiling()</code> function:</p>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" data-line-number="1"><span class="cf">if</span> (<span class="kw">length</span>(height_sorted) <span class="op">%%</span><span class="st"> </span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span>){</a>
+<a class="sourceLine" id="cb154-2" data-line-number="2">  <span class="co"># length of vector is odd</span></a>
+<a class="sourceLine" id="cb154-3" data-line-number="3">  median_height &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb154-4" data-line-number="4"><span class="st">    </span>height_sorted[<span class="kw">ceiling</span>(<span class="kw">length</span>(height_sorted) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)]</a>
+<a class="sourceLine" id="cb154-5" data-line-number="5">} <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb154-6" data-line-number="6">  median_height &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb154-7" data-line-number="7"><span class="st">    </span>(height_sorted[<span class="kw">length</span>(height_sorted) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>] <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb154-8" data-line-number="8"><span class="st">        </span>height_sorted[<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">length</span>(height_sorted) <span class="op">/</span><span class="st"> </span>(<span class="dv">2</span>)])<span class="op">/</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb154-9" data-line-number="9">}</a>
+<a class="sourceLine" id="cb154-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb154-11" data-line-number="11">median_height</a></code></pre></div>
+<pre><code>## [1] 165.1</code></pre>
+<p>We can compare this to the result from the built-in median function:</p>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb156-1" data-line-number="1"><span class="kw">median</span>(height_noNA)</a></code></pre></div>
+<pre><code>## [1] 165.1</code></pre>
 </div>
+<div id="mode" class="section level2">
+<h2><span class="header-section-number">4.3</span> Mode</h2>
+<p>The mode is the most frequent value that occurs in a variable. R has a function called <code>mode()</code> but if you look at the help page you will see that it doesn’t actually copute the mode. In fact, R doesn’t have a built-in function to compute the mode, so we need to create one. Let start with some toy data:</p>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb158-1" data-line-number="1">mode_test =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="st">&#39;c&#39;</span>)</a>
+<a class="sourceLine" id="cb158-2" data-line-number="2">mode_test</a></code></pre></div>
+<pre><code>## [1] &quot;a&quot; &quot;b&quot; &quot;b&quot; &quot;c&quot; &quot;c&quot; &quot;c&quot;</code></pre>
+<p>We can see by eye that the mode is “a” since it occurs more often than the others. To find it computationally, let’s first get the unique values</p>
+<p>To do this, we first create a table with the counts for each value, using the <code>table()</code> function:</p>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb160-1" data-line-number="1">mode_table &lt;-<span class="st"> </span><span class="kw">table</span>(mode_test)</a>
+<a class="sourceLine" id="cb160-2" data-line-number="2">mode_table</a></code></pre></div>
+<pre><code>## mode_test
+## a b c 
+## 1 2 3</code></pre>
+<p>Now we need to find the maximum value. We do this by comparing each value to the maximum of the table; this will work even if there are multiple values with the same frequency (i.e. a tie for the mode).</p>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" data-line-number="1">table_max &lt;-<span class="st"> </span>mode_table[mode_table <span class="op">==</span><span class="st"> </span><span class="kw">max</span>(mode_table)]</a>
+<a class="sourceLine" id="cb162-2" data-line-number="2">table_max</a></code></pre></div>
+<pre><code>## c 
+## 3</code></pre>
+<p>This variable is a special kind of value called a <em>named vector</em>, and its name contains the value that we need to identify the mode. We can pull it out using the <code>names()</code> function:</p>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" data-line-number="1">my_mode &lt;-<span class="st"> </span><span class="kw">names</span>(table_max)[<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb164-2" data-line-number="2">my_mode</a></code></pre></div>
+<pre><code>## [1] &quot;c&quot;</code></pre>
+<p>Let’s wrap this up into our own custom function:</p>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" data-line-number="1">getmode &lt;-<span class="st"> </span><span class="cf">function</span>(v, <span class="dt">print_table=</span><span class="ot">FALSE</span>) {</a>
+<a class="sourceLine" id="cb166-2" data-line-number="2">  mode_table &lt;-<span class="st"> </span><span class="kw">table</span>(v)</a>
+<a class="sourceLine" id="cb166-3" data-line-number="3">  <span class="cf">if</span> (print_table){</a>
+<a class="sourceLine" id="cb166-4" data-line-number="4">    <span class="kw">print</span>(<span class="kw">kable</span>(mode_table))</a>
+<a class="sourceLine" id="cb166-5" data-line-number="5">  }</a>
+<a class="sourceLine" id="cb166-6" data-line-number="6">  table_max &lt;-<span class="st"> </span>mode_table[mode_table <span class="op">==</span><span class="st"> </span><span class="kw">max</span>(mode_table)]</a>
+<a class="sourceLine" id="cb166-7" data-line-number="7">  <span class="kw">return</span>(<span class="kw">names</span>(table_max))</a>
+<a class="sourceLine" id="cb166-8" data-line-number="8">}</a></code></pre></div>
+<p>We can then apply this to real data. Let’s apply this to the <code>MaritalStatus</code> variable in the NHANES dataset:</p>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb167-1" data-line-number="1"><span class="kw">getmode</span>(NHANES<span class="op">$</span>MaritalStatus)</a></code></pre></div>
+<pre><code>## [1] &quot;Married&quot;</code></pre>
 </div>
-<div id="effect-size" class="section level2">
-<h2><span class="header-section-number">9.2</span> Effect Size</h2>
-<div id="cohens-d" class="section level3">
-<h3><span class="header-section-number">9.2.1</span> Cohen’s d</h3>
+<div id="variability" class="section level2">
+<h2><span class="header-section-number">4.4</span> Variability</h2>
+<p>Let’s first compute the <em>variance</em>, which is the average squared difference between each value and the mean. Let’s do this with our cleaned-up version of the height data, but instead of working with the entire dataset, let’s take a random sample of 150 individuals:</p>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb169-1" data-line-number="1">height_sample &lt;-<span class="st"> </span>NHANES <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb169-2" data-line-number="2"><span class="st">  </span><span class="kw">drop_na</span>(Height) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb169-3" data-line-number="3"><span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">150</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb169-4" data-line-number="4"><span class="st">  </span><span class="kw">pull</span>(Height)</a></code></pre></div>
+<p>First we need to obtain the sum of squared errors from the mean. In R, we can square a vector using <code>**2</code>:</p>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" data-line-number="1">SSE &lt;-<span class="st"> </span><span class="kw">sum</span>((height_sample <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(height_sample))<span class="op">**</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb170-2" data-line-number="2">SSE</a></code></pre></div>
+<pre><code>## [1] 63419.37</code></pre>
+<p>Then we divide by N - 1 to get the estimated variance:</p>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb172-1" data-line-number="1">var_est &lt;-<span class="st"> </span>SSE<span class="op">/</span>(<span class="kw">length</span>(height_sample) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb172-2" data-line-number="2">var_est</a></code></pre></div>
+<pre><code>## [1] 425.6333</code></pre>
+<p>We can compare this to the built-in <code>var()</code> function:</p>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb174-1" data-line-number="1"><span class="kw">var</span>(height_sample)</a></code></pre></div>
+<pre><code>## [1] 425.6333</code></pre>
+<p>We can get the <em>standard deviation</em> by simply taking the square root of the variance:</p>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb176-1" data-line-number="1"><span class="kw">sqrt</span>(var_est)</a></code></pre></div>
+<pre><code>## [1] 20.63088</code></pre>
+<p>Which is the same value obtained using the built-in <code>sd()</code> function:</p>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb178-1" data-line-number="1"><span class="kw">sd</span>(height_sample)</a></code></pre></div>
+<pre><code>## [1] 20.63088</code></pre>
 </div>
-<div id="pearsons-r" class="section level3">
-<h3><span class="header-section-number">9.2.2</span> Pearson’s r</h3>
-</div>
-<div id="odds-ratio" class="section level3">
-<h3><span class="header-section-number">9.2.3</span> Odds ratio</h3>
-</div>
-</div>
-<div id="power-analysis" class="section level2">
-<h2><span class="header-section-number">9.3</span> Power analysis</h2>
-<p>We can compute a power analysis using functions from the <code>pwr</code> package. Let’s focus on the power for a t-test in order to determine a difference in the mean between two groups. Let’s say that we think than an effect size of Cohen’s d=0.5 is realistic for the study in question (based on previous research) and would be of scientific interest. We wish to have 80% power to find the effect if it exists. We can compute the sample size needed for adequate power using the <code>pwr.t.test()</code> function:</p>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb221-1" data-line-number="1"><span class="kw">pwr.t.test</span>(<span class="dt">d=</span><span class="fl">0.5</span>, <span class="dt">power=</span>.<span class="dv">8</span>)</a></code></pre></div>
-<pre><code>## 
-##      Two-sample t test power calculation 
-## 
-##               n = 63.76561
-##               d = 0.5
-##       sig.level = 0.05
-##           power = 0.8
-##     alternative = two.sided
-## 
-## NOTE: n is number in *each* group</code></pre>
-<p>Thus, about 64 participants would be needed in each group in order to test the hypothesis with adequate power.</p>
-</div>
-<div id="power-curves" class="section level2">
-<h2><span class="header-section-number">9.4</span> Power curves</h2>
-<p>We can also create plots that can show us how the power to find an effect varies as a function of effect size and sample size. We willl use the <code>crossing()</code> function from the <code>tidyr</code> package to help with this. This function takes in two vectors, and returns a tibble that contains all possible combinations of those values.</p>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb223-1" data-line-number="1">effect_sizes &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.8</span>) </a>
-<a class="sourceLine" id="cb223-2" data-line-number="2">sample_sizes =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">10</span>, <span class="dv">500</span>, <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb223-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb223-4" data-line-number="4"><span class="co">#</span></a>
-<a class="sourceLine" id="cb223-5" data-line-number="5">input_df &lt;-<span class="st"> </span><span class="kw">crossing</span>(effect_sizes,sample_sizes)</a>
-<a class="sourceLine" id="cb223-6" data-line-number="6"><span class="kw">glimpse</span>(input_df)</a></code></pre></div>
-<pre><code>## Observations: 150
-## Variables: 2
-## $ effect_sizes &lt;dbl&gt; 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0…
-## $ sample_sizes &lt;dbl&gt; 10, 20, 30, 40, 50, 60, 70, 80, 90, …</code></pre>
-<p>Using this, we can then perform a power analysis for each combination of effect size and sample size to create our power curves. In this case, let’s say that we wish to perform a two-sample t-test.</p>
-<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb225-1" data-line-number="1"><span class="co"># create a function get the power value and</span></a>
-<a class="sourceLine" id="cb225-2" data-line-number="2"><span class="co"># return as a tibble</span></a>
-<a class="sourceLine" id="cb225-3" data-line-number="3">get_power &lt;-<span class="st"> </span><span class="cf">function</span>(df){</a>
-<a class="sourceLine" id="cb225-4" data-line-number="4">  power_result &lt;-<span class="st"> </span><span class="kw">pwr.t.test</span>(<span class="dt">n=</span>df<span class="op">$</span>sample_sizes, </a>
-<a class="sourceLine" id="cb225-5" data-line-number="5">                             <span class="dt">d=</span>df<span class="op">$</span>effect_sizes,</a>
-<a class="sourceLine" id="cb225-6" data-line-number="6">                             <span class="dt">type=</span><span class="st">&#39;two.sample&#39;</span>)</a>
-<a class="sourceLine" id="cb225-7" data-line-number="7">  df<span class="op">$</span>power=power_result<span class="op">$</span>power</a>
-<a class="sourceLine" id="cb225-8" data-line-number="8">  <span class="kw">return</span>(df)</a>
-<a class="sourceLine" id="cb225-9" data-line-number="9">}</a>
-<a class="sourceLine" id="cb225-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb225-11" data-line-number="11"><span class="co"># run get_power for each combination of effect size </span></a>
-<a class="sourceLine" id="cb225-12" data-line-number="12"><span class="co"># and sample size</span></a>
-<a class="sourceLine" id="cb225-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb225-14" data-line-number="14">power_curves &lt;-<span class="st"> </span>input_df <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb225-15" data-line-number="15"><span class="st">  </span><span class="kw">do</span>(<span class="kw">get_power</span>(.)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb225-16" data-line-number="16"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">effect_sizes =</span> <span class="kw">as.factor</span>(effect_sizes)) </a></code></pre></div>
-<p>Now we can plot the power curves, using a separate line for each effect size.</p>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb226-1" data-line-number="1"><span class="kw">ggplot</span>(power_curves, </a>
-<a class="sourceLine" id="cb226-2" data-line-number="2">       <span class="kw">aes</span>(<span class="dt">x=</span>sample_sizes,</a>
-<a class="sourceLine" id="cb226-3" data-line-number="3">           <span class="dt">y=</span>power, </a>
-<a class="sourceLine" id="cb226-4" data-line-number="4">           <span class="dt">linetype=</span>effect_sizes)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb226-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb226-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="fl">0.8</span>, </a>
-<a class="sourceLine" id="cb226-7" data-line-number="7">             <span class="dt">linetype=</span><span class="st">&#39;dotdash&#39;</span>)</a></code></pre></div>
-<p><img src="StatsThinking21_files/figure-html/unnamed-chunk-124-1.png" width="50%" /></p>
-</div>
-<div id="simulating-statistical-power" class="section level2">
-<h2><span class="header-section-number">9.5</span> Simulating statistical power</h2>
-<p>Let’s simulate this to see whether the power analysis actually gives the right answer.
-We will sample data for two groups, with a difference of 0.5 standard deviations between their underlying distributions, and we will look at how often we reject the null hypothesis.</p>
-<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb227-1" data-line-number="1">nRuns &lt;-<span class="st"> </span><span class="dv">5000</span></a>
-<a class="sourceLine" id="cb227-2" data-line-number="2">effectSize &lt;-<span class="st"> </span><span class="fl">0.5</span></a>
-<a class="sourceLine" id="cb227-3" data-line-number="3"><span class="co"># perform power analysis to get sample size</span></a>
-<a class="sourceLine" id="cb227-4" data-line-number="4">pwr.result &lt;-<span class="st"> </span><span class="kw">pwr.t.test</span>(<span class="dt">d=</span>effectSize, <span class="dt">power=</span>.<span class="dv">8</span>)</a>
-<a class="sourceLine" id="cb227-5" data-line-number="5"><span class="co"># round up from estimated sample size</span></a>
-<a class="sourceLine" id="cb227-6" data-line-number="6">sampleSize &lt;-<span class="st"> </span><span class="kw">ceiling</span>(pwr.result<span class="op">$</span>n)</a>
-<a class="sourceLine" id="cb227-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb227-8" data-line-number="8"><span class="co"># create a function that will generate samples and test for</span></a>
-<a class="sourceLine" id="cb227-9" data-line-number="9"><span class="co"># a difference between groups using a two-sample t-test</span></a>
-<a class="sourceLine" id="cb227-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb227-11" data-line-number="11">get_t_result &lt;-<span class="st"> </span><span class="cf">function</span>(sampleSize, effectSize){</a>
-<a class="sourceLine" id="cb227-12" data-line-number="12">  <span class="co"># take sample for the first group from N(0, 1)</span></a>
-<a class="sourceLine" id="cb227-13" data-line-number="13">  group1 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(sampleSize)</a>
-<a class="sourceLine" id="cb227-14" data-line-number="14">  group2 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(sampleSize, <span class="dt">mean=</span>effectSize)</a>
-<a class="sourceLine" id="cb227-15" data-line-number="15">  ttest.result &lt;-<span class="st"> </span><span class="kw">t.test</span>(group1, group2)</a>
-<a class="sourceLine" id="cb227-16" data-line-number="16">  <span class="kw">return</span>(<span class="kw">tibble</span>(<span class="dt">pvalue=</span>ttest.result<span class="op">$</span>p.value))</a>
-<a class="sourceLine" id="cb227-17" data-line-number="17">}</a>
-<a class="sourceLine" id="cb227-18" data-line-number="18"></a>
-<a class="sourceLine" id="cb227-19" data-line-number="19">index_df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">id=</span><span class="kw">seq</span>(nRuns)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb227-20" data-line-number="20"><span class="st">  </span><span class="kw">group_by</span>(id)</a>
-<a class="sourceLine" id="cb227-21" data-line-number="21"></a>
-<a class="sourceLine" id="cb227-22" data-line-number="22">power_sim_results &lt;-<span class="st"> </span>index_df <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb227-23" data-line-number="23"><span class="st">  </span><span class="kw">do</span>(<span class="kw">get_t_result</span>(sampleSize, effectSize))</a>
-<a class="sourceLine" id="cb227-24" data-line-number="24"></a>
-<a class="sourceLine" id="cb227-25" data-line-number="25">p_reject &lt;-</a>
-<a class="sourceLine" id="cb227-26" data-line-number="26"><span class="st">  </span>power_sim_results <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb227-27" data-line-number="27"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb227-28" data-line-number="28"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">pvalue =</span> <span class="kw">mean</span>(pvalue<span class="op">&lt;</span>.<span class="dv">05</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb227-29" data-line-number="29"><span class="st">  </span><span class="kw">pull</span>()</a>
-<a class="sourceLine" id="cb227-30" data-line-number="30"></a>
-<a class="sourceLine" id="cb227-31" data-line-number="31">p_reject</a></code></pre></div>
-<pre><code>## [1] 0.7998</code></pre>
-<p>This should return a number very close to 0.8.</p>
+<div id="z-scores" class="section level2">
+<h2><span class="header-section-number">4.5</span> Z-scores</h2>
+<p>A Z-score is obtained by first subtracting the mean and then dividing by the standard deviation of a distribution. Let’s do this for the <code>height_sample</code> data.</p>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb180-1" data-line-number="1">mean_height &lt;-<span class="st"> </span><span class="kw">mean</span>(height_sample)</a>
+<a class="sourceLine" id="cb180-2" data-line-number="2">sd_height &lt;-<span class="st"> </span><span class="kw">sd</span>(height_sample)</a>
+<a class="sourceLine" id="cb180-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb180-4" data-line-number="4">z_height &lt;-<span class="st"> </span>(height_sample <span class="op">-</span><span class="st"> </span>mean_height)<span class="op">/</span>sd_height</a></code></pre></div>
+<p>Now let’s plot the histogram of Z-scores alongside the histogram for the original values. We will use the <code>plot_grid()</code> function from the <code>cowplot</code> library to plot the two figures alongside one another. First we need to put the values into a data frame, since <code>ggplot()</code> requires the data to be contained in a data frame.</p>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" data-line-number="1">height_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">orig_height=</span>height_sample, </a>
+<a class="sourceLine" id="cb181-2" data-line-number="2">                        <span class="dt">z_height=</span>z_height)</a>
+<a class="sourceLine" id="cb181-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb181-4" data-line-number="4"><span class="co"># create individual plots</span></a>
+<a class="sourceLine" id="cb181-5" data-line-number="5">plot_orig &lt;-<span class="st"> </span><span class="kw">ggplot</span>(height_df, <span class="kw">aes</span>(orig_height)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb181-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_histogram</span>()</a>
+<a class="sourceLine" id="cb181-7" data-line-number="7">plot_z &lt;-<span class="st"> </span><span class="kw">ggplot</span>(height_df, <span class="kw">aes</span>(z_height)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb181-8" data-line-number="8"><span class="st">  </span><span class="kw">geom_histogram</span>()</a>
+<a class="sourceLine" id="cb181-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb181-10" data-line-number="10"><span class="co"># combine into a single figure</span></a>
+<a class="sourceLine" id="cb181-11" data-line-number="11"><span class="kw">plot_grid</span>(plot_orig, plot_z)</a></code></pre></div>
+<p><img src="StatsThinking21_files/figure-html/unnamed-chunk-90-1.png" width="768" /></p>
+<p>You will notice that the shapes of the histograms are similar but not exactly the same. This occurs because the binning is slightly different between the two sets of values. However, if we plot them against one another in a scatterplot, we will see that there is a direct linear relation between the two sets of values:</p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb182-1" data-line-number="1"><span class="kw">ggplot</span>(height_df, <span class="kw">aes</span>(orig_height, z_height)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb182-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
+<p><img src="StatsThinking21_files/figure-html/unnamed-chunk-91-1.png" width="384" /></p>
 
 </div>
 </div>
@@ -406,8 +430,8 @@ We will sample data for two groups, with a difference of 0.5 standard deviations
           </div>
         </div>
       </div>
-<a href="hypothesis-testing-in-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="bayesian-statistics-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="data-visualization-using-r-with-anna-khazenzon.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="probability-in-r-with-lucy-king.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>
@@ -438,7 +462,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/poldrack/psych10-book/edit/master/09-EffectSizesAndStatisticalPower.Rmd",
+"link": "https://github.com/poldrack/psych10-book/edit/master/04-FittingSimpleModels.Rmd",
 "text": "Edit"
 },
 "history": {

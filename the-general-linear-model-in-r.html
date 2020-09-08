@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 14 The General Linear Model in R | Statistical Thinking for the 21st Century</title>
+  <title>Chapter 13 The General Linear Model in R | Statistical Thinking for the 21st Century</title>
   <meta name="description" content="A book about statistics." />
   <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 14 The General Linear Model in R | Statistical Thinking for the 21st Century" />
+  <meta property="og:title" content="Chapter 13 The General Linear Model in R | Statistical Thinking for the 21st Century" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="poldrack/psych10-book" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 14 The General Linear Model in R | Statistical Thinking for the 21st Century" />
+  <meta name="twitter:title" content="Chapter 13 The General Linear Model in R | Statistical Thinking for the 21st Century" />
   
   <meta name="twitter:description" content="A book about statistics." />
   
@@ -136,11 +136,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#why-does-this-book-exist"><i class="fa fa-check"></i><b>0.1</b> Why does this book exist?</a></li>
-<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#why-r"><i class="fa fa-check"></i><b>0.2</b> Why R?</a></li>
-<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#the-golden-age-of-data"><i class="fa fa-check"></i><b>0.3</b> The golden age of data</a></li>
-<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#an-open-source-book"><i class="fa fa-check"></i><b>0.4</b> An open source book</a></li>
-<li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.5</b> Acknowledgements</a></li>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#why-r"><i class="fa fa-check"></i><b>0.1</b> Why R?</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#the-golden-age-of-data"><i class="fa fa-check"></i><b>0.2</b> The golden age of data</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#an-open-source-book"><i class="fa fa-check"></i><b>0.3</b> An open source book</a></li>
+<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.4</b> Acknowledgements</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>1</b> Introduction to R</a><ul>
 <li class="chapter" data-level="1.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#why-programming-is-hard-to-learn"><i class="fa fa-check"></i><b>1.1</b> Why programming is hard to learn</a><ul>
@@ -159,46 +158,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.11" data-path="introduction-to-r.html"><a href="introduction-to-r.html#learning-objectives"><i class="fa fa-check"></i><b>1.11</b> Learning objectives</a></li>
 <li class="chapter" data-level="1.12" data-path="introduction-to-r.html"><a href="introduction-to-r.html#suggested-readings-and-videos"><i class="fa fa-check"></i><b>1.12</b> Suggested readings and videos</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html"><i class="fa fa-check"></i><b>2</b> Summarizing data with R (with Lucy King)</a><ul>
-<li class="chapter" data-level="2.1" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html#introduction-to-the-tidyverse"><i class="fa fa-check"></i><b>2.1</b> Introduction to the Tidyverse</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html#making-a-data-frame-using-tibble"><i class="fa fa-check"></i><b>2.1.1</b> Making a data frame using tibble()</a></li>
-<li class="chapter" data-level="2.1.2" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html#selecting-an-element"><i class="fa fa-check"></i><b>2.1.2</b> Selecting an element</a></li>
-<li class="chapter" data-level="2.1.3" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html#adding-a-row-or-column"><i class="fa fa-check"></i><b>2.1.3</b> Adding a row or column</a></li>
+<li class="chapter" data-level="2" data-path="summarizing-data-using-r-with-lucy-king.html"><a href="summarizing-data-using-r-with-lucy-king.html"><i class="fa fa-check"></i><b>2</b> Summarizing data using R (with Lucy King)</a><ul>
+<li class="chapter" data-level="2.1" data-path="summarizing-data-using-r-with-lucy-king.html"><a href="summarizing-data-using-r-with-lucy-king.html#introduction-to-the-tidyverse"><i class="fa fa-check"></i><b>2.1</b> Introduction to the Tidyverse</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="summarizing-data-using-r-with-lucy-king.html"><a href="summarizing-data-using-r-with-lucy-king.html#making-a-data-frame-using-tibble"><i class="fa fa-check"></i><b>2.1.1</b> Making a data frame using tibble()</a></li>
+<li class="chapter" data-level="2.1.2" data-path="summarizing-data-using-r-with-lucy-king.html"><a href="summarizing-data-using-r-with-lucy-king.html#selecting-an-element"><i class="fa fa-check"></i><b>2.1.2</b> Selecting an element</a></li>
+<li class="chapter" data-level="2.1.3" data-path="summarizing-data-using-r-with-lucy-king.html"><a href="summarizing-data-using-r-with-lucy-king.html#adding-a-row-or-column"><i class="fa fa-check"></i><b>2.1.3</b> Adding a row or column</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html#creating-or-modifying-variables-using-mutate"><i class="fa fa-check"></i><b>2.2</b> Creating or modifying variables using <code>mutate()</code></a><ul>
-<li class="chapter" data-level="2.2.1" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html#remove-a-column-using-the-select-function"><i class="fa fa-check"></i><b>2.2.1</b> Remove a column using the select() function</a></li>
+<li class="chapter" data-level="2.2" data-path="summarizing-data-using-r-with-lucy-king.html"><a href="summarizing-data-using-r-with-lucy-king.html#creating-or-modifying-variables-using-mutate"><i class="fa fa-check"></i><b>2.2</b> Creating or modifying variables using <code>mutate()</code></a><ul>
+<li class="chapter" data-level="2.2.1" data-path="summarizing-data-using-r-with-lucy-king.html"><a href="summarizing-data-using-r-with-lucy-king.html#remove-a-column-using-the-select-function"><i class="fa fa-check"></i><b>2.2.1</b> Remove a column using the select() function</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html#tidyverse-in-action"><i class="fa fa-check"></i><b>2.3</b> Tidyverse in action</a></li>
-<li class="chapter" data-level="2.4" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html#looking-at-individual-variables-using-pull-and-head"><i class="fa fa-check"></i><b>2.4</b> Looking at individual variables using pull() and head()</a></li>
-<li class="chapter" data-level="2.5" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html#computing-a-frequency-distribution-section-reffrequency-distributions"><i class="fa fa-check"></i><b>2.5</b> Computing a frequency distribution (Section @ref(frequency-distributions))</a></li>
-<li class="chapter" data-level="2.6" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html#computing-a-cumulative-distribution-section-refcumulative-distributions"><i class="fa fa-check"></i><b>2.6</b> Computing a cumulative distribution (Section @ref(cumulative-distributions))</a></li>
-<li class="chapter" data-level="2.7" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html#data-cleaning-and-tidying-with-r"><i class="fa fa-check"></i><b>2.7</b> Data cleaning and tidying with R</a><ul>
-<li class="chapter" data-level="2.7.1" data-path="summarizing-data-with-r-with-lucy-king.html"><a href="summarizing-data-with-r-with-lucy-king.html#statistics-attitude-data-from-course-survey"><i class="fa fa-check"></i><b>2.7.1</b> Statistics attitude data from course survey</a></li>
+<li class="chapter" data-level="2.3" data-path="summarizing-data-using-r-with-lucy-king.html"><a href="summarizing-data-using-r-with-lucy-king.html#tidyverse-in-action"><i class="fa fa-check"></i><b>2.3</b> Tidyverse in action</a></li>
+<li class="chapter" data-level="2.4" data-path="summarizing-data-using-r-with-lucy-king.html"><a href="summarizing-data-using-r-with-lucy-king.html#looking-at-individual-variables-using-pull-and-head"><i class="fa fa-check"></i><b>2.4</b> Looking at individual variables using pull() and head()</a></li>
+<li class="chapter" data-level="2.5" data-path="summarizing-data-using-r-with-lucy-king.html"><a href="summarizing-data-using-r-with-lucy-king.html#computing-a-frequency-distribution-section-reffrequency-distributions"><i class="fa fa-check"></i><b>2.5</b> Computing a frequency distribution (Section @ref(frequency-distributions))</a></li>
+<li class="chapter" data-level="2.6" data-path="summarizing-data-using-r-with-lucy-king.html"><a href="summarizing-data-using-r-with-lucy-king.html#computing-a-cumulative-distribution-section-refcumulative-distributions"><i class="fa fa-check"></i><b>2.6</b> Computing a cumulative distribution (Section @ref(cumulative-distributions))</a></li>
+<li class="chapter" data-level="2.7" data-path="summarizing-data-using-r-with-lucy-king.html"><a href="summarizing-data-using-r-with-lucy-king.html#data-cleaning-and-tidying-with-r"><i class="fa fa-check"></i><b>2.7</b> Data cleaning and tidying with R</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="summarizing-data-using-r-with-lucy-king.html"><a href="summarizing-data-using-r-with-lucy-king.html#statistics-attitude-data-from-course-survey"><i class="fa fa-check"></i><b>2.7.1</b> Statistics attitude data from course survey</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html"><i class="fa fa-check"></i><b>3</b> Data visualization with R (with Anna Khazenzon)</a><ul>
-<li class="chapter" data-level="3.1" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#the-grammar-of-graphics"><i class="fa fa-check"></i><b>3.1</b> The grammar of graphics</a></li>
-<li class="chapter" data-level="3.2" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#getting-started"><i class="fa fa-check"></i><b>3.2</b> Getting started</a></li>
-<li class="chapter" data-level="3.3" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#lets-think-through-a-visualization"><i class="fa fa-check"></i><b>3.3</b> Let’s think through a visualization</a></li>
-<li class="chapter" data-level="3.4" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#plotting-the-distribution-of-a-single-variable"><i class="fa fa-check"></i><b>3.4</b> Plotting the distribution of a single variable</a><ul>
-<li class="chapter" data-level="3.4.1" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#histogram"><i class="fa fa-check"></i><b>3.4.1</b> Histogram</a></li>
-<li class="chapter" data-level="3.4.2" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#density-plot"><i class="fa fa-check"></i><b>3.4.2</b> Density plot</a></li>
-<li class="chapter" data-level="3.4.3" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#bar-vs.line-plots"><i class="fa fa-check"></i><b>3.4.3</b> Bar vs. line plots</a></li>
+<li class="chapter" data-level="3" data-path="data-visualization-using-r-with-anna-khazenzon.html"><a href="data-visualization-using-r-with-anna-khazenzon.html"><i class="fa fa-check"></i><b>3</b> Data visualization using R (with Anna Khazenzon)</a><ul>
+<li class="chapter" data-level="3.1" data-path="data-visualization-using-r-with-anna-khazenzon.html"><a href="data-visualization-using-r-with-anna-khazenzon.html#the-grammar-of-graphics"><i class="fa fa-check"></i><b>3.1</b> The grammar of graphics</a></li>
+<li class="chapter" data-level="3.2" data-path="data-visualization-using-r-with-anna-khazenzon.html"><a href="data-visualization-using-r-with-anna-khazenzon.html#getting-started"><i class="fa fa-check"></i><b>3.2</b> Getting started</a></li>
+<li class="chapter" data-level="3.3" data-path="data-visualization-using-r-with-anna-khazenzon.html"><a href="data-visualization-using-r-with-anna-khazenzon.html#lets-think-through-a-visualization"><i class="fa fa-check"></i><b>3.3</b> Let’s think through a visualization</a></li>
+<li class="chapter" data-level="3.4" data-path="data-visualization-using-r-with-anna-khazenzon.html"><a href="data-visualization-using-r-with-anna-khazenzon.html#plotting-the-distribution-of-a-single-variable"><i class="fa fa-check"></i><b>3.4</b> Plotting the distribution of a single variable</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="data-visualization-using-r-with-anna-khazenzon.html"><a href="data-visualization-using-r-with-anna-khazenzon.html#histogram"><i class="fa fa-check"></i><b>3.4.1</b> Histogram</a></li>
+<li class="chapter" data-level="3.4.2" data-path="data-visualization-using-r-with-anna-khazenzon.html"><a href="data-visualization-using-r-with-anna-khazenzon.html#density-plot"><i class="fa fa-check"></i><b>3.4.2</b> Density plot</a></li>
+<li class="chapter" data-level="3.4.3" data-path="data-visualization-using-r-with-anna-khazenzon.html"><a href="data-visualization-using-r-with-anna-khazenzon.html#bar-vs.line-plots"><i class="fa fa-check"></i><b>3.4.3</b> Bar vs. line plots</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#plots-with-two-variables"><i class="fa fa-check"></i><b>3.5</b> Plots with two variables</a><ul>
-<li class="chapter" data-level="3.5.1" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#adding-on-variables"><i class="fa fa-check"></i><b>3.5.1</b> Adding on variables</a></li>
-<li class="chapter" data-level="3.5.2" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#plotting-dispersion"><i class="fa fa-check"></i><b>3.5.2</b> Plotting dispersion</a></li>
-<li class="chapter" data-level="3.5.3" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#scatter-plot"><i class="fa fa-check"></i><b>3.5.3</b> Scatter plot</a></li>
+<li class="chapter" data-level="3.5" data-path="data-visualization-using-r-with-anna-khazenzon.html"><a href="data-visualization-using-r-with-anna-khazenzon.html#plots-with-two-variables"><i class="fa fa-check"></i><b>3.5</b> Plots with two variables</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="data-visualization-using-r-with-anna-khazenzon.html"><a href="data-visualization-using-r-with-anna-khazenzon.html#adding-on-variables"><i class="fa fa-check"></i><b>3.5.1</b> Adding on variables</a></li>
+<li class="chapter" data-level="3.5.2" data-path="data-visualization-using-r-with-anna-khazenzon.html"><a href="data-visualization-using-r-with-anna-khazenzon.html#plotting-dispersion"><i class="fa fa-check"></i><b>3.5.2</b> Plotting dispersion</a></li>
+<li class="chapter" data-level="3.5.3" data-path="data-visualization-using-r-with-anna-khazenzon.html"><a href="data-visualization-using-r-with-anna-khazenzon.html#scatter-plot"><i class="fa fa-check"></i><b>3.5.3</b> Scatter plot</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#creating-a-more-complex-plot"><i class="fa fa-check"></i><b>3.6</b> Creating a more complex plot</a></li>
-<li class="chapter" data-level="3.7" data-path="data-visualization-with-r-with-anna-khazenzon.html"><a href="data-visualization-with-r-with-anna-khazenzon.html#additional-reading-and-resources"><i class="fa fa-check"></i><b>3.7</b> Additional reading and resources</a></li>
+<li class="chapter" data-level="3.6" data-path="data-visualization-using-r-with-anna-khazenzon.html"><a href="data-visualization-using-r-with-anna-khazenzon.html#creating-a-more-complex-plot"><i class="fa fa-check"></i><b>3.6</b> Creating a more complex plot</a></li>
+<li class="chapter" data-level="3.7" data-path="data-visualization-using-r-with-anna-khazenzon.html"><a href="data-visualization-using-r-with-anna-khazenzon.html#additional-reading-and-resources"><i class="fa fa-check"></i><b>3.7</b> Additional reading and resources</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="fitting-simple-models-with-r.html"><a href="fitting-simple-models-with-r.html"><i class="fa fa-check"></i><b>4</b> Fitting simple models with R</a><ul>
-<li class="chapter" data-level="4.1" data-path="fitting-simple-models-with-r.html"><a href="fitting-simple-models-with-r.html#mean"><i class="fa fa-check"></i><b>4.1</b> Mean</a></li>
-<li class="chapter" data-level="4.2" data-path="fitting-simple-models-with-r.html"><a href="fitting-simple-models-with-r.html#median"><i class="fa fa-check"></i><b>4.2</b> Median</a></li>
-<li class="chapter" data-level="4.3" data-path="fitting-simple-models-with-r.html"><a href="fitting-simple-models-with-r.html#mode"><i class="fa fa-check"></i><b>4.3</b> Mode</a></li>
-<li class="chapter" data-level="4.4" data-path="fitting-simple-models-with-r.html"><a href="fitting-simple-models-with-r.html#variability"><i class="fa fa-check"></i><b>4.4</b> Variability</a></li>
-<li class="chapter" data-level="4.5" data-path="fitting-simple-models-with-r.html"><a href="fitting-simple-models-with-r.html#z-scores"><i class="fa fa-check"></i><b>4.5</b> Z-scores</a></li>
+<li class="chapter" data-level="4" data-path="fitting-simple-models-using-r.html"><a href="fitting-simple-models-using-r.html"><i class="fa fa-check"></i><b>4</b> Fitting simple models using R</a><ul>
+<li class="chapter" data-level="4.1" data-path="fitting-simple-models-using-r.html"><a href="fitting-simple-models-using-r.html#mean"><i class="fa fa-check"></i><b>4.1</b> Mean</a></li>
+<li class="chapter" data-level="4.2" data-path="fitting-simple-models-using-r.html"><a href="fitting-simple-models-using-r.html#median"><i class="fa fa-check"></i><b>4.2</b> Median</a></li>
+<li class="chapter" data-level="4.3" data-path="fitting-simple-models-using-r.html"><a href="fitting-simple-models-using-r.html#mode"><i class="fa fa-check"></i><b>4.3</b> Mode</a></li>
+<li class="chapter" data-level="4.4" data-path="fitting-simple-models-using-r.html"><a href="fitting-simple-models-using-r.html#variability"><i class="fa fa-check"></i><b>4.4</b> Variability</a></li>
+<li class="chapter" data-level="4.5" data-path="fitting-simple-models-using-r.html"><a href="fitting-simple-models-using-r.html#z-scores"><i class="fa fa-check"></i><b>4.5</b> Z-scores</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="probability-in-r-with-lucy-king.html"><a href="probability-in-r-with-lucy-king.html"><i class="fa fa-check"></i><b>5</b> Probability in R (with Lucy King)</a><ul>
 <li class="chapter" data-level="5.1" data-path="probability-in-r-with-lucy-king.html"><a href="probability-in-r-with-lucy-king.html#basic-probability-calculations"><i class="fa fa-check"></i><b>5.1</b> Basic probability calculations</a></li>
@@ -219,61 +218,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.1" data-path="hypothesis-testing-in-r.html"><a href="hypothesis-testing-in-r.html#simple-example-coin-flipping-section-refrandomization-very-simple"><i class="fa fa-check"></i><b>8.1</b> Simple example: Coin-flipping (Section @ref(randomization-very-simple))</a></li>
 <li class="chapter" data-level="8.2" data-path="hypothesis-testing-in-r.html"><a href="hypothesis-testing-in-r.html#simulating-p-values"><i class="fa fa-check"></i><b>8.2</b> Simulating p-values</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html"><i class="fa fa-check"></i><b>9</b> Quantifying effects and designing studies</a><ul>
-<li class="chapter" data-level="9.1" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#confidence-intervals"><i class="fa fa-check"></i><b>9.1</b> Confidence intervals</a><ul>
-<li class="chapter" data-level="9.1.1" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#confidence-intervals-using-the-normal-distribution"><i class="fa fa-check"></i><b>9.1.1</b> Confidence intervals using the normal distribution</a></li>
-<li class="chapter" data-level="9.1.2" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#confidence-intervals-using-the-t-distribution"><i class="fa fa-check"></i><b>9.1.2</b> Confidence intervals using the t distribution</a></li>
-<li class="chapter" data-level="9.1.3" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#confidence-intervals-and-sample-size"><i class="fa fa-check"></i><b>9.1.3</b> Confidence intervals and sample size</a></li>
-<li class="chapter" data-level="9.1.4" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#computing-confidence-intervals-using-the-bootstrap"><i class="fa fa-check"></i><b>9.1.4</b> Computing confidence intervals using the bootstrap</a></li>
-<li class="chapter" data-level="9.1.5" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#relation-of-confidence-intervals-to-hypothesis-tests"><i class="fa fa-check"></i><b>9.1.5</b> Relation of confidence intervals to hypothesis tests</a></li>
+<li class="chapter" data-level="9" data-path="statistical-power-in-r.html"><a href="statistical-power-in-r.html"><i class="fa fa-check"></i><b>9</b> Statistical power in R</a><ul>
+<li class="chapter" data-level="9.1" data-path="statistical-power-in-r.html"><a href="statistical-power-in-r.html#computing-confidence-intervals"><i class="fa fa-check"></i><b>9.1</b> Computing confidence intervals</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="statistical-power-in-r.html"><a href="statistical-power-in-r.html#theoretical"><i class="fa fa-check"></i><b>9.1.1</b> Theoretical</a></li>
+<li class="chapter" data-level="9.1.2" data-path="statistical-power-in-r.html"><a href="statistical-power-in-r.html#bootstrap"><i class="fa fa-check"></i><b>9.1.2</b> Bootstrap</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#effect-sizes"><i class="fa fa-check"></i><b>9.2</b> Effect sizes</a><ul>
-<li class="chapter" data-level="9.2.1" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#cohens-d"><i class="fa fa-check"></i><b>9.2.1</b> Cohen’s D</a></li>
-<li class="chapter" data-level="9.2.2" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#pearsons-r"><i class="fa fa-check"></i><b>9.2.2</b> Pearson’s r</a></li>
-<li class="chapter" data-level="9.2.3" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#odds-ratio"><i class="fa fa-check"></i><b>9.2.3</b> Odds ratio</a></li>
+<li class="chapter" data-level="9.2" data-path="statistical-power-in-r.html"><a href="statistical-power-in-r.html#effect-size"><i class="fa fa-check"></i><b>9.2</b> Effect Size</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="statistical-power-in-r.html"><a href="statistical-power-in-r.html#cohens-d"><i class="fa fa-check"></i><b>9.2.1</b> Cohen’s d</a></li>
+<li class="chapter" data-level="9.2.2" data-path="statistical-power-in-r.html"><a href="statistical-power-in-r.html#pearsons-r"><i class="fa fa-check"></i><b>9.2.2</b> Pearson’s r</a></li>
+<li class="chapter" data-level="9.2.3" data-path="statistical-power-in-r.html"><a href="statistical-power-in-r.html#odds-ratio"><i class="fa fa-check"></i><b>9.2.3</b> Odds ratio</a></li>
 </ul></li>
-<li class="chapter" data-level="9.3" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#statistical-power"><i class="fa fa-check"></i><b>9.3</b> Statistical power</a><ul>
-<li class="chapter" data-level="9.3.1" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#power-analysis"><i class="fa fa-check"></i><b>9.3.1</b> Power analysis</a></li>
+<li class="chapter" data-level="9.3" data-path="statistical-power-in-r.html"><a href="statistical-power-in-r.html#power-analysis"><i class="fa fa-check"></i><b>9.3</b> Power analysis</a></li>
+<li class="chapter" data-level="9.4" data-path="statistical-power-in-r.html"><a href="statistical-power-in-r.html#power-curves"><i class="fa fa-check"></i><b>9.4</b> Power curves</a></li>
+<li class="chapter" data-level="9.5" data-path="statistical-power-in-r.html"><a href="statistical-power-in-r.html#simulating-statistical-power"><i class="fa fa-check"></i><b>9.5</b> Simulating statistical power</a></li>
 </ul></li>
-<li class="chapter" data-level="9.4" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#learning-objectives-1"><i class="fa fa-check"></i><b>9.4</b> Learning objectives</a></li>
-<li class="chapter" data-level="9.5" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#suggested-readings"><i class="fa fa-check"></i><b>9.5</b> Suggested readings</a></li>
+<li class="chapter" data-level="10" data-path="bayesian-statistics-in-r.html"><a href="bayesian-statistics-in-r.html"><i class="fa fa-check"></i><b>10</b> Bayesian statistics in R</a><ul>
+<li class="chapter" data-level="10.1" data-path="bayesian-statistics-in-r.html"><a href="bayesian-statistics-in-r.html#a-simple-example-section-refdoing-bayesian-estimation"><i class="fa fa-check"></i><b>10.1</b> A simple example (Section @ref(doing-bayesian-estimation))</a></li>
+<li class="chapter" data-level="10.2" data-path="bayesian-statistics-in-r.html"><a href="bayesian-statistics-in-r.html#estimating-posterior-distributions-section-refestimating-posterior-distributions"><i class="fa fa-check"></i><b>10.2</b> Estimating posterior distributions (Section @ref(estimating-posterior-distributions))</a></li>
+<li class="chapter" data-level="10.3" data-path="bayesian-statistics-in-r.html"><a href="bayesian-statistics-in-r.html#bayes-factors-section-refbayes-factors"><i class="fa fa-check"></i><b>10.3</b> Bayes factors (Section @ref(Bayes-factors))</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="statistical-power-in-r.html"><a href="statistical-power-in-r.html"><i class="fa fa-check"></i><b>10</b> Statistical power in R</a><ul>
-<li class="chapter" data-level="10.1" data-path="statistical-power-in-r.html"><a href="statistical-power-in-r.html#power-analysis-1"><i class="fa fa-check"></i><b>10.1</b> Power analysis</a></li>
-<li class="chapter" data-level="10.2" data-path="statistical-power-in-r.html"><a href="statistical-power-in-r.html#power-curves"><i class="fa fa-check"></i><b>10.2</b> Power curves</a></li>
-<li class="chapter" data-level="10.3" data-path="statistical-power-in-r.html"><a href="statistical-power-in-r.html#simulating-statistical-power"><i class="fa fa-check"></i><b>10.3</b> Simulating statistical power</a></li>
+<li class="chapter" data-level="11" data-path="modeling-categorical-relationships-in-r.html"><a href="modeling-categorical-relationships-in-r.html"><i class="fa fa-check"></i><b>11</b> Modeling categorical relationships in R</a><ul>
+<li class="chapter" data-level="11.1" data-path="modeling-categorical-relationships-in-r.html"><a href="modeling-categorical-relationships-in-r.html#the-pearson-chi-squared-test-section-refchi-squared-test"><i class="fa fa-check"></i><b>11.1</b> The Pearson Chi-squared test (Section @ref(chi-squared-test))</a></li>
+<li class="chapter" data-level="11.2" data-path="modeling-categorical-relationships-in-r.html"><a href="modeling-categorical-relationships-in-r.html#two-way-tests-section-reftwo-way-test"><i class="fa fa-check"></i><b>11.2</b> Two-way tests (Section @ref(two-way-test})</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="bayesian-statistics-in-r.html"><a href="bayesian-statistics-in-r.html"><i class="fa fa-check"></i><b>11</b> Bayesian statistics in R</a><ul>
-<li class="chapter" data-level="11.1" data-path="bayesian-statistics-in-r.html"><a href="bayesian-statistics-in-r.html#a-simple-example-section-refdoing-bayesian-estimation"><i class="fa fa-check"></i><b>11.1</b> A simple example (Section @ref(doing-bayesian-estimation))</a></li>
-<li class="chapter" data-level="11.2" data-path="bayesian-statistics-in-r.html"><a href="bayesian-statistics-in-r.html#estimating-posterior-distributions-section-refestimating-posterior-distributions"><i class="fa fa-check"></i><b>11.2</b> Estimating posterior distributions (Section @ref(estimating-posterior-distributions))</a></li>
-<li class="chapter" data-level="11.3" data-path="bayesian-statistics-in-r.html"><a href="bayesian-statistics-in-r.html#bayes-factors-section-refbayes-factors"><i class="fa fa-check"></i><b>11.3</b> Bayes factors (Section @ref(Bayes-factors))</a></li>
+<li class="chapter" data-level="12" data-path="modeling-continuous-relationships-in-r.html"><a href="modeling-continuous-relationships-in-r.html"><i class="fa fa-check"></i><b>12</b> Modeling continuous relationships in R</a><ul>
+<li class="chapter" data-level="12.1" data-path="modeling-continuous-relationships-in-r.html"><a href="modeling-continuous-relationships-in-r.html#computing-covariance-and-correlation-section-refcovariance-and-correlation"><i class="fa fa-check"></i><b>12.1</b> Computing covariance and correlation (Section @ref(covariance-and-correlation))</a></li>
+<li class="chapter" data-level="12.2" data-path="modeling-continuous-relationships-in-r.html"><a href="modeling-continuous-relationships-in-r.html#hate-crime-example"><i class="fa fa-check"></i><b>12.2</b> Hate crime example</a></li>
+<li class="chapter" data-level="12.3" data-path="modeling-continuous-relationships-in-r.html"><a href="modeling-continuous-relationships-in-r.html#robust-correlations-section-refrobust-correlations"><i class="fa fa-check"></i><b>12.3</b> Robust correlations (Section @ref(robust-correlations))</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="modeling-categorical-relationships-in-r.html"><a href="modeling-categorical-relationships-in-r.html"><i class="fa fa-check"></i><b>12</b> Modeling categorical relationships in R</a><ul>
-<li class="chapter" data-level="12.1" data-path="modeling-categorical-relationships-in-r.html"><a href="modeling-categorical-relationships-in-r.html#the-pearson-chi-squared-test-section-refchi-squared-test"><i class="fa fa-check"></i><b>12.1</b> The Pearson Chi-squared test (Section @ref(chi-squared-test))</a></li>
-<li class="chapter" data-level="12.2" data-path="modeling-categorical-relationships-in-r.html"><a href="modeling-categorical-relationships-in-r.html#two-way-tests-section-reftwo-way-test"><i class="fa fa-check"></i><b>12.2</b> Two-way tests (Section @ref(two-way-test})</a></li>
+<li class="chapter" data-level="13" data-path="the-general-linear-model-in-r.html"><a href="the-general-linear-model-in-r.html"><i class="fa fa-check"></i><b>13</b> The General Linear Model in R</a><ul>
+<li class="chapter" data-level="13.1" data-path="the-general-linear-model-in-r.html"><a href="the-general-linear-model-in-r.html#linear-regression-section-reflinear-regression"><i class="fa fa-check"></i><b>13.1</b> Linear regression (Section @ref(linear-regression))</a></li>
+<li class="chapter" data-level="13.2" data-path="the-general-linear-model-in-r.html"><a href="the-general-linear-model-in-r.html#model-criticism-and-diagnostics-section-refmodel-criticism"><i class="fa fa-check"></i><b>13.2</b> Model criticism and diagnostics (Section @ref(model-criticism))</a></li>
+<li class="chapter" data-level="13.3" data-path="the-general-linear-model-in-r.html"><a href="the-general-linear-model-in-r.html#examples-of-problematic-model-fit"><i class="fa fa-check"></i><b>13.3</b> Examples of problematic model fit</a></li>
+<li class="chapter" data-level="13.4" data-path="the-general-linear-model-in-r.html"><a href="the-general-linear-model-in-r.html#extending-regression-to-binary-outcomes."><i class="fa fa-check"></i><b>13.4</b> Extending regression to binary outcomes.</a></li>
+<li class="chapter" data-level="13.5" data-path="the-general-linear-model-in-r.html"><a href="the-general-linear-model-in-r.html#cross-validation-section-refcross-validation"><i class="fa fa-check"></i><b>13.5</b> Cross-validation (Section @ref(cross-validation))</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="modeling-continuous-relationships-in-r.html"><a href="modeling-continuous-relationships-in-r.html"><i class="fa fa-check"></i><b>13</b> Modeling continuous relationships in R</a><ul>
-<li class="chapter" data-level="13.1" data-path="modeling-continuous-relationships-in-r.html"><a href="modeling-continuous-relationships-in-r.html#computing-covariance-and-correlation-section-refcovariance-and-correlation"><i class="fa fa-check"></i><b>13.1</b> Computing covariance and correlation (Section @ref(covariance-and-correlation))</a></li>
-<li class="chapter" data-level="13.2" data-path="modeling-continuous-relationships-in-r.html"><a href="modeling-continuous-relationships-in-r.html#hate-crime-example"><i class="fa fa-check"></i><b>13.2</b> Hate crime example</a></li>
-<li class="chapter" data-level="13.3" data-path="modeling-continuous-relationships-in-r.html"><a href="modeling-continuous-relationships-in-r.html#robust-correlations-section-refrobust-correlations"><i class="fa fa-check"></i><b>13.3</b> Robust correlations (Section @ref(robust-correlations))</a></li>
-</ul></li>
-<li class="chapter" data-level="14" data-path="the-general-linear-model-in-r.html"><a href="the-general-linear-model-in-r.html"><i class="fa fa-check"></i><b>14</b> The General Linear Model in R</a><ul>
-<li class="chapter" data-level="14.1" data-path="the-general-linear-model-in-r.html"><a href="the-general-linear-model-in-r.html#linear-regression-section-reflinear-regression"><i class="fa fa-check"></i><b>14.1</b> Linear regression (Section @ref(linear-regression))</a></li>
-<li class="chapter" data-level="14.2" data-path="the-general-linear-model-in-r.html"><a href="the-general-linear-model-in-r.html#model-criticism-and-diagnostics-section-refmodel-criticism"><i class="fa fa-check"></i><b>14.2</b> Model criticism and diagnostics (Section @ref(model-criticism))</a></li>
-<li class="chapter" data-level="14.3" data-path="the-general-linear-model-in-r.html"><a href="the-general-linear-model-in-r.html#examples-of-problematic-model-fit"><i class="fa fa-check"></i><b>14.3</b> Examples of problematic model fit</a></li>
-<li class="chapter" data-level="14.4" data-path="the-general-linear-model-in-r.html"><a href="the-general-linear-model-in-r.html#extending-regression-to-binary-outcomes."><i class="fa fa-check"></i><b>14.4</b> Extending regression to binary outcomes.</a></li>
-<li class="chapter" data-level="14.5" data-path="the-general-linear-model-in-r.html"><a href="the-general-linear-model-in-r.html#cross-validation-section-refcross-validation"><i class="fa fa-check"></i><b>14.5</b> Cross-validation (Section @ref(cross-validation))</a></li>
-</ul></li>
-<li class="chapter" data-level="15" data-path="comparing-means-in-r.html"><a href="comparing-means-in-r.html"><i class="fa fa-check"></i><b>15</b> Comparing means in R</a><ul>
-<li class="chapter" data-level="15.1" data-path="comparing-means-in-r.html"><a href="comparing-means-in-r.html#testing-the-value-of-a-single-mean-section-refsingle-mean"><i class="fa fa-check"></i><b>15.1</b> Testing the value of a single mean (Section @ref(single-mean))</a></li>
-<li class="chapter" data-level="15.2" data-path="comparing-means-in-r.html"><a href="comparing-means-in-r.html#comparing-two-means-section-refcomparing-two-means"><i class="fa fa-check"></i><b>15.2</b> Comparing two means (Section @ref(comparing-two-means))</a></li>
-<li class="chapter" data-level="15.3" data-path="comparing-means-in-r.html"><a href="comparing-means-in-r.html#the-t-test-as-a-linear-model-section-refttest-linear-model"><i class="fa fa-check"></i><b>15.3</b> The t-test as a linear model (Section @ref(ttest-linear-model))</a></li>
-<li class="chapter" data-level="15.4" data-path="comparing-means-in-r.html"><a href="comparing-means-in-r.html#comparing-paired-observations-section-refpaired-ttests"><i class="fa fa-check"></i><b>15.4</b> Comparing paired observations (Section @ref(paired-ttests))</a></li>
-<li class="chapter" data-level="15.5" data-path="comparing-means-in-r.html"><a href="comparing-means-in-r.html#analysis-of-variance-section-refanova"><i class="fa fa-check"></i><b>15.5</b> Analysis of variance (Section @ref(ANOVA))</a><ul>
-<li class="chapter" data-level="15.5.1" data-path="comparing-means-in-r.html"><a href="comparing-means-in-r.html#repeated-measures-analysis-of-variance"><i class="fa fa-check"></i><b>15.5.1</b> Repeated measures analysis of variance</a></li>
+<li class="chapter" data-level="14" data-path="comparing-means-in-r.html"><a href="comparing-means-in-r.html"><i class="fa fa-check"></i><b>14</b> Comparing means in R</a><ul>
+<li class="chapter" data-level="14.1" data-path="comparing-means-in-r.html"><a href="comparing-means-in-r.html#testing-the-value-of-a-single-mean-section-refsingle-mean"><i class="fa fa-check"></i><b>14.1</b> Testing the value of a single mean (Section @ref(single-mean))</a></li>
+<li class="chapter" data-level="14.2" data-path="comparing-means-in-r.html"><a href="comparing-means-in-r.html#comparing-two-means-section-refcomparing-two-means"><i class="fa fa-check"></i><b>14.2</b> Comparing two means (Section @ref(comparing-two-means))</a></li>
+<li class="chapter" data-level="14.3" data-path="comparing-means-in-r.html"><a href="comparing-means-in-r.html#the-t-test-as-a-linear-model-section-refttest-linear-model"><i class="fa fa-check"></i><b>14.3</b> The t-test as a linear model (Section @ref(ttest-linear-model))</a></li>
+<li class="chapter" data-level="14.4" data-path="comparing-means-in-r.html"><a href="comparing-means-in-r.html#comparing-paired-observations-section-refpaired-ttests"><i class="fa fa-check"></i><b>14.4</b> Comparing paired observations (Section @ref(paired-ttests))</a></li>
+<li class="chapter" data-level="14.5" data-path="comparing-means-in-r.html"><a href="comparing-means-in-r.html#analysis-of-variance-section-refanova"><i class="fa fa-check"></i><b>14.5</b> Analysis of variance (Section @ref(ANOVA))</a><ul>
+<li class="chapter" data-level="14.5.1" data-path="comparing-means-in-r.html"><a href="comparing-means-in-r.html#repeated-measures-analysis-of-variance"><i class="fa fa-check"></i><b>14.5.1</b> Repeated measures analysis of variance</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="practical-statistical-modeling-in-r.html"><a href="practical-statistical-modeling-in-r.html"><i class="fa fa-check"></i><b>16</b> Practical statistical modeling in R</a></li>
+<li class="chapter" data-level="15" data-path="practical-statistical-modeling-in-r.html"><a href="practical-statistical-modeling-in-r.html"><i class="fa fa-check"></i><b>15</b> Practical statistical modeling in R</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
@@ -293,27 +282,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="the-general-linear-model-in-r" class="section level1">
-<h1><span class="header-section-number">Chapter 14</span> The General Linear Model in R</h1>
+<h1><span class="header-section-number">Chapter 13</span> The General Linear Model in R</h1>
 <div id="linear-regression-section-reflinear-regression" class="section level2">
-<h2><span class="header-section-number">14.1</span> Linear regression (Section <a href="#linear-regression"><strong>??</strong></a>)</h2>
+<h2><span class="header-section-number">13.1</span> Linear regression (Section <a href="#linear-regression"><strong>??</strong></a>)</h2>
 <p>To perform linear regression in R, we use the <code>lm()</code> function. Let’s generate some data and use this function to compute the linear regression solution.</p>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb247-1" data-line-number="1">npoints &lt;-<span class="st"> </span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb247-2" data-line-number="2">intercept =<span class="st"> </span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb247-3" data-line-number="3"><span class="co"># slope of X/Y relationship</span></a>
-<a class="sourceLine" id="cb247-4" data-line-number="4">slope=<span class="fl">0.5</span></a>
-<a class="sourceLine" id="cb247-5" data-line-number="5"><span class="co"># this lets us control the strength of the relationship</span></a>
-<a class="sourceLine" id="cb247-6" data-line-number="6"><span class="co"># by varying the amount of noise added to the y variable</span></a>
-<a class="sourceLine" id="cb247-7" data-line-number="7">noise_sd =<span class="st"> </span><span class="fl">0.6</span></a>
-<a class="sourceLine" id="cb247-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb247-9" data-line-number="9">regression_data &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">rnorm</span>(npoints)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb247-10" data-line-number="10"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">y =</span> x<span class="op">*</span>slope <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(npoints)<span class="op">*</span>noise_sd <span class="op">+</span><span class="st"> </span>intercept)</a>
-<a class="sourceLine" id="cb247-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb247-12" data-line-number="12"><span class="kw">ggplot</span>(regression_data,<span class="kw">aes</span>(x,y)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb247-13" data-line-number="13"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
-<p><img src="StatsThinking21_files/figure-html/unnamed-chunk-159-1.png" width="50%" /></p>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb244-1" data-line-number="1">npoints &lt;-<span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb244-2" data-line-number="2">intercept =<span class="st"> </span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb244-3" data-line-number="3"><span class="co"># slope of X/Y relationship</span></a>
+<a class="sourceLine" id="cb244-4" data-line-number="4">slope=<span class="fl">0.5</span></a>
+<a class="sourceLine" id="cb244-5" data-line-number="5"><span class="co"># this lets us control the strength of the relationship</span></a>
+<a class="sourceLine" id="cb244-6" data-line-number="6"><span class="co"># by varying the amount of noise added to the y variable</span></a>
+<a class="sourceLine" id="cb244-7" data-line-number="7">noise_sd =<span class="st"> </span><span class="fl">0.6</span></a>
+<a class="sourceLine" id="cb244-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb244-9" data-line-number="9">regression_data &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">rnorm</span>(npoints)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb244-10" data-line-number="10"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">y =</span> x<span class="op">*</span>slope <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(npoints)<span class="op">*</span>noise_sd <span class="op">+</span><span class="st"> </span>intercept)</a>
+<a class="sourceLine" id="cb244-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb244-12" data-line-number="12"><span class="kw">ggplot</span>(regression_data,<span class="kw">aes</span>(x,y)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb244-13" data-line-number="13"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
+<p><img src="StatsThinking21_files/figure-html/unnamed-chunk-148-1.png" width="50%" /></p>
 <p>We can then apply <code>lm()</code> to these data:</p>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb248-1" data-line-number="1">lm_result &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data=</span>regression_data)</a>
-<a class="sourceLine" id="cb248-2" data-line-number="2"><span class="kw">summary</span>(lm_result)</a></code></pre></div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb245-1" data-line-number="1">lm_result &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data=</span>regression_data)</a>
+<a class="sourceLine" id="cb245-2" data-line-number="2"><span class="kw">summary</span>(lm_result)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = y ~ x, data = regression_data)
@@ -340,21 +329,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 </div>
 <div id="model-criticism-and-diagnostics-section-refmodel-criticism" class="section level2">
-<h2><span class="header-section-number">14.2</span> Model criticism and diagnostics (Section <a href="#model-criticism"><strong>??</strong></a>)</h2>
+<h2><span class="header-section-number">13.2</span> Model criticism and diagnostics (Section <a href="#model-criticism"><strong>??</strong></a>)</h2>
 <p>Once we have fitted the model, we want to look at some diagnostics to determine whether the model is actually fitting properly. We can do this using the <code>autoplot()</code> function from the <code>ggfortify</code> package.</p>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb250-1" data-line-number="1"><span class="kw">autoplot</span>(lm_result,<span class="dt">which=</span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a></code></pre></div>
-<p><img src="StatsThinking21_files/figure-html/unnamed-chunk-161-1.png" width="80%" /></p>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb247-1" data-line-number="1"><span class="kw">autoplot</span>(lm_result,<span class="dt">which=</span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a></code></pre></div>
+<p><img src="StatsThinking21_files/figure-html/unnamed-chunk-150-1.png" width="80%" /></p>
 <p>The left panel in this plot shows the relationship between the predicted (or “fitted”) values and the residuals. We would like to make sure that there is no clear relationship between these two (as we will see below). The right panel shows a Q-Q plot, which helps us assess whether the residuals from the model are normally distributed. In this case, they look reasonably normal, as the points don’t differ too much from the unit line.</p>
 </div>
 <div id="examples-of-problematic-model-fit" class="section level2">
-<h2><span class="header-section-number">14.3</span> Examples of problematic model fit</h2>
+<h2><span class="header-section-number">13.3</span> Examples of problematic model fit</h2>
 <p>Let’s say that there was another variable at play in this dataset, which we were not aware of. This variable causes some of the cases to have much larger values than others, in a way that is unrelated to the X variable. We play a trick here using the <code>seq()</code> function to create a sequence from zero to one, and then threshold those 0.5 (in order to obtain half of the values as zero and the other half as one) and then multiply by the desired effect size:</p>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb251-1" data-line-number="1">effsize=<span class="dv">2</span></a>
-<a class="sourceLine" id="cb251-2" data-line-number="2">regression_data &lt;-<span class="st"> </span>regression_data <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb251-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">y2=</span>y <span class="op">+</span><span class="st"> </span>effsize<span class="op">*</span>(<span class="kw">seq</span>(<span class="dv">1</span><span class="op">/</span>npoints,<span class="dv">1</span>,<span class="dv">1</span><span class="op">/</span>npoints)<span class="op">&gt;</span><span class="fl">0.5</span>))</a>
-<a class="sourceLine" id="cb251-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb251-5" data-line-number="5">lm_result2 &lt;-<span class="st"> </span><span class="kw">lm</span>(y2 <span class="op">~</span><span class="st"> </span>x, <span class="dt">data=</span>regression_data)</a>
-<a class="sourceLine" id="cb251-6" data-line-number="6"><span class="kw">summary</span>(lm_result2)</a></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb248-1" data-line-number="1">effsize=<span class="dv">2</span></a>
+<a class="sourceLine" id="cb248-2" data-line-number="2">regression_data &lt;-<span class="st"> </span>regression_data <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb248-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">y2=</span>y <span class="op">+</span><span class="st"> </span>effsize<span class="op">*</span>(<span class="kw">seq</span>(<span class="dv">1</span><span class="op">/</span>npoints,<span class="dv">1</span>,<span class="dv">1</span><span class="op">/</span>npoints)<span class="op">&gt;</span><span class="fl">0.5</span>))</a>
+<a class="sourceLine" id="cb248-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb248-5" data-line-number="5">lm_result2 &lt;-<span class="st"> </span><span class="kw">lm</span>(y2 <span class="op">~</span><span class="st"> </span>x, <span class="dt">data=</span>regression_data)</a>
+<a class="sourceLine" id="cb248-6" data-line-number="6"><span class="kw">summary</span>(lm_result2)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = y2 ~ x, data = regression_data)
@@ -374,16 +363,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Multiple R-squared:  0.0501, Adjusted R-squared:  0.04041 
 ## F-statistic: 5.169 on 1 and 98 DF,  p-value: 0.02518</code></pre>
 <p>One thing you should notice is that the model now fits overall much worse; the R-squared is about half of what it was in the previous model, which reflects the fact that more variability was added to the data, but it wasn’t accounted for in the model. Let’s see if our diagnostic reports can give us any insight:</p>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb253-1" data-line-number="1"><span class="kw">autoplot</span>(lm_result2,<span class="dt">which=</span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a></code></pre></div>
-<p><img src="StatsThinking21_files/figure-html/unnamed-chunk-163-1.png" width="80%" /></p>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb250-1" data-line-number="1"><span class="kw">autoplot</span>(lm_result2,<span class="dt">which=</span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a></code></pre></div>
+<p><img src="StatsThinking21_files/figure-html/unnamed-chunk-152-1.png" width="80%" /></p>
 <p>The residual versus fitted graph doesn’t give us much insight, but we see from the Q-Q plot that the residuals are diverging quite a bit from the unit line.</p>
 <p>Let’s look at another potential problem, in which the y variable is nonlinearly related to the X variable. We can create these data by squaring the X variable when we generate the Y variable:</p>
-<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb254-1" data-line-number="1">effsize=<span class="dv">2</span></a>
-<a class="sourceLine" id="cb254-2" data-line-number="2">regression_data &lt;-<span class="st"> </span>regression_data <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb254-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">y3 =</span> (x<span class="op">**</span><span class="dv">2</span>)<span class="op">*</span>slope <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(npoints)<span class="op">*</span>noise_sd <span class="op">+</span><span class="st"> </span>intercept)</a>
-<a class="sourceLine" id="cb254-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb254-5" data-line-number="5">lm_result3 &lt;-<span class="st"> </span><span class="kw">lm</span>(y3 <span class="op">~</span><span class="st"> </span>x, <span class="dt">data=</span>regression_data)</a>
-<a class="sourceLine" id="cb254-6" data-line-number="6"><span class="kw">summary</span>(lm_result3)</a></code></pre></div>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb251-1" data-line-number="1">effsize=<span class="dv">2</span></a>
+<a class="sourceLine" id="cb251-2" data-line-number="2">regression_data &lt;-<span class="st"> </span>regression_data <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb251-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">y3 =</span> (x<span class="op">**</span><span class="dv">2</span>)<span class="op">*</span>slope <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(npoints)<span class="op">*</span>noise_sd <span class="op">+</span><span class="st"> </span>intercept)</a>
+<a class="sourceLine" id="cb251-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb251-5" data-line-number="5">lm_result3 &lt;-<span class="st"> </span><span class="kw">lm</span>(y3 <span class="op">~</span><span class="st"> </span>x, <span class="dt">data=</span>regression_data)</a>
+<a class="sourceLine" id="cb251-6" data-line-number="6"><span class="kw">summary</span>(lm_result3)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = y3 ~ x, data = regression_data)
@@ -403,16 +392,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Multiple R-squared:  0.002452,   Adjusted R-squared:  -0.007727 
 ## F-statistic: 0.2409 on 1 and 98 DF,  p-value: 0.6247</code></pre>
 <p>Now we see that there is no significant linear relationship between <span class="math inline">\(X^2\)</span> and Y/ But if we look at the residuals the problem with the model becomes clear:</p>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb256-1" data-line-number="1"><span class="kw">autoplot</span>(lm_result3,<span class="dt">which=</span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a></code></pre></div>
-<p><img src="StatsThinking21_files/figure-html/unnamed-chunk-165-1.png" width="80%" /></p>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb253-1" data-line-number="1"><span class="kw">autoplot</span>(lm_result3,<span class="dt">which=</span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a></code></pre></div>
+<p><img src="StatsThinking21_files/figure-html/unnamed-chunk-154-1.png" width="80%" /></p>
 <p>In this case we can see the clearly nonlinear relationship between the predicted and residual values, as well as the clear lack of normality in the residuals.</p>
 <p>As we noted in the previous chapter, the “linear” in the general linear model doesn’t refer to the shape of the response, but instead refers to the fact that model is linear in its parameters — that is, the predictors in the model only get multiplied the parameters (e.g., rather than being raised to a power of the parameter). Here is how we would build a model that could account for the nonlinear relationship:</p>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb257-1" data-line-number="1"><span class="co"># create x^2 variable</span></a>
-<a class="sourceLine" id="cb257-2" data-line-number="2">regression_data &lt;-<span class="st"> </span>regression_data <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb257-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">x_squared =</span> x<span class="op">**</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb257-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb257-5" data-line-number="5">lm_result4 &lt;-<span class="st"> </span><span class="kw">lm</span>(y3 <span class="op">~</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span>x_squared, <span class="dt">data=</span>regression_data)</a>
-<a class="sourceLine" id="cb257-6" data-line-number="6"><span class="kw">summary</span>(lm_result4)</a></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb254-1" data-line-number="1"><span class="co"># create x^2 variable</span></a>
+<a class="sourceLine" id="cb254-2" data-line-number="2">regression_data &lt;-<span class="st"> </span>regression_data <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb254-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">x_squared =</span> x<span class="op">**</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb254-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb254-5" data-line-number="5">lm_result4 &lt;-<span class="st"> </span><span class="kw">lm</span>(y3 <span class="op">~</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span>x_squared, <span class="dt">data=</span>regression_data)</a>
+<a class="sourceLine" id="cb254-6" data-line-number="6"><span class="kw">summary</span>(lm_result4)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = y3 ~ x + x_squared, data = regression_data)
@@ -433,47 +422,47 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Multiple R-squared:  0.5137, Adjusted R-squared:  0.5037 
 ## F-statistic: 51.23 on 2 and 97 DF,  p-value: 6.536e-16</code></pre>
 <p>Now we see that the effect of <span class="math inline">\(X^2\)</span> is significant, and if we look at the residual plot we should see that things look much better:</p>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb259-1" data-line-number="1"><span class="kw">autoplot</span>(lm_result4,<span class="dt">which=</span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a></code></pre></div>
-<p><img src="StatsThinking21_files/figure-html/unnamed-chunk-167-1.png" width="80%" />
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb256-1" data-line-number="1"><span class="kw">autoplot</span>(lm_result4,<span class="dt">which=</span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a></code></pre></div>
+<p><img src="StatsThinking21_files/figure-html/unnamed-chunk-156-1.png" width="80%" />
 Not perfect, but much better than before!</p>
 </div>
 <div id="extending-regression-to-binary-outcomes." class="section level2">
-<h2><span class="header-section-number">14.4</span> Extending regression to binary outcomes.</h2>
+<h2><span class="header-section-number">13.4</span> Extending regression to binary outcomes.</h2>
 <p>Let’s say that we have a blood test (which is often referred to as a <em>biomarker</em>) and we want to know whether it predicts who is going to have a heart attack within the next year. We will generate a synthetic dataset for a population that is at very high risk for a heart attack in the next year.</p>
-<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb260-1" data-line-number="1"><span class="co"># sample size</span></a>
-<a class="sourceLine" id="cb260-2" data-line-number="2">npatients=<span class="dv">1000</span></a>
-<a class="sourceLine" id="cb260-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb260-4" data-line-number="4"><span class="co"># probability of heart attack</span></a>
-<a class="sourceLine" id="cb260-5" data-line-number="5">p_heartattack =<span class="st"> </span><span class="fl">0.5</span></a>
-<a class="sourceLine" id="cb260-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb260-7" data-line-number="7"><span class="co"># true relation to biomarker</span></a>
-<a class="sourceLine" id="cb260-8" data-line-number="8">true_effect &lt;-<span class="st"> </span><span class="fl">0.6</span></a>
-<a class="sourceLine" id="cb260-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb260-10" data-line-number="10"><span class="co"># assume biomarker is normally distributed</span></a>
-<a class="sourceLine" id="cb260-11" data-line-number="11">disease_df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">biomarker=</span><span class="kw">rnorm</span>(npatients))</a>
-<a class="sourceLine" id="cb260-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb260-13" data-line-number="13"><span class="co"># generate another variable that reflects risk for </span></a>
-<a class="sourceLine" id="cb260-14" data-line-number="14"><span class="co"># heart attack, which is related to the biomarker</span></a>
-<a class="sourceLine" id="cb260-15" data-line-number="15">disease_df &lt;-<span class="st"> </span>disease_df <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb260-16" data-line-number="16"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">risk =</span> biomarker<span class="op">*</span>true_effect <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(npatients))</a>
-<a class="sourceLine" id="cb260-17" data-line-number="17"></a>
-<a class="sourceLine" id="cb260-18" data-line-number="18"><span class="co"># create another variable that shows who has a </span></a>
-<a class="sourceLine" id="cb260-19" data-line-number="19"><span class="co"># heart attack, based on the risk variable</span></a>
-<a class="sourceLine" id="cb260-20" data-line-number="20">disease_df &lt;-<span class="st"> </span>disease_df <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb260-21" data-line-number="21"><span class="st">  </span><span class="kw">mutate</span>(</a>
-<a class="sourceLine" id="cb260-22" data-line-number="22">    <span class="dt">heartattack =</span> risk <span class="op">&gt;</span><span class="st"> </span><span class="kw">quantile</span>(disease_df<span class="op">$</span>risk,</a>
-<a class="sourceLine" id="cb260-23" data-line-number="23">                                       <span class="dv">1</span><span class="op">-</span>p_heartattack))</a>
-<a class="sourceLine" id="cb260-24" data-line-number="24"></a>
-<a class="sourceLine" id="cb260-25" data-line-number="25"><span class="kw">glimpse</span>(disease_df)</a></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb257-1" data-line-number="1"><span class="co"># sample size</span></a>
+<a class="sourceLine" id="cb257-2" data-line-number="2">npatients=<span class="dv">1000</span></a>
+<a class="sourceLine" id="cb257-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb257-4" data-line-number="4"><span class="co"># probability of heart attack</span></a>
+<a class="sourceLine" id="cb257-5" data-line-number="5">p_heartattack =<span class="st"> </span><span class="fl">0.5</span></a>
+<a class="sourceLine" id="cb257-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb257-7" data-line-number="7"><span class="co"># true relation to biomarker</span></a>
+<a class="sourceLine" id="cb257-8" data-line-number="8">true_effect &lt;-<span class="st"> </span><span class="fl">0.6</span></a>
+<a class="sourceLine" id="cb257-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb257-10" data-line-number="10"><span class="co"># assume biomarker is normally distributed</span></a>
+<a class="sourceLine" id="cb257-11" data-line-number="11">disease_df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">biomarker=</span><span class="kw">rnorm</span>(npatients))</a>
+<a class="sourceLine" id="cb257-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb257-13" data-line-number="13"><span class="co"># generate another variable that reflects risk for </span></a>
+<a class="sourceLine" id="cb257-14" data-line-number="14"><span class="co"># heart attack, which is related to the biomarker</span></a>
+<a class="sourceLine" id="cb257-15" data-line-number="15">disease_df &lt;-<span class="st"> </span>disease_df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb257-16" data-line-number="16"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">risk =</span> biomarker<span class="op">*</span>true_effect <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(npatients))</a>
+<a class="sourceLine" id="cb257-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb257-18" data-line-number="18"><span class="co"># create another variable that shows who has a </span></a>
+<a class="sourceLine" id="cb257-19" data-line-number="19"><span class="co"># heart attack, based on the risk variable</span></a>
+<a class="sourceLine" id="cb257-20" data-line-number="20">disease_df &lt;-<span class="st"> </span>disease_df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb257-21" data-line-number="21"><span class="st">  </span><span class="kw">mutate</span>(</a>
+<a class="sourceLine" id="cb257-22" data-line-number="22">    <span class="dt">heartattack =</span> risk <span class="op">&gt;</span><span class="st"> </span><span class="kw">quantile</span>(disease_df<span class="op">$</span>risk,</a>
+<a class="sourceLine" id="cb257-23" data-line-number="23">                                       <span class="dv">1</span><span class="op">-</span>p_heartattack))</a>
+<a class="sourceLine" id="cb257-24" data-line-number="24"></a>
+<a class="sourceLine" id="cb257-25" data-line-number="25"><span class="kw">glimpse</span>(disease_df)</a></code></pre></div>
 <pre><code>## Observations: 1,000
 ## Variables: 3
 ## $ biomarker   &lt;dbl&gt; 1.1512317, 0.6753651, 1.2141696, -0.7…
 ## $ risk        &lt;dbl&gt; 1.05356169, -0.52889832, 0.67528209, …
 ## $ heartattack &lt;lgl&gt; TRUE, FALSE, TRUE, FALSE, FALSE, TRUE…</code></pre>
 <p>Now we would like to build a model that allows us to predict who will have a heart attack from these data. However, you may have noticed that the heartattack variable is a binary variable; because linear regression assumes that the residuals from the model will be normally distributed, and the binary nature of the data will violate this, we instead need to use a different kind of model, known as a <em>logistic regression</em> model, which is built to deal with binary outcomes. We can fit this model using the <code>glm()</code> function:</p>
-<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb262-1" data-line-number="1">glm_result &lt;-<span class="st"> </span><span class="kw">glm</span>(heartattack <span class="op">~</span><span class="st"> </span>biomarker, <span class="dt">data=</span>disease_df,</a>
-<a class="sourceLine" id="cb262-2" data-line-number="2">                  <span class="dt">family=</span><span class="kw">binomial</span>())</a>
-<a class="sourceLine" id="cb262-3" data-line-number="3"><span class="kw">summary</span>(glm_result)</a></code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb259-1" data-line-number="1">glm_result &lt;-<span class="st"> </span><span class="kw">glm</span>(heartattack <span class="op">~</span><span class="st"> </span>biomarker, <span class="dt">data=</span>disease_df,</a>
+<a class="sourceLine" id="cb259-2" data-line-number="2">                  <span class="dt">family=</span><span class="kw">binomial</span>())</a>
+<a class="sourceLine" id="cb259-3" data-line-number="3"><span class="kw">summary</span>(glm_result)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = heartattack ~ biomarker, family = binomial(), data = disease_df)
@@ -498,17 +487,17 @@ Not perfect, but much better than before!</p>
 ## Number of Fisher Scoring iterations: 3</code></pre>
 <p>This looks very similar to the output from the <code>lm()</code> function, and it shows us that there is a significant relationship between the biomarker and heart attacks. The model provides us with a predicted probability that each individual will have a heart attack; if this is greater than 0.5, then that means that the model predicts that the individual is more likely than not to have a heart attack.<br />
 We can start by simply comparing those predictions to the actual outcomes.</p>
-<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb264-1" data-line-number="1"><span class="co"># add predictions to data frame</span></a>
-<a class="sourceLine" id="cb264-2" data-line-number="2">disease_df &lt;-<span class="st"> </span>disease_df <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb264-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prediction =</span> glm_result<span class="op">$</span>fitted.values<span class="op">&gt;</span><span class="fl">0.5</span>,</a>
-<a class="sourceLine" id="cb264-4" data-line-number="4">         <span class="dt">heartattack =</span> heartattack)</a>
-<a class="sourceLine" id="cb264-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb264-6" data-line-number="6"><span class="co"># create table comparing predicted to actual outcomes</span></a>
-<a class="sourceLine" id="cb264-7" data-line-number="7"><span class="kw">CrossTable</span>(disease_df<span class="op">$</span>prediction,</a>
-<a class="sourceLine" id="cb264-8" data-line-number="8">           disease_df<span class="op">$</span>heartattack,</a>
-<a class="sourceLine" id="cb264-9" data-line-number="9">           <span class="dt">prop.t=</span><span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb264-10" data-line-number="10">           <span class="dt">prop.r=</span><span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb264-11" data-line-number="11">           <span class="dt">prop.chisq=</span><span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb261-1" data-line-number="1"><span class="co"># add predictions to data frame</span></a>
+<a class="sourceLine" id="cb261-2" data-line-number="2">disease_df &lt;-<span class="st"> </span>disease_df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb261-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prediction =</span> glm_result<span class="op">$</span>fitted.values<span class="op">&gt;</span><span class="fl">0.5</span>,</a>
+<a class="sourceLine" id="cb261-4" data-line-number="4">         <span class="dt">heartattack =</span> heartattack)</a>
+<a class="sourceLine" id="cb261-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb261-6" data-line-number="6"><span class="co"># create table comparing predicted to actual outcomes</span></a>
+<a class="sourceLine" id="cb261-7" data-line-number="7"><span class="kw">CrossTable</span>(disease_df<span class="op">$</span>prediction,</a>
+<a class="sourceLine" id="cb261-8" data-line-number="8">           disease_df<span class="op">$</span>heartattack,</a>
+<a class="sourceLine" id="cb261-9" data-line-number="9">           <span class="dt">prop.t=</span><span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb261-10" data-line-number="10">           <span class="dt">prop.r=</span><span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb261-11" data-line-number="11">           <span class="dt">prop.chisq=</span><span class="ot">FALSE</span>)</a></code></pre></div>
 <pre><code>## 
 ##  
 ##    Cell Contents
@@ -538,41 +527,41 @@ We can start by simply comparing those predictions to the actual outcomes.</p>
 <p>This shows us that of the 500 people who had heart attacks, the model corrected predicted a heart attack for 343 of them. It also predicted heart attacks for 168 people who didn’t have them, and it failed to predict a heart attack for 157 people who had them. This highlights the distinction that we mentioned before between statistical and practical significance; even though the biomarker shows a highly significant relationship to heart attacks, it’s ability to predict them is still relatively poor. As we will see below, it gets even worse when we try to generalize this to a new group of people.</p>
 </div>
 <div id="cross-validation-section-refcross-validation" class="section level2">
-<h2><span class="header-section-number">14.5</span> Cross-validation (Section <a href="#cross-validation"><strong>??</strong></a>)</h2>
+<h2><span class="header-section-number">13.5</span> Cross-validation (Section <a href="#cross-validation"><strong>??</strong></a>)</h2>
 <p>Cross-validation is a powerful technique that allows us to estimate how well our results will generalize to a new dataset. Here we will build our own crossvalidation code to see how it works, continuing the logistic regression example from the previous section.</p>
 <p>In cross-validation, we want to split the data into several subsets and then iteratively train the model while leaving out each subset (which we usually call <em>folds</em>) and then test the model on that held-out fold Let’s write our own code to do this splitting; one relatively easy way to this is to create a vector that contains the fold numbers, and then randomly shuffle it to create the fold assigments for each data point.</p>
-<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb266-1" data-line-number="1">nfolds &lt;-<span class="st"> </span><span class="dv">4</span> <span class="co"># number of folds</span></a>
-<a class="sourceLine" id="cb266-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb266-3" data-line-number="3"><span class="co"># we use the kronecker() function to repeat the folds</span></a>
-<a class="sourceLine" id="cb266-4" data-line-number="4">fold &lt;-<span class="st">  </span><span class="kw">kronecker</span>(<span class="kw">seq</span>(nfolds),<span class="kw">rep</span>(<span class="dv">1</span>,npatients<span class="op">/</span>nfolds))</a>
-<a class="sourceLine" id="cb266-5" data-line-number="5"><span class="co"># randomly shuffle using the sample() function</span></a>
-<a class="sourceLine" id="cb266-6" data-line-number="6">fold &lt;-<span class="st"> </span><span class="kw">sample</span>(fold)</a>
-<a class="sourceLine" id="cb266-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb266-8" data-line-number="8"><span class="co"># add variable to store CV predictions</span></a>
-<a class="sourceLine" id="cb266-9" data-line-number="9">disease_df &lt;-<span class="st"> </span>disease_df <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb266-10" data-line-number="10"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">CVpred=</span><span class="ot">NA</span>)</a>
-<a class="sourceLine" id="cb266-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb266-12" data-line-number="12"><span class="co"># now loop through folds and separate training and test data</span></a>
-<a class="sourceLine" id="cb266-13" data-line-number="13"><span class="cf">for</span> (f <span class="cf">in</span> <span class="kw">seq</span>(nfolds)){</a>
-<a class="sourceLine" id="cb266-14" data-line-number="14">  <span class="co"># get training and test data</span></a>
-<a class="sourceLine" id="cb266-15" data-line-number="15">  train_df &lt;-<span class="st"> </span>disease_df[fold<span class="op">!=</span>f,]</a>
-<a class="sourceLine" id="cb266-16" data-line-number="16">  test_df &lt;-<span class="st"> </span>disease_df[fold<span class="op">==</span>f,]</a>
-<a class="sourceLine" id="cb266-17" data-line-number="17">  <span class="co"># fit model to training data</span></a>
-<a class="sourceLine" id="cb266-18" data-line-number="18">  glm_result_cv &lt;-<span class="st"> </span><span class="kw">glm</span>(heartattack <span class="op">~</span><span class="st"> </span>biomarker, <span class="dt">data=</span>train_df,</a>
-<a class="sourceLine" id="cb266-19" data-line-number="19">                  <span class="dt">family=</span><span class="kw">binomial</span>())</a>
-<a class="sourceLine" id="cb266-20" data-line-number="20">  <span class="co"># get probability of heart attack on test data</span></a>
-<a class="sourceLine" id="cb266-21" data-line-number="21">  pred &lt;-<span class="st"> </span><span class="kw">predict</span>(glm_result_cv,<span class="dt">newdata =</span> test_df)</a>
-<a class="sourceLine" id="cb266-22" data-line-number="22">  <span class="co"># convert to prediction and put into data frame</span></a>
-<a class="sourceLine" id="cb266-23" data-line-number="23">  disease_df<span class="op">$</span>CVpred[fold<span class="op">==</span>f] =<span class="st"> </span>(pred<span class="op">&gt;</span><span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb266-24" data-line-number="24"></a>
-<a class="sourceLine" id="cb266-25" data-line-number="25">}</a></code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb263-1" data-line-number="1">nfolds &lt;-<span class="st"> </span><span class="dv">4</span> <span class="co"># number of folds</span></a>
+<a class="sourceLine" id="cb263-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb263-3" data-line-number="3"><span class="co"># we use the kronecker() function to repeat the folds</span></a>
+<a class="sourceLine" id="cb263-4" data-line-number="4">fold &lt;-<span class="st">  </span><span class="kw">kronecker</span>(<span class="kw">seq</span>(nfolds),<span class="kw">rep</span>(<span class="dv">1</span>,npatients<span class="op">/</span>nfolds))</a>
+<a class="sourceLine" id="cb263-5" data-line-number="5"><span class="co"># randomly shuffle using the sample() function</span></a>
+<a class="sourceLine" id="cb263-6" data-line-number="6">fold &lt;-<span class="st"> </span><span class="kw">sample</span>(fold)</a>
+<a class="sourceLine" id="cb263-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb263-8" data-line-number="8"><span class="co"># add variable to store CV predictions</span></a>
+<a class="sourceLine" id="cb263-9" data-line-number="9">disease_df &lt;-<span class="st"> </span>disease_df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb263-10" data-line-number="10"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">CVpred=</span><span class="ot">NA</span>)</a>
+<a class="sourceLine" id="cb263-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb263-12" data-line-number="12"><span class="co"># now loop through folds and separate training and test data</span></a>
+<a class="sourceLine" id="cb263-13" data-line-number="13"><span class="cf">for</span> (f <span class="cf">in</span> <span class="kw">seq</span>(nfolds)){</a>
+<a class="sourceLine" id="cb263-14" data-line-number="14">  <span class="co"># get training and test data</span></a>
+<a class="sourceLine" id="cb263-15" data-line-number="15">  train_df &lt;-<span class="st"> </span>disease_df[fold<span class="op">!=</span>f,]</a>
+<a class="sourceLine" id="cb263-16" data-line-number="16">  test_df &lt;-<span class="st"> </span>disease_df[fold<span class="op">==</span>f,]</a>
+<a class="sourceLine" id="cb263-17" data-line-number="17">  <span class="co"># fit model to training data</span></a>
+<a class="sourceLine" id="cb263-18" data-line-number="18">  glm_result_cv &lt;-<span class="st"> </span><span class="kw">glm</span>(heartattack <span class="op">~</span><span class="st"> </span>biomarker, <span class="dt">data=</span>train_df,</a>
+<a class="sourceLine" id="cb263-19" data-line-number="19">                  <span class="dt">family=</span><span class="kw">binomial</span>())</a>
+<a class="sourceLine" id="cb263-20" data-line-number="20">  <span class="co"># get probability of heart attack on test data</span></a>
+<a class="sourceLine" id="cb263-21" data-line-number="21">  pred &lt;-<span class="st"> </span><span class="kw">predict</span>(glm_result_cv,<span class="dt">newdata =</span> test_df)</a>
+<a class="sourceLine" id="cb263-22" data-line-number="22">  <span class="co"># convert to prediction and put into data frame</span></a>
+<a class="sourceLine" id="cb263-23" data-line-number="23">  disease_df<span class="op">$</span>CVpred[fold<span class="op">==</span>f] =<span class="st"> </span>(pred<span class="op">&gt;</span><span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb263-24" data-line-number="24"></a>
+<a class="sourceLine" id="cb263-25" data-line-number="25">}</a></code></pre></div>
 <p>Now let’s look at the performance of the model:</p>
-<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb267-1" data-line-number="1"><span class="co"># create table comparing predicted to actual outcomes</span></a>
-<a class="sourceLine" id="cb267-2" data-line-number="2"><span class="kw">CrossTable</span>(disease_df<span class="op">$</span>CVpred,</a>
-<a class="sourceLine" id="cb267-3" data-line-number="3">           disease_df<span class="op">$</span>heartattack,</a>
-<a class="sourceLine" id="cb267-4" data-line-number="4">           <span class="dt">prop.t=</span><span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb267-5" data-line-number="5">           <span class="dt">prop.r=</span><span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb267-6" data-line-number="6">           <span class="dt">prop.chisq=</span><span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb264-1" data-line-number="1"><span class="co"># create table comparing predicted to actual outcomes</span></a>
+<a class="sourceLine" id="cb264-2" data-line-number="2"><span class="kw">CrossTable</span>(disease_df<span class="op">$</span>CVpred,</a>
+<a class="sourceLine" id="cb264-3" data-line-number="3">           disease_df<span class="op">$</span>heartattack,</a>
+<a class="sourceLine" id="cb264-4" data-line-number="4">           <span class="dt">prop.t=</span><span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb264-5" data-line-number="5">           <span class="dt">prop.r=</span><span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb264-6" data-line-number="6">           <span class="dt">prop.chisq=</span><span class="ot">FALSE</span>)</a></code></pre></div>
 <pre><code>## 
 ##  
 ##    Cell Contents
@@ -640,7 +629,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/poldrack/psych10-book/edit/master/14b-GeneralLinearModelInR.Rmd",
+"link": "https://github.com/poldrack/psych10-book/edit/master/13-GeneralLinearModel.Rmd",
 "text": "Edit"
 },
 "history": {
