@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 6 Sampling in R | An R companion to Statistical Thinking for the 21st Century</title>
+  <meta name="description" content="A book about doing statistics using R." />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 6 Sampling in R | An R companion to Statistical Thinking for the 21st Century" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="A book about doing statistics using R." />
+  <meta name="github-repo" content="statsthinking21/statsthinking21-R" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 Sampling in R | An R companion to Statistical Thinking for the 21st Century" />
+  
+  <meta name="twitter:description" content="A book about doing statistics using R." />
+  
+
+<meta name="author" content="Copyright 2020 Russell A. Poldrack" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="probability-in-r-with-lucy-king.html"/>
+<link rel="next" href="resampling-and-simulation-in-r.html"/>
+<script src="book_assets/jquery-3.6.1/jquery-3.6.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="book_assets/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="book_assets/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="book_assets/anchor-sections-1.1.0/anchor-sections.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129414074-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-129414074-1');
+</script>
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#why-r"><i class="fa fa-check"></i><b>0.1</b> Why R?</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#the-golden-age-of-data"><i class="fa fa-check"></i><b>0.2</b> The golden age of data</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#an-open-source-book"><i class="fa fa-check"></i><b>0.3</b> An open source book</a></li>
+<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.4</b> Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>1</b> Introduction to R</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#why-programming-is-hard-to-learn"><i class="fa fa-check"></i><b>1.1</b> Why programming is hard to learn</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#use-the-web"><i class="fa fa-check"></i><b>1.1.1</b> Use the web</a></li>
+<li class="chapter" data-level="1.1.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#rubber-duck-debugging"><i class="fa fa-check"></i><b>1.1.2</b> Rubber duck debugging</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#using-rstudio"><i class="fa fa-check"></i><b>1.2</b> Using RStudio</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-started-with-r"><i class="fa fa-check"></i><b>1.3</b> Getting started with R</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#variables"><i class="fa fa-check"></i><b>1.4</b> Variables</a></li>
+<li class="chapter" data-level="1.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#functions"><i class="fa fa-check"></i><b>1.5</b> Functions</a></li>
+<li class="chapter" data-level="1.6" data-path="introduction-to-r.html"><a href="introduction-to-r.html#vectors"><i class="fa fa-check"></i><b>1.6</b> Vectors</a></li>
+<li class="chapter" data-level="1.7" data-path="introduction-to-r.html"><a href="introduction-to-r.html#math-with-vectors"><i class="fa fa-check"></i><b>1.7</b> Math with vectors</a></li>
+<li class="chapter" data-level="1.8" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-frames"><i class="fa fa-check"></i><b>1.8</b> Data Frames</a></li>
+<li class="chapter" data-level="1.9" data-path="introduction-to-r.html"><a href="introduction-to-r.html#using-r-libraries"><i class="fa fa-check"></i><b>1.9</b> Using R libraries</a></li>
+<li class="chapter" data-level="1.10" data-path="introduction-to-r.html"><a href="introduction-to-r.html#working-with-data-files"><i class="fa fa-check"></i><b>1.10</b> Working with data files</a></li>
+<li class="chapter" data-level="1.11" data-path="introduction-to-r.html"><a href="introduction-to-r.html#learning-objectives"><i class="fa fa-check"></i><b>1.11</b> Learning objectives</a></li>
+<li class="chapter" data-level="1.12" data-path="introduction-to-r.html"><a href="introduction-to-r.html#suggested-readings-and-videos"><i class="fa fa-check"></i><b>1.12</b> Suggested readings and videos</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="summarizing-data.html"><a href="summarizing-data.html"><i class="fa fa-check"></i><b>2</b> Summarizing data using R (with Lucy King)</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="summarizing-data.html"><a href="summarizing-data.html#introduction-to-the-tidyverse"><i class="fa fa-check"></i><b>2.1</b> Introduction to the Tidyverse</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="summarizing-data.html"><a href="summarizing-data.html#making-a-data-frame-using-tibble"><i class="fa fa-check"></i><b>2.1.1</b> Making a data frame using tibble()</a></li>
+<li class="chapter" data-level="2.1.2" data-path="summarizing-data.html"><a href="summarizing-data.html#selecting-an-element"><i class="fa fa-check"></i><b>2.1.2</b> Selecting an element</a></li>
+<li class="chapter" data-level="2.1.3" data-path="summarizing-data.html"><a href="summarizing-data.html#adding-a-row-or-column"><i class="fa fa-check"></i><b>2.1.3</b> Adding a row or column</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="summarizing-data.html"><a href="summarizing-data.html#creating-or-modifying-variables-using-mutate"><i class="fa fa-check"></i><b>2.2</b> Creating or modifying variables using <code>mutate()</code></a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="summarizing-data.html"><a href="summarizing-data.html#remove-a-column-using-the-select-function"><i class="fa fa-check"></i><b>2.2.1</b> Remove a column using the select() function</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="summarizing-data.html"><a href="summarizing-data.html#tidyverse-in-action"><i class="fa fa-check"></i><b>2.3</b> Tidyverse in action</a></li>
+<li class="chapter" data-level="2.4" data-path="summarizing-data.html"><a href="summarizing-data.html#looking-at-individual-variables-using-pull-and-head"><i class="fa fa-check"></i><b>2.4</b> Looking at individual variables using pull() and head()</a></li>
+<li class="chapter" data-level="2.5" data-path="summarizing-data.html"><a href="summarizing-data.html#frequency-distributions"><i class="fa fa-check"></i><b>2.5</b> Computing a frequency distribution (Section @ref(frequency-distributions))</a></li>
+<li class="chapter" data-level="2.6" data-path="summarizing-data.html"><a href="summarizing-data.html#cumulative-distributions"><i class="fa fa-check"></i><b>2.6</b> Computing a cumulative distribution (Section @ref(cumulative-distributions))</a></li>
+<li class="chapter" data-level="2.7" data-path="summarizing-data.html"><a href="summarizing-data.html#data-cleaning-and-tidying-with-r"><i class="fa fa-check"></i><b>2.7</b> Data cleaning and tidying with R</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="summarizing-data.html"><a href="summarizing-data.html#statistics-attitude-data-from-course-survey"><i class="fa fa-check"></i><b>2.7.1</b> Statistics attitude data from course survey</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-visualization.html"><a href="data-visualization.html"><i class="fa fa-check"></i><b>3</b> Data visualization using R (with Anna Khazenzon)</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-visualization.html"><a href="data-visualization.html#the-grammar-of-graphics"><i class="fa fa-check"></i><b>3.1</b> The grammar of graphics</a></li>
+<li class="chapter" data-level="3.2" data-path="data-visualization.html"><a href="data-visualization.html#getting-started"><i class="fa fa-check"></i><b>3.2</b> Getting started</a></li>
+<li class="chapter" data-level="3.3" data-path="data-visualization.html"><a href="data-visualization.html#lets-think-through-a-visualization"><i class="fa fa-check"></i><b>3.3</b> Let’s think through a visualization</a></li>
+<li class="chapter" data-level="3.4" data-path="data-visualization.html"><a href="data-visualization.html#plotting-the-distribution-of-a-single-variable"><i class="fa fa-check"></i><b>3.4</b> Plotting the distribution of a single variable</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="data-visualization.html"><a href="data-visualization.html#histogram"><i class="fa fa-check"></i><b>3.4.1</b> Histogram</a></li>
+<li class="chapter" data-level="3.4.2" data-path="data-visualization.html"><a href="data-visualization.html#density-plot"><i class="fa fa-check"></i><b>3.4.2</b> Density plot</a></li>
+<li class="chapter" data-level="3.4.3" data-path="data-visualization.html"><a href="data-visualization.html#bar-vs.-line-plots"><i class="fa fa-check"></i><b>3.4.3</b> Bar vs. line plots</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="data-visualization.html"><a href="data-visualization.html#plots-with-two-variables"><i class="fa fa-check"></i><b>3.5</b> Plots with two variables</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="data-visualization.html"><a href="data-visualization.html#adding-on-variables"><i class="fa fa-check"></i><b>3.5.1</b> Adding on variables</a></li>
+<li class="chapter" data-level="3.5.2" data-path="data-visualization.html"><a href="data-visualization.html#plotting-dispersion"><i class="fa fa-check"></i><b>3.5.2</b> Plotting dispersion</a></li>
+<li class="chapter" data-level="3.5.3" data-path="data-visualization.html"><a href="data-visualization.html#scatter-plot"><i class="fa fa-check"></i><b>3.5.3</b> Scatter plot</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="data-visualization.html"><a href="data-visualization.html#creating-a-more-complex-plot"><i class="fa fa-check"></i><b>3.6</b> Creating a more complex plot</a></li>
+<li class="chapter" data-level="3.7" data-path="data-visualization.html"><a href="data-visualization.html#additional-reading-and-resources"><i class="fa fa-check"></i><b>3.7</b> Additional reading and resources</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="fitting-simple-models-using-r.html"><a href="fitting-simple-models-using-r.html"><i class="fa fa-check"></i><b>4</b> Fitting simple models using R</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="fitting-simple-models-using-r.html"><a href="fitting-simple-models-using-r.html#mean"><i class="fa fa-check"></i><b>4.1</b> Mean</a></li>
+<li class="chapter" data-level="4.2" data-path="fitting-simple-models-using-r.html"><a href="fitting-simple-models-using-r.html#median"><i class="fa fa-check"></i><b>4.2</b> Median</a></li>
+<li class="chapter" data-level="4.3" data-path="fitting-simple-models-using-r.html"><a href="fitting-simple-models-using-r.html#mode"><i class="fa fa-check"></i><b>4.3</b> Mode</a></li>
+<li class="chapter" data-level="4.4" data-path="fitting-simple-models-using-r.html"><a href="fitting-simple-models-using-r.html#variability"><i class="fa fa-check"></i><b>4.4</b> Variability</a></li>
+<li class="chapter" data-level="4.5" data-path="fitting-simple-models-using-r.html"><a href="fitting-simple-models-using-r.html#z-scores"><i class="fa fa-check"></i><b>4.5</b> Z-scores</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="probability-in-r-with-lucy-king.html"><a href="probability-in-r-with-lucy-king.html"><i class="fa fa-check"></i><b>5</b> Probability in R (with Lucy King)</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="probability-in-r-with-lucy-king.html"><a href="probability-in-r-with-lucy-king.html#basic-probability-calculations"><i class="fa fa-check"></i><b>5.1</b> Basic probability calculations</a></li>
+<li class="chapter" data-level="5.2" data-path="probability-in-r-with-lucy-king.html"><a href="probability-in-r-with-lucy-king.html#empirical-frequency"><i class="fa fa-check"></i><b>5.2</b> Empirical frequency (Section @ref(empirical-frequency))</a></li>
+<li class="chapter" data-level="5.3" data-path="probability-in-r-with-lucy-king.html"><a href="probability-in-r-with-lucy-king.html#conditional-probability"><i class="fa fa-check"></i><b>5.3</b> Conditional probability (Section @ref(conditional-probability))</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="sampling-in-r.html"><a href="sampling-in-r.html"><i class="fa fa-check"></i><b>6</b> Sampling in R</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="sampling-in-r.html"><a href="sampling-in-r.html#samplingerror"><i class="fa fa-check"></i><b>6.1</b> Sampling error (Section @ref(samplingerror))</a></li>
+<li class="chapter" data-level="6.2" data-path="sampling-in-r.html"><a href="sampling-in-r.html#central-limit-theorem"><i class="fa fa-check"></i><b>6.2</b> Central limit theorem</a></li>
+<li class="chapter" data-level="6.3" data-path="sampling-in-r.html"><a href="sampling-in-r.html#confidence-intervals"><i class="fa fa-check"></i><b>6.3</b> Confidence intervals (Section @ref(confidence-intervals))</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="resampling-and-simulation-in-r.html"><a href="resampling-and-simulation-in-r.html"><i class="fa fa-check"></i><b>7</b> Resampling and simulation in R</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="resampling-and-simulation-in-r.html"><a href="resampling-and-simulation-in-r.html#generating-random-numbers"><i class="fa fa-check"></i><b>7.1</b> Generating random samples (Section @ref(generating-random-numbers))</a></li>
+<li class="chapter" data-level="7.2" data-path="resampling-and-simulation-in-r.html"><a href="resampling-and-simulation-in-r.html#simulating-the-maximum-finishing-time"><i class="fa fa-check"></i><b>7.2</b> Simulating the maximum finishing time</a></li>
+<li class="chapter" data-level="7.3" data-path="resampling-and-simulation-in-r.html"><a href="resampling-and-simulation-in-r.html#the-bootstrap"><i class="fa fa-check"></i><b>7.3</b> The bootstrap</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="hypothesis-testing-in-r.html"><a href="hypothesis-testing-in-r.html"><i class="fa fa-check"></i><b>8</b> Hypothesis testing in R</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="hypothesis-testing-in-r.html"><a href="hypothesis-testing-in-r.html#randomization-very-simple"><i class="fa fa-check"></i><b>8.1</b> Simple example: Coin-flipping (Section @ref(randomization-very-simple))</a></li>
+<li class="chapter" data-level="8.2" data-path="hypothesis-testing-in-r.html"><a href="hypothesis-testing-in-r.html#simulating-p-values"><i class="fa fa-check"></i><b>8.2</b> Simulating p-values</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="statistical-power-in-r.html"><a href="statistical-power-in-r.html"><i class="fa fa-check"></i><b>9</b> Statistical power in R</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="statistical-power-in-r.html"><a href="statistical-power-in-r.html#computing-confidence-intervals"><i class="fa fa-check"></i><b>9.1</b> Computing confidence intervals</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="statistical-power-in-r.html"><a href="statistical-power-in-r.html#theoretical"><i class="fa fa-check"></i><b>9.1.1</b> Theoretical</a></li>
+<li class="chapter" data-level="9.1.2" data-path="statistical-power-in-r.html"><a href="statistical-power-in-r.html#bootstrap"><i class="fa fa-check"></i><b>9.1.2</b> Bootstrap</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="statistical-power-in-r.html"><a href="statistical-power-in-r.html#effect-size"><i class="fa fa-check"></i><b>9.2</b> Effect Size</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="statistical-power-in-r.html"><a href="statistical-power-in-r.html#cohens-d"><i class="fa fa-check"></i><b>9.2.1</b> Cohen’s d</a></li>
+<li class="chapter" data-level="9.2.2" data-path="statistical-power-in-r.html"><a href="statistical-power-in-r.html#pearsons-r"><i class="fa fa-check"></i><b>9.2.2</b> Pearson’s r</a></li>
+<li class="chapter" data-level="9.2.3" data-path="statistical-power-in-r.html"><a href="statistical-power-in-r.html#odds-ratio"><i class="fa fa-check"></i><b>9.2.3</b> Odds ratio</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="statistical-power-in-r.html"><a href="statistical-power-in-r.html#power-analysis"><i class="fa fa-check"></i><b>9.3</b> Power analysis</a></li>
+<li class="chapter" data-level="9.4" data-path="statistical-power-in-r.html"><a href="statistical-power-in-r.html#power-curves"><i class="fa fa-check"></i><b>9.4</b> Power curves</a></li>
+<li class="chapter" data-level="9.5" data-path="statistical-power-in-r.html"><a href="statistical-power-in-r.html#simulating-statistical-power"><i class="fa fa-check"></i><b>9.5</b> Simulating statistical power</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="bayesian-statistics-in-r.html"><a href="bayesian-statistics-in-r.html"><i class="fa fa-check"></i><b>10</b> Bayesian statistics in R</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="bayesian-statistics-in-r.html"><a href="bayesian-statistics-in-r.html#doing-bayesian-estimation"><i class="fa fa-check"></i><b>10.1</b> A simple example (Section @ref(doing-bayesian-estimation))</a></li>
+<li class="chapter" data-level="10.2" data-path="bayesian-statistics-in-r.html"><a href="bayesian-statistics-in-r.html#estimating-posterior-distributions"><i class="fa fa-check"></i><b>10.2</b> Estimating posterior distributions (Section @ref(estimating-posterior-distributions))</a></li>
+<li class="chapter" data-level="10.3" data-path="bayesian-statistics-in-r.html"><a href="bayesian-statistics-in-r.html#Bayes-factors"><i class="fa fa-check"></i><b>10.3</b> Bayes factors (Section @ref(Bayes-factors))</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="modeling-categorical-relationships-in-r.html"><a href="modeling-categorical-relationships-in-r.html"><i class="fa fa-check"></i><b>11</b> Modeling categorical relationships in R</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="modeling-categorical-relationships-in-r.html"><a href="modeling-categorical-relationships-in-r.html#chi-squared-test"><i class="fa fa-check"></i><b>11.1</b> The Pearson Chi-squared test (Section @ref(chi-squared-test))</a></li>
+<li class="chapter" data-level="11.2" data-path="modeling-categorical-relationships-in-r.html"><a href="modeling-categorical-relationships-in-r.html#two-way-test"><i class="fa fa-check"></i><b>11.2</b> Two-way tests (Section @ref(two-way-test})</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="modeling-continuous-relationships-in-r.html"><a href="modeling-continuous-relationships-in-r.html"><i class="fa fa-check"></i><b>12</b> Modeling continuous relationships in R</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="modeling-continuous-relationships-in-r.html"><a href="modeling-continuous-relationships-in-r.html#covariance-and-correlation"><i class="fa fa-check"></i><b>12.1</b> Computing covariance and correlation (Section @ref(covariance-and-correlation))</a></li>
+<li class="chapter" data-level="12.2" data-path="modeling-continuous-relationships-in-r.html"><a href="modeling-continuous-relationships-in-r.html#hate-crime-example"><i class="fa fa-check"></i><b>12.2</b> Hate crime example</a></li>
+<li class="chapter" data-level="12.3" data-path="modeling-continuous-relationships-in-r.html"><a href="modeling-continuous-relationships-in-r.html#robust-correlations"><i class="fa fa-check"></i><b>12.3</b> Robust correlations (Section @ref(robust-correlations))</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="the-general-linear-model-in-r.html"><a href="the-general-linear-model-in-r.html"><i class="fa fa-check"></i><b>13</b> The General Linear Model in R</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="the-general-linear-model-in-r.html"><a href="the-general-linear-model-in-r.html#linear-regression"><i class="fa fa-check"></i><b>13.1</b> Linear regression (Section @ref(linear-regression))</a></li>
+<li class="chapter" data-level="13.2" data-path="the-general-linear-model-in-r.html"><a href="the-general-linear-model-in-r.html#model-criticism"><i class="fa fa-check"></i><b>13.2</b> Model criticism and diagnostics (Section @ref(model-criticism))</a></li>
+<li class="chapter" data-level="13.3" data-path="the-general-linear-model-in-r.html"><a href="the-general-linear-model-in-r.html#examples-of-problematic-model-fit"><i class="fa fa-check"></i><b>13.3</b> Examples of problematic model fit</a></li>
+<li class="chapter" data-level="13.4" data-path="the-general-linear-model-in-r.html"><a href="the-general-linear-model-in-r.html#extending-regression-to-binary-outcomes."><i class="fa fa-check"></i><b>13.4</b> Extending regression to binary outcomes.</a></li>
+<li class="chapter" data-level="13.5" data-path="the-general-linear-model-in-r.html"><a href="the-general-linear-model-in-r.html#cross-validation"><i class="fa fa-check"></i><b>13.5</b> Cross-validation (Section @ref(cross-validation))</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="comparing-means-in-r.html"><a href="comparing-means-in-r.html"><i class="fa fa-check"></i><b>14</b> Comparing means in R</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="comparing-means-in-r.html"><a href="comparing-means-in-r.html#single-mean"><i class="fa fa-check"></i><b>14.1</b> Testing the value of a single mean (Section @ref(single-mean))</a></li>
+<li class="chapter" data-level="14.2" data-path="comparing-means-in-r.html"><a href="comparing-means-in-r.html#comparing-two-means"><i class="fa fa-check"></i><b>14.2</b> Comparing two means (Section @ref(comparing-two-means))</a></li>
+<li class="chapter" data-level="14.3" data-path="comparing-means-in-r.html"><a href="comparing-means-in-r.html#ttest-linear-model"><i class="fa fa-check"></i><b>14.3</b> The t-test as a linear model (Section @ref(ttest-linear-model))</a></li>
+<li class="chapter" data-level="14.4" data-path="comparing-means-in-r.html"><a href="comparing-means-in-r.html#paired-ttests"><i class="fa fa-check"></i><b>14.4</b> Comparing paired observations (Section @ref(paired-ttests))</a></li>
+<li class="chapter" data-level="14.5" data-path="comparing-means-in-r.html"><a href="comparing-means-in-r.html#ANOVA"><i class="fa fa-check"></i><b>14.5</b> Analysis of variance (Section @ref(ANOVA))</a>
+<ul>
+<li class="chapter" data-level="14.5.1" data-path="comparing-means-in-r.html"><a href="comparing-means-in-r.html#repeated-measures-analysis-of-variance"><i class="fa fa-check"></i><b>14.5.1</b> Repeated measures analysis of variance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="practical-statistical-modeling-in-r.html"><a href="practical-statistical-modeling-in-r.html"><i class="fa fa-check"></i><b>15</b> Practical statistical modeling in R</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">An R companion to Statistical Thinking for the 21st Century</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="sampling-in-r" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">Chapter 6</span> Sampling in R<a href="sampling-in-r.html#sampling-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>First we load the necessary libraries and set up the NHANES adult dataset</p>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="sampling-in-r.html#cb207-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb207-2"><a href="sampling-in-r.html#cb207-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb207-3"><a href="sampling-in-r.html#cb207-3" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb207-4"><a href="sampling-in-r.html#cb207-4" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span>
+<span id="cb207-5"><a href="sampling-in-r.html#cb207-5" tabindex="-1"></a></span>
+<span id="cb207-6"><a href="sampling-in-r.html#cb207-6" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123456</span>)</span>
+<span id="cb207-7"><a href="sampling-in-r.html#cb207-7" tabindex="-1"></a>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">tidy.opts=</span><span class="fu">list</span>(<span class="at">width.cutoff=</span><span class="dv">80</span>))</span>
+<span id="cb207-8"><a href="sampling-in-r.html#cb207-8" tabindex="-1"></a><span class="fu">options</span>(<span class="at">tibble.width =</span> <span class="dv">60</span>)</span>
+<span id="cb207-9"><a href="sampling-in-r.html#cb207-9" tabindex="-1"></a></span>
+<span id="cb207-10"><a href="sampling-in-r.html#cb207-10" tabindex="-1"></a></span>
+<span id="cb207-11"><a href="sampling-in-r.html#cb207-11" tabindex="-1"></a><span class="co"># load the NHANES data library</span></span>
+<span id="cb207-12"><a href="sampling-in-r.html#cb207-12" tabindex="-1"></a><span class="fu">library</span>(NHANES)</span>
+<span id="cb207-13"><a href="sampling-in-r.html#cb207-13" tabindex="-1"></a></span>
+<span id="cb207-14"><a href="sampling-in-r.html#cb207-14" tabindex="-1"></a><span class="co"># create a NHANES dataset without duplicated IDs </span></span>
+<span id="cb207-15"><a href="sampling-in-r.html#cb207-15" tabindex="-1"></a>NHANES <span class="ot">&lt;-</span></span>
+<span id="cb207-16"><a href="sampling-in-r.html#cb207-16" tabindex="-1"></a>  NHANES <span class="sc">%&gt;%</span></span>
+<span id="cb207-17"><a href="sampling-in-r.html#cb207-17" tabindex="-1"></a>  <span class="fu">distinct</span>(ID, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>) </span>
+<span id="cb207-18"><a href="sampling-in-r.html#cb207-18" tabindex="-1"></a></span>
+<span id="cb207-19"><a href="sampling-in-r.html#cb207-19" tabindex="-1"></a><span class="co">#create a dataset of only adults</span></span>
+<span id="cb207-20"><a href="sampling-in-r.html#cb207-20" tabindex="-1"></a>NHANES_adult <span class="ot">&lt;-</span> </span>
+<span id="cb207-21"><a href="sampling-in-r.html#cb207-21" tabindex="-1"></a>  NHANES <span class="sc">%&gt;%</span></span>
+<span id="cb207-22"><a href="sampling-in-r.html#cb207-22" tabindex="-1"></a>  <span class="fu">filter</span>( </span>
+<span id="cb207-23"><a href="sampling-in-r.html#cb207-23" tabindex="-1"></a>    Age <span class="sc">&gt;=</span> <span class="dv">18</span></span>
+<span id="cb207-24"><a href="sampling-in-r.html#cb207-24" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb207-25"><a href="sampling-in-r.html#cb207-25" tabindex="-1"></a>  <span class="fu">drop_na</span>(Height)</span></code></pre></div>
+<div id="samplingerror" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Sampling error (Section <a href="sampling-in-r.html#samplingerror">6.1</a>)<a href="sampling-in-r.html#samplingerror" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Here we will repeatedly sample from the NHANES Height variable in order to obtain the sampling distribution of the mean.</p>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="sampling-in-r.html#cb208-1" tabindex="-1"></a>sampSize <span class="ot">&lt;-</span> <span class="dv">50</span> <span class="co"># size of sample</span></span>
+<span id="cb208-2"><a href="sampling-in-r.html#cb208-2" tabindex="-1"></a>nsamps <span class="ot">&lt;-</span> <span class="dv">5000</span> <span class="co"># number of samples we will take</span></span>
+<span id="cb208-3"><a href="sampling-in-r.html#cb208-3" tabindex="-1"></a></span>
+<span id="cb208-4"><a href="sampling-in-r.html#cb208-4" tabindex="-1"></a><span class="co"># set up variable to store all of the results</span></span>
+<span id="cb208-5"><a href="sampling-in-r.html#cb208-5" tabindex="-1"></a>sampMeans <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">meanHeight=</span><span class="fu">rep</span>(<span class="cn">NA</span>,nsamps))</span>
+<span id="cb208-6"><a href="sampling-in-r.html#cb208-6" tabindex="-1"></a></span>
+<span id="cb208-7"><a href="sampling-in-r.html#cb208-7" tabindex="-1"></a><span class="co"># Loop through and repeatedly sample and compute the mean</span></span>
+<span id="cb208-8"><a href="sampling-in-r.html#cb208-8" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsamps) {</span>
+<span id="cb208-9"><a href="sampling-in-r.html#cb208-9" tabindex="-1"></a>  sampMeans<span class="sc">$</span>meanHeight[i] <span class="ot">&lt;-</span> NHANES_adult <span class="sc">%&gt;%</span></span>
+<span id="cb208-10"><a href="sampling-in-r.html#cb208-10" tabindex="-1"></a>    <span class="fu">sample_n</span>(sampSize) <span class="sc">%&gt;%</span></span>
+<span id="cb208-11"><a href="sampling-in-r.html#cb208-11" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">meanHeight=</span><span class="fu">mean</span>(Height)) <span class="sc">%&gt;%</span></span>
+<span id="cb208-12"><a href="sampling-in-r.html#cb208-12" tabindex="-1"></a>    <span class="fu">pull</span>(meanHeight)</span>
+<span id="cb208-13"><a href="sampling-in-r.html#cb208-13" tabindex="-1"></a>}</span></code></pre></div>
+<p>Now let’s plot the sampling distribution. We will also overlay the sampling distribution of the mean predicted on the basis of the population mean and standard deviation, to show that it properly describes the actual sampling distribution.</p>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="sampling-in-r.html#cb209-1" tabindex="-1"></a><span class="co"># pipe the sampMeans data frame into ggplot</span></span>
+<span id="cb209-2"><a href="sampling-in-r.html#cb209-2" tabindex="-1"></a>sampMeans <span class="sc">%&gt;%</span> </span>
+<span id="cb209-3"><a href="sampling-in-r.html#cb209-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(meanHeight)) <span class="sc">+</span></span>
+<span id="cb209-4"><a href="sampling-in-r.html#cb209-4" tabindex="-1"></a>  <span class="co"># create histogram using density rather than count</span></span>
+<span id="cb209-5"><a href="sampling-in-r.html#cb209-5" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(</span>
+<span id="cb209-6"><a href="sampling-in-r.html#cb209-6" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> ..density..),</span>
+<span id="cb209-7"><a href="sampling-in-r.html#cb209-7" tabindex="-1"></a>    <span class="at">bins =</span> <span class="dv">50</span>,</span>
+<span id="cb209-8"><a href="sampling-in-r.html#cb209-8" tabindex="-1"></a>    <span class="at">col =</span> <span class="st">&quot;gray&quot;</span>, </span>
+<span id="cb209-9"><a href="sampling-in-r.html#cb209-9" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&quot;gray&quot;</span></span>
+<span id="cb209-10"><a href="sampling-in-r.html#cb209-10" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb209-11"><a href="sampling-in-r.html#cb209-11" tabindex="-1"></a>  <span class="co"># add a vertical line for the population mean</span></span>
+<span id="cb209-12"><a href="sampling-in-r.html#cb209-12" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(NHANES_adult<span class="sc">$</span>Height),</span>
+<span id="cb209-13"><a href="sampling-in-r.html#cb209-13" tabindex="-1"></a>             <span class="at">size=</span><span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb209-14"><a href="sampling-in-r.html#cb209-14" tabindex="-1"></a>  <span class="co"># add a label for the line</span></span>
+<span id="cb209-15"><a href="sampling-in-r.html#cb209-15" tabindex="-1"></a>  <span class="fu">annotate</span>(</span>
+<span id="cb209-16"><a href="sampling-in-r.html#cb209-16" tabindex="-1"></a>    <span class="st">&quot;text&quot;</span>,</span>
+<span id="cb209-17"><a href="sampling-in-r.html#cb209-17" tabindex="-1"></a>    <span class="at">x =</span> <span class="fl">169.6</span>, </span>
+<span id="cb209-18"><a href="sampling-in-r.html#cb209-18" tabindex="-1"></a>    <span class="at">y =</span> .<span class="dv">4</span>,</span>
+<span id="cb209-19"><a href="sampling-in-r.html#cb209-19" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;Population mean&quot;</span>,</span>
+<span id="cb209-20"><a href="sampling-in-r.html#cb209-20" tabindex="-1"></a>    <span class="at">size=</span><span class="dv">6</span></span>
+<span id="cb209-21"><a href="sampling-in-r.html#cb209-21" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb209-22"><a href="sampling-in-r.html#cb209-22" tabindex="-1"></a>  <span class="co"># label the x axis</span></span>
+<span id="cb209-23"><a href="sampling-in-r.html#cb209-23" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Height (cm)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb209-24"><a href="sampling-in-r.html#cb209-24" tabindex="-1"></a>  <span class="co"># add normal based on population mean/sd</span></span>
+<span id="cb209-25"><a href="sampling-in-r.html#cb209-25" tabindex="-1"></a>  <span class="fu">stat_function</span>(</span>
+<span id="cb209-26"><a href="sampling-in-r.html#cb209-26" tabindex="-1"></a>      <span class="at">fun =</span> dnorm, <span class="at">n =</span> sampSize,</span>
+<span id="cb209-27"><a href="sampling-in-r.html#cb209-27" tabindex="-1"></a>      <span class="at">args =</span> <span class="fu">list</span>(</span>
+<span id="cb209-28"><a href="sampling-in-r.html#cb209-28" tabindex="-1"></a>        <span class="at">mean =</span> <span class="fu">mean</span>(NHANES_adult<span class="sc">$</span>Height),</span>
+<span id="cb209-29"><a href="sampling-in-r.html#cb209-29" tabindex="-1"></a>        <span class="at">sd =</span> <span class="fu">sd</span>(NHANES_adult<span class="sc">$</span>Height) <span class="sc">/</span> <span class="fu">sqrt</span>(sampSize)</span>
+<span id="cb209-30"><a href="sampling-in-r.html#cb209-30" tabindex="-1"></a>      ), </span>
+<span id="cb209-31"><a href="sampling-in-r.html#cb209-31" tabindex="-1"></a>      <span class="at">size =</span> <span class="fl">1.5</span>,</span>
+<span id="cb209-32"><a href="sampling-in-r.html#cb209-32" tabindex="-1"></a>      <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb209-33"><a href="sampling-in-r.html#cb209-33" tabindex="-1"></a>      <span class="at">linetype=</span><span class="st">&#39;dotted&#39;</span></span>
+<span id="cb209-34"><a href="sampling-in-r.html#cb209-34" tabindex="-1"></a>    ) </span></code></pre></div>
+<p><img src="StatsThinking21_files/figure-html/unnamed-chunk-106-1.png" width="768" height="50%" /></p>
+</div>
+<div id="central-limit-theorem" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Central limit theorem<a href="sampling-in-r.html#central-limit-theorem" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The central limit theorem tells us that the sampling distribution of the mean becomes normal as the sample size grows. Let’s test this by sampling a clearly non-normal variable and look at the normality of the results using a Q-Q plot. We saw in Figure <a href="sampling-in-r.html#fig:alcDist50">6.1</a> that the variable <code>AlcoholYear</code> is distributed in a very non-normal way. Let’s first look at the Q-Q plot for these data, to see what it looks like. We will use the <code>stat_qq()</code> function from <code>ggplot2</code> to create the plot for us.</p>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="sampling-in-r.html#cb210-1" tabindex="-1"></a><span class="co"># prepare the dta</span></span>
+<span id="cb210-2"><a href="sampling-in-r.html#cb210-2" tabindex="-1"></a>NHANES_cleanAlc <span class="ot">&lt;-</span> NHANES <span class="sc">%&gt;%</span></span>
+<span id="cb210-3"><a href="sampling-in-r.html#cb210-3" tabindex="-1"></a>  <span class="fu">drop_na</span>(AlcoholYear)</span>
+<span id="cb210-4"><a href="sampling-in-r.html#cb210-4" tabindex="-1"></a></span>
+<span id="cb210-5"><a href="sampling-in-r.html#cb210-5" tabindex="-1"></a><span class="fu">ggplot</span>(NHANES_cleanAlc, <span class="fu">aes</span>(<span class="at">sample=</span>AlcoholYear)) <span class="sc">+</span></span>
+<span id="cb210-6"><a href="sampling-in-r.html#cb210-6" tabindex="-1"></a>  <span class="fu">stat_qq</span>() <span class="sc">+</span> </span>
+<span id="cb210-7"><a href="sampling-in-r.html#cb210-7" tabindex="-1"></a>  <span class="co"># add the line for x=y</span></span>
+<span id="cb210-8"><a href="sampling-in-r.html#cb210-8" tabindex="-1"></a>  <span class="fu">stat_qq_line</span>()</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:alcDist50"></span>
+<img src="StatsThinking21_files/figure-html/alcDist50-1.png" alt="Q-Q plot for the variable `AlcoholYear`." width="384" />
+<p class="caption">
+Figure 6.1: Q-Q plot for the variable <code>AlcoholYear</code>.
+</p>
+</div>
+<p>We can see from this figure that the distribution is highly non-normal, as the Q-Q plot diverges substantially from the unit line.</p>
+<p>Now let’s repeatedly sample and compute the mean, and look at the resulting Q-Q plot. We will take samples of various sizes to see the effect of sample size. We will use a function from the <code>dplyr</code> package called <code>do()</code>, which can run a large number of analyses at once.</p>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="sampling-in-r.html#cb211-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
+<span id="cb211-2"><a href="sampling-in-r.html#cb211-2" tabindex="-1"></a></span>
+<span id="cb211-3"><a href="sampling-in-r.html#cb211-3" tabindex="-1"></a>sampSizes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">16</span>, <span class="dv">32</span>, <span class="dv">64</span>, <span class="dv">128</span>) <span class="co"># size of sample</span></span>
+<span id="cb211-4"><a href="sampling-in-r.html#cb211-4" tabindex="-1"></a>nsamps <span class="ot">&lt;-</span> <span class="dv">1000</span> <span class="co"># number of samples we will take</span></span>
+<span id="cb211-5"><a href="sampling-in-r.html#cb211-5" tabindex="-1"></a></span>
+<span id="cb211-6"><a href="sampling-in-r.html#cb211-6" tabindex="-1"></a><span class="co"># create the data frame that specifies the analyses</span></span>
+<span id="cb211-7"><a href="sampling-in-r.html#cb211-7" tabindex="-1"></a>input_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">sampSize=</span><span class="fu">rep</span>(sampSizes, nsamps),</span>
+<span id="cb211-8"><a href="sampling-in-r.html#cb211-8" tabindex="-1"></a>                      <span class="at">id=</span><span class="fu">seq</span>(nsamps <span class="sc">*</span> <span class="fu">length</span>(sampSizes)))</span>
+<span id="cb211-9"><a href="sampling-in-r.html#cb211-9" tabindex="-1"></a></span>
+<span id="cb211-10"><a href="sampling-in-r.html#cb211-10" tabindex="-1"></a></span>
+<span id="cb211-11"><a href="sampling-in-r.html#cb211-11" tabindex="-1"></a><span class="co"># create a function that samples and returns the mean</span></span>
+<span id="cb211-12"><a href="sampling-in-r.html#cb211-12" tabindex="-1"></a><span class="co"># so that we can loop over it using replicate()</span></span>
+<span id="cb211-13"><a href="sampling-in-r.html#cb211-13" tabindex="-1"></a>get_sample_mean <span class="ot">&lt;-</span> <span class="cf">function</span>(sampSize){</span>
+<span id="cb211-14"><a href="sampling-in-r.html#cb211-14" tabindex="-1"></a>  meanAlcYear <span class="ot">&lt;-</span> </span>
+<span id="cb211-15"><a href="sampling-in-r.html#cb211-15" tabindex="-1"></a>    NHANES_cleanAlc <span class="sc">%&gt;%</span></span>
+<span id="cb211-16"><a href="sampling-in-r.html#cb211-16" tabindex="-1"></a>    <span class="fu">sample_n</span>(sampSize) <span class="sc">%&gt;%</span></span>
+<span id="cb211-17"><a href="sampling-in-r.html#cb211-17" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">meanAlcoholYear =</span> <span class="fu">mean</span>(AlcoholYear)) <span class="sc">%&gt;%</span></span>
+<span id="cb211-18"><a href="sampling-in-r.html#cb211-18" tabindex="-1"></a>    <span class="fu">pull</span>(meanAlcoholYear)</span>
+<span id="cb211-19"><a href="sampling-in-r.html#cb211-19" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">tibble</span>(<span class="at">meanAlcYear =</span> meanAlcYear, <span class="at">sampSize=</span>sampSize))</span>
+<span id="cb211-20"><a href="sampling-in-r.html#cb211-20" tabindex="-1"></a>}</span>
+<span id="cb211-21"><a href="sampling-in-r.html#cb211-21" tabindex="-1"></a></span>
+<span id="cb211-22"><a href="sampling-in-r.html#cb211-22" tabindex="-1"></a><span class="co"># loop through sample sizes</span></span>
+<span id="cb211-23"><a href="sampling-in-r.html#cb211-23" tabindex="-1"></a><span class="co"># we group by id so that each id will be run separately by do()</span></span>
+<span id="cb211-24"><a href="sampling-in-r.html#cb211-24" tabindex="-1"></a>all_results <span class="ot">=</span> input_df <span class="sc">%&gt;%</span> </span>
+<span id="cb211-25"><a href="sampling-in-r.html#cb211-25" tabindex="-1"></a>  <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span></span>
+<span id="cb211-26"><a href="sampling-in-r.html#cb211-26" tabindex="-1"></a>  <span class="co"># &quot;.&quot; refers to the data frame being passed in by do()</span></span>
+<span id="cb211-27"><a href="sampling-in-r.html#cb211-27" tabindex="-1"></a>  <span class="fu">do</span>(<span class="fu">get_sample_mean</span>(.<span class="sc">$</span>sampSize))</span></code></pre></div>
+<p>Now let’s create separate Q-Q plots for the different sample sizes.</p>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="sampling-in-r.html#cb212-1" tabindex="-1"></a><span class="co"># create empty list to store plots</span></span>
+<span id="cb212-2"><a href="sampling-in-r.html#cb212-2" tabindex="-1"></a></span>
+<span id="cb212-3"><a href="sampling-in-r.html#cb212-3" tabindex="-1"></a>qqplots <span class="ot">=</span> <span class="fu">list</span>()</span>
+<span id="cb212-4"><a href="sampling-in-r.html#cb212-4" tabindex="-1"></a></span>
+<span id="cb212-5"><a href="sampling-in-r.html#cb212-5" tabindex="-1"></a><span class="cf">for</span> (N <span class="cf">in</span> sampSizes){</span>
+<span id="cb212-6"><a href="sampling-in-r.html#cb212-6" tabindex="-1"></a>  sample_results <span class="ot">&lt;-</span> </span>
+<span id="cb212-7"><a href="sampling-in-r.html#cb212-7" tabindex="-1"></a>    all_results <span class="sc">%&gt;%</span></span>
+<span id="cb212-8"><a href="sampling-in-r.html#cb212-8" tabindex="-1"></a>    <span class="fu">filter</span>(sampSize<span class="sc">==</span>N)</span>
+<span id="cb212-9"><a href="sampling-in-r.html#cb212-9" tabindex="-1"></a></span>
+<span id="cb212-10"><a href="sampling-in-r.html#cb212-10" tabindex="-1"></a>  qqplots[[<span class="fu">toString</span>(N)]] <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(sample_results, </span>
+<span id="cb212-11"><a href="sampling-in-r.html#cb212-11" tabindex="-1"></a>                                <span class="fu">aes</span>(<span class="at">sample=</span>meanAlcYear)) <span class="sc">+</span></span>
+<span id="cb212-12"><a href="sampling-in-r.html#cb212-12" tabindex="-1"></a>    <span class="fu">stat_qq</span>() <span class="sc">+</span> </span>
+<span id="cb212-13"><a href="sampling-in-r.html#cb212-13" tabindex="-1"></a>    <span class="co"># add the line for x=y</span></span>
+<span id="cb212-14"><a href="sampling-in-r.html#cb212-14" tabindex="-1"></a>    <span class="fu">stat_qq_line</span>(<span class="at">fullrange =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> </span>
+<span id="cb212-15"><a href="sampling-in-r.html#cb212-15" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="fu">sprintf</span>(<span class="st">&#39;N = %d&#39;</span>, N)) <span class="sc">+</span> </span>
+<span id="cb212-16"><a href="sampling-in-r.html#cb212-16" tabindex="-1"></a>   <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>) </span>
+<span id="cb212-17"><a href="sampling-in-r.html#cb212-17" tabindex="-1"></a></span>
+<span id="cb212-18"><a href="sampling-in-r.html#cb212-18" tabindex="-1"></a>}</span>
+<span id="cb212-19"><a href="sampling-in-r.html#cb212-19" tabindex="-1"></a></span>
+<span id="cb212-20"><a href="sampling-in-r.html#cb212-20" tabindex="-1"></a><span class="fu">plot_grid</span>(<span class="at">plotlist =</span> qqplots)</span></code></pre></div>
+<p><img src="StatsThinking21_files/figure-html/unnamed-chunk-108-1.png" width="768" /></p>
+<p>This shows that the results become more normally distributed (i.e. following the straight line) as the samples get larger.</p>
+</div>
+<div id="confidence-intervals" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Confidence intervals (Section <a href="sampling-in-r.html#confidence-intervals">6.3</a>)<a href="sampling-in-r.html#confidence-intervals" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Remember that confidence intervals are intervals that will contain the population parameter on a certain proportion of times. In this example we will walk through the simulation that was presented in Section <a href="sampling-in-r.html#confidence-intervals">6.3</a> to show that this actually works properly. Here we will use a function called <code>do()</code> that lets us</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="probability-in-r-with-lucy-king.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="resampling-and-simulation-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/statsthinking21/statsthinking21-R/edit/master/06-Sampling.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["StatsThinking21.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
